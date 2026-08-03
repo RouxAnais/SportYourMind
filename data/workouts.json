@@ -1,0 +1,3238 @@
+{
+  "week_1": {
+    "title": "Week 1",
+    "seances": [
+      {
+        "id": "w1_1",
+        "title": "Session 1 - Rectus abdominis",
+        "theme": "Rectus abdominis",
+        "focus": "Thoracic flexion and hip flexion, mainly along the body's midline.",
+        "n_blocks": 4,
+        "rest_between_blocks": 60,
+        "challenge_name": "TABATA (4 min, 20\"/10\")",
+        "blocks": [
+          {
+            "name": "Block 1",
+            "type": "hold",
+            "rest_between": 30,
+            "rounds": [
+              {
+                "exercise": "hollow_1",
+                "duration": 10
+              },
+              {
+                "exercise": "hollow_1",
+                "duration": 20
+              },
+              {
+                "exercise": "hollow_1",
+                "duration": 30
+              },
+              {
+                "exercise": "hollow_1",
+                "duration": 40
+              }
+            ]
+          },
+          {
+            "name": "Block 2",
+            "type": "rep",
+            "rest_between": 15,
+            "rounds": [
+              {
+                "exercise": "crunch",
+                "reps": 10
+              },
+              {
+                "exercise": "crunch_hollow1",
+                "reps": 10
+              },
+              {
+                "exercise": "crunch_lposition",
+                "reps": 10
+              },
+              {
+                "exercise": "reverse_crunch_bent",
+                "reps": 10
+              }
+            ]
+          },
+          {
+            "name": "Block 3 (no rest)",
+            "type": "nostop",
+            "rest_between": 0,
+            "rounds": [
+              {
+                "exercise": "crunch",
+                "reps": 10
+              },
+              {
+                "exercise": "crunch_hollow1",
+                "reps": 10
+              },
+              {
+                "exercise": "crunch_lposition",
+                "reps": 10
+              },
+              {
+                "exercise": "reverse_crunch_bent",
+                "reps": 10
+              }
+            ]
+          },
+          {
+            "name": "Block 4",
+            "type": "on",
+            "rest_between": 20,
+            "rounds": [
+              {
+                "exercise": "crunch",
+                "duration": 20
+              },
+              {
+                "exercise": "crunch_hollow1",
+                "duration": 20
+              },
+              {
+                "exercise": "crunch_lposition",
+                "duration": 20
+              },
+              {
+                "exercise": "reverse_crunch_bent",
+                "duration": 20
+              }
+            ]
+          }
+        ],
+        "challenge": {
+          "name": "ALL OUT - TABATA (4 min)",
+          "type": "tabata",
+          "note": "Sequence repeated x2 (as marked in the book) to fill the full 4 minutes.",
+          "rounds": [
+            {
+              "exercise": "crunch",
+              "duration": 20
+            },
+            {
+              "exercise": "hollow_1",
+              "duration": 10
+            },
+            {
+              "exercise": "crunch_hollow1",
+              "duration": 20
+            },
+            {
+              "exercise": "hollow_1",
+              "duration": 10
+            },
+            {
+              "exercise": "crunch",
+              "duration": 20
+            },
+            {
+              "exercise": "hollow_1",
+              "duration": 10
+            },
+            {
+              "exercise": "reverse_crunch_bent_to_straight",
+              "duration": 20
+            },
+            {
+              "exercise": "hollow_1",
+              "duration": 10
+            },
+            {
+              "exercise": "crunch",
+              "duration": 20
+            },
+            {
+              "exercise": "hollow_1",
+              "duration": 10
+            },
+            {
+              "exercise": "crunch_hollow1",
+              "duration": 20
+            },
+            {
+              "exercise": "hollow_1",
+              "duration": 10
+            },
+            {
+              "exercise": "crunch",
+              "duration": 20
+            },
+            {
+              "exercise": "hollow_1",
+              "duration": 10
+            },
+            {
+              "exercise": "reverse_crunch_bent_to_straight",
+              "duration": 20
+            },
+            {
+              "exercise": "hollow_1",
+              "duration": 10
+            }
+          ]
+        }
+      },
+      {
+        "id": "w1_2",
+        "title": "Session 2 - Core bracing",
+        "theme": "Core bracing",
+        "focus": "Often static work of the deep muscles (transverse abdominis).",
+        "n_blocks": 3,
+        "rest_between_blocks": 60,
+        "challenge_name": "HOLD",
+        "blocks": [
+          {
+            "name": "Block 1",
+            "type": "hold",
+            "rest_between": 30,
+            "rounds": [
+              {
+                "exercise": "hollow_1",
+                "duration": 30
+              },
+              {
+                "exercise": "hollow_2",
+                "duration": 30,
+                "side": "right"
+              },
+              {
+                "exercise": "hollow_2",
+                "duration": 30,
+                "side": "left"
+              },
+              {
+                "exercise": "hollow_1_arm",
+                "duration": 30
+              }
+            ]
+          },
+          {
+            "name": "Block 2",
+            "type": "hold",
+            "rest_between": 30,
+            "rounds": [
+              {
+                "exercise": "arch_no_legs",
+                "duration": 30
+              },
+              {
+                "exercise": "arch_1_leg",
+                "duration": 30,
+                "side": "right"
+              },
+              {
+                "exercise": "arch_1_leg",
+                "duration": 30,
+                "side": "left"
+              },
+              {
+                "exercise": "arch",
+                "duration": 30
+              }
+            ]
+          },
+          {
+            "name": "Block 3",
+            "type": "hold",
+            "rest_between": 30,
+            "rounds": [
+              {
+                "exercise": "plank",
+                "duration": 30
+              },
+              {
+                "exercise": "side_plank",
+                "duration": 30,
+                "side": "right"
+              },
+              {
+                "exercise": "side_plank",
+                "duration": 30,
+                "side": "left"
+              },
+              {
+                "exercise": "plank",
+                "duration": 30
+              }
+            ]
+          }
+        ],
+        "challenge": {
+          "name": "HOLD challenge",
+          "type": "hold_chain",
+          "rounds": [
+            {
+              "exercise": "hollow_1",
+              "duration": 60
+            },
+            {
+              "exercise": "arch",
+              "duration": 60
+            },
+            {
+              "exercise": "plank",
+              "duration": 60
+            },
+            {
+              "exercise": "side_plank",
+              "duration": 60,
+              "side": "right"
+            },
+            {
+              "exercise": "side_plank",
+              "duration": 60,
+              "side": "left"
+            }
+          ],
+          "rest_between": 15
+        }
+      },
+      {
+        "id": "w1_3",
+        "title": "Session 3 - Gym",
+        "theme": "Gym",
+        "focus": "Movements transferable to gymnastics (toes to bar, L-sit, back lever...).",
+        "n_blocks": 3,
+        "rest_between_blocks": 60,
+        "challenge_name": "ALL OUT - Bring Sally Up",
+        "blocks": [
+          {
+            "name": "Block 1 (start in L-sit 1)",
+            "type": "sequence",
+            "rest_between": 15,
+            "repeat": 3,
+            "note": "Right leg then left leg, repeat 3 times",
+            "rounds": [
+              {
+                "exercise": "leg_raise_lsit1",
+                "reps": 10
+              },
+              {
+                "exercise": "leg_raise_lsit1",
+                "duration": 10
+              },
+              {
+                "exercise": "leg_raise_lsit1",
+                "reps": 5,
+                "note": "slow"
+              }
+            ]
+          },
+          {
+            "name": "Block 2 (start in L-position)",
+            "type": "sequence",
+            "rest_between": 15,
+            "repeat": 2,
+            "note": "Right leg then left leg, repeat 2 times",
+            "rounds": [
+              {
+                "exercise": "leg_raise_lsit1",
+                "reps": 10,
+                "variant": "L-position"
+              },
+              {
+                "exercise": "leg_raise_lsit1",
+                "duration": 10,
+                "variant": "L-position"
+              },
+              {
+                "exercise": "leg_raise_lsit1",
+                "reps": 5,
+                "note": "slow",
+                "variant": "L-position"
+              }
+            ]
+          },
+          {
+            "name": "Block 3 (start in L-sit 2)",
+            "type": "sequence",
+            "rest_between": 0,
+            "note": "Right leg then left leg",
+            "rounds": [
+              {
+                "exercise": "leg_raise_lsit2",
+                "reps": 10
+              },
+              {
+                "exercise": "leg_raise_lsit2",
+                "duration": 10
+              },
+              {
+                "exercise": "leg_raise_lsit2",
+                "reps": 5,
+                "note": "slow"
+              }
+            ]
+          }
+        ],
+        "challenge": {
+          "name": "Bring Sally Up",
+          "type": "music_cue",
+          "note": "Track: \"Flower\" by Moby\n\n**UP** -> rest  \n**DOWN** -> Hollow 1",
+          "rounds": [
+            {
+              "exercise": "hollow_1",
+              "duration": null
+            }
+          ],
+          "audio_file": "bring_sally_up",
+          "external_link": "https://open.spotify.com/search/Flower%20Moby"
+        }
+      },
+      {
+        "id": "w1_4",
+        "title": "Session 4 - Obliques",
+        "theme": "Obliques",
+        "focus": "Rotation and lateral flexion work.",
+        "n_blocks": 3,
+        "rest_between_blocks": 60,
+        "challenge_name": null,
+        "blocks": [
+          {
+            "name": "Block 1 (right side only)",
+            "type": "AB_couple",
+            "side": "right",
+            "note": "20 REPS A + 30\"off / 20 REPS B + 30\"off / 30\"ON A + 30\"off / 30\"ON B + 30\"off / 30\"ON A + 30\"ON B",
+            "exercise_a": "bicycle_crunch_bent",
+            "exercise_b": "heel_touch",
+            "sequence": [
+              {
+                "who": "A",
+                "reps": 20,
+                "rest_after": 30
+              },
+              {
+                "who": "B",
+                "reps": 20,
+                "rest_after": 30
+              },
+              {
+                "who": "A",
+                "duration": 30,
+                "rest_after": 30
+              },
+              {
+                "who": "B",
+                "duration": 30,
+                "rest_after": 30
+              },
+              {
+                "who": "A",
+                "duration": 30,
+                "rest_after": 0
+              },
+              {
+                "who": "B",
+                "duration": 30,
+                "rest_after": 0
+              }
+            ]
+          },
+          {
+            "name": "Block 2 (left side only)",
+            "type": "AB_couple",
+            "side": "left",
+            "exercise_a": "bicycle_crunch_bent",
+            "exercise_b": "heel_touch",
+            "sequence": [
+              {
+                "who": "A",
+                "reps": 20,
+                "rest_after": 30
+              },
+              {
+                "who": "B",
+                "reps": 20,
+                "rest_after": 30
+              },
+              {
+                "who": "A",
+                "duration": 30,
+                "rest_after": 30
+              },
+              {
+                "who": "B",
+                "duration": 30,
+                "rest_after": 30
+              },
+              {
+                "who": "A",
+                "duration": 30,
+                "rest_after": 0
+              },
+              {
+                "who": "B",
+                "duration": 30,
+                "rest_after": 0
+              }
+            ]
+          },
+          {
+            "name": "Block 3 (alternate right/left)",
+            "type": "AB_couple",
+            "side": "alternate",
+            "exercise_a": "bicycle_crunch_bent",
+            "exercise_b": "heel_touch",
+            "sequence": [
+              {
+                "who": "A",
+                "reps": 20,
+                "rest_after": 30
+              },
+              {
+                "who": "B",
+                "reps": 20,
+                "rest_after": 30
+              },
+              {
+                "who": "A",
+                "duration": 30,
+                "rest_after": 30
+              },
+              {
+                "who": "B",
+                "duration": 30,
+                "rest_after": 30
+              },
+              {
+                "who": "A",
+                "duration": 30,
+                "rest_after": 0
+              },
+              {
+                "who": "B",
+                "duration": 30,
+                "rest_after": 0
+              }
+            ]
+          }
+        ],
+        "challenge": null
+      }
+    ]
+  },
+  "week_2": {
+    "title": "Week 2",
+    "seances": [
+      {
+        "id": "w2_1",
+        "title": "Session 1 - Rectus abdominis",
+        "theme": "Rectus abdominis",
+        "focus": "Thoracic flexion and hip flexion, mainly along the body's midline.",
+        "n_blocks": 4,
+        "rest_between_blocks": 60,
+        "challenge_name": "TABATA (4 min, 20\"/10\")",
+        "blocks": [
+          {
+            "name": "Block 1",
+            "type": "hold",
+            "rest_between": 30,
+            "rounds": [
+              {
+                "exercise": "hollow_2",
+                "duration": 20,
+                "side": "right"
+              },
+              {
+                "exercise": "hollow_2",
+                "duration": 20,
+                "side": "left"
+              },
+              {
+                "exercise": "hollow_2",
+                "duration": 20,
+                "side": "right"
+              },
+              {
+                "exercise": "hollow_2",
+                "duration": 20,
+                "side": "left"
+              }
+            ]
+          },
+          {
+            "name": "Block 2 (start: feet and head on the floor)",
+            "type": "rep",
+            "rest_between": 15,
+            "rounds": [
+              {
+                "exercise": "crunch",
+                "reps": 10
+              },
+              {
+                "exercise": "alt_bent_leg_raise",
+                "reps": 10
+              },
+              {
+                "exercise": "bent_leg_raise",
+                "reps": 10
+              },
+              {
+                "exercise": "tuck_up1",
+                "reps": 10
+              }
+            ]
+          },
+          {
+            "name": "Block 3 (start: hollow 1)",
+            "type": "rep",
+            "rest_between": 15,
+            "rounds": [
+              {
+                "exercise": "crunch_hollow1",
+                "reps": 10
+              },
+              {
+                "exercise": "alt_bent_leg_raise_hollow1",
+                "reps": 10
+              },
+              {
+                "exercise": "bent_leg_raise_hollow1",
+                "reps": 10
+              },
+              {
+                "exercise": "tuck_up1_hollow2",
+                "reps": 10
+              }
+            ]
+          },
+          {
+            "name": "Block 4",
+            "type": "on",
+            "rest_between": 20,
+            "rounds": [
+              {
+                "exercise": "crunch_hollow1",
+                "duration": 20
+              },
+              {
+                "exercise": "alt_bent_leg_raise_hollow1",
+                "duration": 20
+              },
+              {
+                "exercise": "bent_leg_raise_hollow1",
+                "duration": 20
+              },
+              {
+                "exercise": "tuck_up1_hollow2",
+                "duration": 20
+              }
+            ]
+          }
+        ],
+        "challenge": {
+          "name": "ALL OUT - TABATA (4 min)",
+          "type": "tabata",
+          "rounds": [
+            {
+              "exercise": "crunch_hollow1",
+              "duration": 20
+            },
+            {
+              "exercise": "hollow_1",
+              "duration": 10
+            },
+            {
+              "exercise": "alt_bent_leg_raise_hollow1",
+              "duration": 20
+            },
+            {
+              "exercise": "hollow_1",
+              "duration": 10
+            },
+            {
+              "exercise": "bent_leg_raise_hollow1",
+              "duration": 20
+            },
+            {
+              "exercise": "hollow_1",
+              "duration": 10
+            },
+            {
+              "exercise": "tuck_up1_hollow2",
+              "duration": 20
+            },
+            {
+              "exercise": "hollow_1",
+              "duration": 10
+            },
+            {
+              "exercise": "crunch_hollow1",
+              "duration": 20
+            },
+            {
+              "exercise": "hollow_1",
+              "duration": 10
+            },
+            {
+              "exercise": "alt_bent_leg_raise_hollow1",
+              "duration": 20
+            },
+            {
+              "exercise": "hollow_1",
+              "duration": 10
+            },
+            {
+              "exercise": "bent_leg_raise_hollow1",
+              "duration": 20
+            },
+            {
+              "exercise": "hollow_1",
+              "duration": 10
+            },
+            {
+              "exercise": "tuck_up1_hollow2",
+              "duration": 20
+            },
+            {
+              "exercise": "hollow_1",
+              "duration": 10
+            }
+          ],
+          "rest_between": 0,
+          "note": "Sequence repeated x2 (as marked in the book) to fill the full 4 minutes."
+        }
+      },
+      {
+        "id": "w2_2",
+        "title": "Session 2 - Core bracing",
+        "theme": "Core bracing",
+        "focus": "Often static work of the deep muscles (transverse abdominis).",
+        "n_blocks": 3,
+        "rest_between_blocks": 60,
+        "challenge_name": "HOLD",
+        "blocks": [
+          {
+            "name": "Block 1 (30\" hollow evolution)",
+            "type": "chain",
+            "rounds": [
+              {
+                "exercise": "hollow_1",
+                "duration": 15
+              },
+              {
+                "exercise": "hollow_2",
+                "duration": 10,
+                "side": "right"
+              },
+              {
+                "exercise": "hollow_3",
+                "duration": 5,
+                "rest_after": 30
+              },
+              {
+                "exercise": "hollow_1",
+                "duration": 15
+              },
+              {
+                "exercise": "hollow_2",
+                "duration": 10,
+                "side": "left"
+              },
+              {
+                "exercise": "hollow_3",
+                "duration": 5
+              }
+            ]
+          },
+          {
+            "name": "Block 2 (1' arch evolution) x2",
+            "type": "chain",
+            "rounds": [
+              {
+                "exercise": "arch_no_legs",
+                "duration": 20
+              },
+              {
+                "exercise": "arch_1_leg",
+                "duration": 20,
+                "side": "right"
+              },
+              {
+                "exercise": "arch_1_leg",
+                "duration": 20,
+                "side": "left"
+              },
+              {
+                "exercise": "arch",
+                "duration": 20,
+                "rest_after": 30
+              },
+              {
+                "exercise": "arch_no_legs",
+                "duration": 20
+              },
+              {
+                "exercise": "arch_1_leg",
+                "duration": 20,
+                "side": "right"
+              },
+              {
+                "exercise": "arch_1_leg",
+                "duration": 20,
+                "side": "left"
+              },
+              {
+                "exercise": "arch",
+                "duration": 20
+              }
+            ]
+          },
+          {
+            "name": "Block 3 (1'20 plank evolution) x2",
+            "type": "chain",
+            "rounds": [
+              {
+                "exercise": "plank",
+                "duration": 20
+              },
+              {
+                "exercise": "side_plank",
+                "duration": 20,
+                "side": "right"
+              },
+              {
+                "exercise": "plank",
+                "duration": 20
+              },
+              {
+                "exercise": "side_plank",
+                "duration": 20,
+                "side": "left",
+                "rest_after": 30
+              },
+              {
+                "exercise": "plank",
+                "duration": 20
+              },
+              {
+                "exercise": "side_plank",
+                "duration": 20,
+                "side": "right"
+              },
+              {
+                "exercise": "plank",
+                "duration": 20
+              },
+              {
+                "exercise": "side_plank",
+                "duration": 20,
+                "side": "left"
+              }
+            ]
+          }
+        ],
+        "challenge": {
+          "name": "HOLD challenge",
+          "type": "hold_chain",
+          "rounds": [
+            {
+              "exercise": "hollow_2",
+              "duration": 60,
+              "side": "right"
+            },
+            {
+              "exercise": "side_plank",
+              "duration": 60,
+              "side": "right"
+            },
+            {
+              "exercise": "plank",
+              "duration": 60
+            },
+            {
+              "exercise": "hollow_2",
+              "duration": 60,
+              "side": "left"
+            },
+            {
+              "exercise": "side_plank",
+              "duration": 60,
+              "side": "left"
+            },
+            {
+              "exercise": "arch",
+              "duration": 60
+            }
+          ],
+          "rest_between": 15
+        }
+      },
+      {
+        "id": "w2_3",
+        "title": "Session 3 - Gym",
+        "theme": "Gym",
+        "focus": "Movements transferable to gymnastics (toes to bar, L-sit, back lever...).",
+        "n_blocks": 3,
+        "rest_between_blocks": 60,
+        "challenge_name": "ALL OUT - Bring Sally Up",
+        "blocks": [
+          {
+            "name": "Block 1 (start in L-position)",
+            "type": "sequence",
+            "rest_between": 15,
+            "repeat": 3,
+            "rounds": [
+              {
+                "exercise": "alt_leg_raise_lposition",
+                "reps": 10
+              },
+              {
+                "exercise": "alt_leg_raise_lposition",
+                "duration": 10
+              },
+              {
+                "exercise": "alt_leg_raise_lposition",
+                "reps": 5,
+                "note": "slow"
+              }
+            ],
+            "note": "Right leg then left leg, repeat 3 times"
+          },
+          {
+            "name": "Block 2 (start in L-sit 2)",
+            "type": "sequence",
+            "rest_between": 15,
+            "repeat": 2,
+            "rounds": [
+              {
+                "exercise": "leg_raise_lsit2",
+                "reps": 10
+              },
+              {
+                "exercise": "leg_raise_lsit2",
+                "duration": 10
+              },
+              {
+                "exercise": "leg_raise_lsit2",
+                "reps": 5,
+                "note": "slow"
+              }
+            ],
+            "note": "Right leg then left leg, repeat 2 times"
+          },
+          {
+            "name": "Block 3 (lying, legs at 90)",
+            "type": "nostop",
+            "rest_between": 10,
+            "rounds": [
+              {
+                "exercise": "reverse_crunch_bent",
+                "reps": 10
+              },
+              {
+                "exercise": "reverse_crunch_bent_to_straight",
+                "reps": 10
+              },
+              {
+                "exercise": "reverse_crunch_straight",
+                "reps": 10
+              }
+            ]
+          }
+        ],
+        "challenge": {
+          "name": "Bring Sally Up",
+          "type": "music_cue",
+          "note": "Track: \"Flower\" by Moby\n\n**UP** -> rest  \n**DOWN** -> Hollow 1",
+          "rounds": [
+            {
+              "exercise": "hollow_1",
+              "duration": null
+            }
+          ],
+          "audio_file": "bring_sally_up",
+          "external_link": "https://open.spotify.com/search/Flower%20Moby"
+        }
+      },
+      {
+        "id": "w2_4",
+        "title": "Session 4 - Obliques",
+        "theme": "Obliques",
+        "focus": "Rotation and lateral flexion work.",
+        "n_blocks": 3,
+        "rest_between_blocks": 60,
+        "challenge_name": null,
+        "blocks": [
+          {
+            "name": "Block 1 (right side only)",
+            "type": "AB_couple",
+            "exercise_a": "bicycle_crunch_bent",
+            "exercise_b": "hip_raise_side_plank_knee",
+            "sequence": [
+              {
+                "who": "A",
+                "reps": 20,
+                "rest_after": 20
+              },
+              {
+                "who": "B",
+                "reps": 20,
+                "rest_after": 20
+              },
+              {
+                "who": "A",
+                "duration": 30,
+                "rest_after": 20
+              },
+              {
+                "who": "B",
+                "duration": 30,
+                "rest_after": 20
+              },
+              {
+                "who": "A",
+                "duration": 30,
+                "rest_after": 0
+              },
+              {
+                "who": "B",
+                "duration": 30,
+                "rest_after": 0
+              }
+            ],
+            "side": "right",
+            "note": "20 REPS A + 20\"off / 20 REPS B + 20\"off / 30\"ON A + 20\"off / 30\"ON B + 20\"off / 30\"ON A + 30\"ON B"
+          },
+          {
+            "name": "Block 2 (left side only)",
+            "type": "AB_couple",
+            "exercise_a": "bicycle_crunch_bent",
+            "exercise_b": "hip_raise_side_plank_knee",
+            "sequence": [
+              {
+                "who": "A",
+                "reps": 20,
+                "rest_after": 20
+              },
+              {
+                "who": "B",
+                "reps": 20,
+                "rest_after": 20
+              },
+              {
+                "who": "A",
+                "duration": 30,
+                "rest_after": 20
+              },
+              {
+                "who": "B",
+                "duration": 30,
+                "rest_after": 20
+              },
+              {
+                "who": "A",
+                "duration": 30,
+                "rest_after": 0
+              },
+              {
+                "who": "B",
+                "duration": 30,
+                "rest_after": 0
+              }
+            ],
+            "side": "left"
+          },
+          {
+            "name": "Block 3 (alternate right/left)",
+            "type": "AB_couple",
+            "exercise_a": "bicycle_crunch",
+            "exercise_b": "hip_rotation_plank",
+            "sequence": [
+              {
+                "who": "A",
+                "reps": 20,
+                "rest_after": 20
+              },
+              {
+                "who": "B",
+                "reps": 20,
+                "rest_after": 20
+              },
+              {
+                "who": "A",
+                "duration": 30,
+                "rest_after": 20
+              },
+              {
+                "who": "B",
+                "duration": 30,
+                "rest_after": 20
+              },
+              {
+                "who": "A",
+                "duration": 30,
+                "rest_after": 0
+              },
+              {
+                "who": "B",
+                "duration": 30,
+                "rest_after": 0
+              }
+            ],
+            "side": "alternate",
+            "note": "A: Alt. Bicycle crunch / B: Hip rotation plank (block 3 swaps both exercises)"
+          }
+        ],
+        "challenge": null
+      }
+    ]
+  },
+  "week_3": {
+    "title": "Week 3",
+    "seances": [
+      {
+        "id": "w3_1",
+        "title": "Session 1 - Rectus abdominis",
+        "theme": "Rectus abdominis",
+        "focus": "Thoracic flexion and hip flexion, mainly along the body's midline.",
+        "n_blocks": 5,
+        "rest_between_blocks": 60,
+        "challenge_name": "TABATA (4 min, 20\"/10\")",
+        "blocks": [
+          {
+            "name": "Block 1",
+            "type": "hold",
+            "rest_between": 20,
+            "rounds": [
+              {
+                "exercise": "hollow_1",
+                "duration": 20
+              },
+              {
+                "exercise": "hollow_2",
+                "duration": 20,
+                "side": "right"
+              },
+              {
+                "exercise": "hollow_2",
+                "duration": 20,
+                "side": "left"
+              },
+              {
+                "exercise": "hollow_3",
+                "duration": 20
+              },
+              {
+                "exercise": "hollow_1_arm",
+                "duration": 20
+              },
+              {
+                "exercise": "hollow_2_arm",
+                "duration": 20,
+                "side": "right"
+              },
+              {
+                "exercise": "hollow_2_arm",
+                "duration": 20,
+                "side": "left"
+              },
+              {
+                "exercise": "hollow_3_arm",
+                "duration": 20
+              }
+            ]
+          },
+          {
+            "name": "Block 2 (start in hollow 2)",
+            "type": "chain",
+            "rounds": [
+              {
+                "exercise": "crunch_hollow2",
+                "reps": 10,
+                "side": "right",
+                "rest_after": 15
+              },
+              {
+                "exercise": "leg_raise_hollow2",
+                "reps": 10,
+                "side": "right",
+                "rest_after": 15
+              },
+              {
+                "exercise": "tuck_up1_hollow2",
+                "reps": 10,
+                "side": "right",
+                "rest_after": 15
+              },
+              {
+                "exercise": "crunch_hollow2",
+                "reps": 10,
+                "side": "left",
+                "rest_after": 15
+              },
+              {
+                "exercise": "leg_raise_hollow2",
+                "reps": 10,
+                "side": "left",
+                "rest_after": 15
+              },
+              {
+                "exercise": "tuck_up1_hollow2",
+                "reps": 10,
+                "side": "left"
+              }
+            ]
+          },
+          {
+            "name": "Block 3 (start in hollow 2 + arms)",
+            "type": "chain",
+            "rounds": [
+              {
+                "exercise": "crunch_hollow2_arm",
+                "reps": 10,
+                "side": "right",
+                "rest_after": 15
+              },
+              {
+                "exercise": "leg_raise_hollow2_arm",
+                "reps": 10,
+                "side": "right",
+                "rest_after": 15
+              },
+              {
+                "exercise": "tuck_up2",
+                "reps": 10,
+                "side": "right",
+                "rest_after": 15
+              },
+              {
+                "exercise": "crunch_hollow2_arm",
+                "reps": 10,
+                "side": "left",
+                "rest_after": 15
+              },
+              {
+                "exercise": "leg_raise_hollow2_arm",
+                "reps": 10,
+                "side": "left",
+                "rest_after": 15
+              },
+              {
+                "exercise": "tuck_up2",
+                "reps": 10,
+                "side": "left"
+              }
+            ]
+          }
+        ],
+        "challenge": {
+          "name": "ALL OUT - TABATA (4 min)",
+          "type": "tabata",
+          "rounds": [
+            {
+              "exercise": "crunch_hollow2",
+              "duration": 20,
+              "side": "right"
+            },
+            {
+              "exercise": "hollow_2",
+              "duration": 10,
+              "side": "right"
+            },
+            {
+              "exercise": "leg_raise_hollow2",
+              "duration": 20,
+              "side": "right"
+            },
+            {
+              "exercise": "hollow_2",
+              "duration": 10,
+              "side": "right"
+            },
+            {
+              "exercise": "tuck_up1_hollow2",
+              "duration": 20,
+              "side": "right"
+            },
+            {
+              "exercise": "hollow_2",
+              "duration": 10,
+              "side": "right"
+            },
+            {
+              "exercise": "tuck_up2",
+              "duration": 20,
+              "side": "right"
+            },
+            {
+              "exercise": "hollow_2",
+              "duration": 10,
+              "side": "right"
+            },
+            {
+              "exercise": "crunch_hollow2",
+              "duration": 20,
+              "side": "left"
+            },
+            {
+              "exercise": "hollow_2",
+              "duration": 10,
+              "side": "left"
+            },
+            {
+              "exercise": "leg_raise_hollow2",
+              "duration": 20,
+              "side": "left"
+            },
+            {
+              "exercise": "hollow_2",
+              "duration": 10,
+              "side": "left"
+            },
+            {
+              "exercise": "tuck_up1_hollow2",
+              "duration": 20,
+              "side": "left"
+            },
+            {
+              "exercise": "hollow_2",
+              "duration": 10,
+              "side": "left"
+            },
+            {
+              "exercise": "tuck_up2",
+              "duration": 20,
+              "side": "left"
+            },
+            {
+              "exercise": "hollow_2",
+              "duration": 10,
+              "side": "left"
+            }
+          ],
+          "rest_between": 0,
+          "note": "First 8 intervals with the right leg straight, then the same 8 with the left leg straight (4 minutes total)."
+        }
+      },
+      {
+        "id": "w3_2",
+        "title": "Session 2 - Core bracing",
+        "theme": "Core bracing",
+        "focus": "Often static work of the deep muscles (transverse abdominis).",
+        "n_blocks": 3,
+        "rest_between_blocks": 60,
+        "challenge_name": "HOLD",
+        "blocks": [
+          {
+            "name": "Block 1 (TABATA hollow evolution) x2",
+            "type": "hold",
+            "rest_between": 10,
+            "rounds": [
+              {
+                "exercise": "hollow_1",
+                "duration": 20
+              },
+              {
+                "exercise": "hollow_2",
+                "duration": 20,
+                "side": "right"
+              },
+              {
+                "exercise": "hollow_2",
+                "duration": 20,
+                "side": "left"
+              },
+              {
+                "exercise": "hollow_3",
+                "duration": 20
+              },
+              {
+                "exercise": "hollow_1",
+                "duration": 20
+              },
+              {
+                "exercise": "hollow_2",
+                "duration": 20,
+                "side": "right"
+              },
+              {
+                "exercise": "hollow_2",
+                "duration": 20,
+                "side": "left"
+              },
+              {
+                "exercise": "hollow_3",
+                "duration": 20
+              }
+            ],
+            "note": "Repeat this block x2"
+          },
+          {
+            "name": "Block 2 (TABATA arch evolution) x2",
+            "type": "hold",
+            "rest_between": 10,
+            "rounds": [
+              {
+                "exercise": "arch_no_legs",
+                "duration": 20
+              },
+              {
+                "exercise": "arch_1_leg",
+                "duration": 20,
+                "side": "right"
+              },
+              {
+                "exercise": "arch_1_leg",
+                "duration": 20,
+                "side": "left"
+              },
+              {
+                "exercise": "arch",
+                "duration": 20
+              },
+              {
+                "exercise": "arch_no_legs",
+                "duration": 20
+              },
+              {
+                "exercise": "arch_1_leg",
+                "duration": 20,
+                "side": "right"
+              },
+              {
+                "exercise": "arch_1_leg",
+                "duration": 20,
+                "side": "left"
+              },
+              {
+                "exercise": "arch",
+                "duration": 20
+              }
+            ],
+            "note": "Repeat this block x2"
+          },
+          {
+            "name": "Block 3 (TABATA plank evolution) x2",
+            "type": "hold",
+            "rest_between": 10,
+            "rounds": [
+              {
+                "exercise": "plank",
+                "duration": 20
+              },
+              {
+                "exercise": "side_plank",
+                "duration": 20,
+                "side": "right"
+              },
+              {
+                "exercise": "plank",
+                "duration": 20
+              },
+              {
+                "exercise": "side_plank",
+                "duration": 20,
+                "side": "left"
+              },
+              {
+                "exercise": "plank",
+                "duration": 20
+              },
+              {
+                "exercise": "side_plank",
+                "duration": 20,
+                "side": "right"
+              },
+              {
+                "exercise": "plank",
+                "duration": 20
+              },
+              {
+                "exercise": "side_plank",
+                "duration": 20,
+                "side": "left"
+              }
+            ],
+            "note": "Repeat this block x2"
+          }
+        ],
+        "challenge": {
+          "name": "HOLD challenge",
+          "type": "hold_chain",
+          "rounds": [
+            {
+              "exercise": "side_plank",
+              "duration": 60,
+              "side": "right"
+            },
+            {
+              "exercise": "plank",
+              "duration": 60
+            },
+            {
+              "exercise": "side_plank",
+              "duration": 60,
+              "side": "left"
+            },
+            {
+              "exercise": "arch",
+              "duration": 60
+            }
+          ],
+          "rest_between": 0,
+          "note": "No rest between exercises"
+        }
+      },
+      {
+        "id": "w3_3",
+        "title": "Session 3 - Gym",
+        "theme": "Gym",
+        "focus": "Movements transferable to gymnastics (toes to bar, L-sit, back lever...).",
+        "n_blocks": 3,
+        "rest_between_blocks": 60,
+        "challenge_name": "ALL OUT - Bring Sally Up",
+        "blocks": [
+          {
+            "name": "Block 1 (start in L-sit 2)",
+            "type": "sequence",
+            "rest_between": 15,
+            "repeat": 3,
+            "rounds": [
+              {
+                "exercise": "leg_raise_lsit2",
+                "reps": 10
+              },
+              {
+                "exercise": "leg_raise_lsit2",
+                "duration": 10
+              },
+              {
+                "exercise": "leg_raise_lsit2",
+                "reps": 5,
+                "note": "slow"
+              }
+            ],
+            "note": "Right leg then left leg, repeat 3 times"
+          },
+          {
+            "name": "Block 2 (start in L-sit 2)",
+            "type": "chain",
+            "rounds": [
+              {
+                "exercise": "hip_raise_lsit2",
+                "reps": 10,
+                "rest_after": 10
+              },
+              {
+                "exercise": "hip_raise_lsit2",
+                "duration": 5,
+                "rest_after": 10
+              },
+              {
+                "exercise": "hip_raise_lsit2",
+                "duration": 5
+              }
+            ]
+          },
+          {
+            "name": "Block 3 (lying, legs at 90) x2",
+            "type": "nostop",
+            "rest_between": 10,
+            "rounds": [
+              {
+                "exercise": "reverse_crunch_bent",
+                "reps": 15
+              },
+              {
+                "exercise": "reverse_crunch_bent_to_straight",
+                "reps": 15
+              },
+              {
+                "exercise": "reverse_crunch_straight",
+                "reps": 15
+              },
+              {
+                "exercise": "reverse_crunch_bent",
+                "reps": 15
+              },
+              {
+                "exercise": "reverse_crunch_bent_to_straight",
+                "reps": 15
+              },
+              {
+                "exercise": "reverse_crunch_straight",
+                "reps": 15
+              }
+            ],
+            "note": "Repeat x2"
+          }
+        ],
+        "challenge": {
+          "name": "Bring Sally Up",
+          "type": "music_cue",
+          "note": "Track: \"Flower\" by Moby\n\n**UP** -> rest  \n**DOWN** -> Hollow 2 (straight leg of your choice)",
+          "rounds": [
+            {
+              "exercise": "hollow_2",
+              "duration": null
+            }
+          ],
+          "audio_file": "bring_sally_up",
+          "external_link": "https://open.spotify.com/search/Flower%20Moby"
+        }
+      },
+      {
+        "id": "w3_4",
+        "title": "Session 4 - Obliques",
+        "theme": "Obliques",
+        "focus": "Rotation and lateral flexion work.",
+        "n_blocks": 3,
+        "rest_between_blocks": 60,
+        "challenge_name": null,
+        "blocks": [
+          {
+            "name": "Block 1 (right side only)",
+            "type": "AB_couple",
+            "exercise_a": "twist_lposition",
+            "exercise_b": "hip_raise_side_plank",
+            "sequence": [
+              {
+                "who": "A",
+                "reps": 25,
+                "rest_after": 20
+              },
+              {
+                "who": "B",
+                "reps": 25,
+                "rest_after": 20
+              },
+              {
+                "who": "A",
+                "duration": 40,
+                "rest_after": 20
+              },
+              {
+                "who": "B",
+                "duration": 40,
+                "rest_after": 20
+              },
+              {
+                "who": "B",
+                "duration": 40,
+                "rest_after": 0
+              },
+              {
+                "who": "B",
+                "duration": 40,
+                "rest_after": 0
+              }
+            ],
+            "side": "right",
+            "note": "25 REPS A + 20\"off / 25 REPS B + 20\"off / 40\"ON A + 20\"off / 40\"ON B + 20\"off / 40\"ON B + 40\"ON B (as printed in the book)"
+          },
+          {
+            "name": "Block 2 (left side only)",
+            "type": "AB_couple",
+            "exercise_a": "twist_lposition",
+            "exercise_b": "hip_raise_side_plank",
+            "sequence": [
+              {
+                "who": "A",
+                "reps": 25,
+                "rest_after": 20
+              },
+              {
+                "who": "B",
+                "reps": 25,
+                "rest_after": 20
+              },
+              {
+                "who": "A",
+                "duration": 40,
+                "rest_after": 20
+              },
+              {
+                "who": "B",
+                "duration": 40,
+                "rest_after": 20
+              },
+              {
+                "who": "B",
+                "duration": 40,
+                "rest_after": 0
+              },
+              {
+                "who": "B",
+                "duration": 40,
+                "rest_after": 0
+              }
+            ],
+            "side": "left"
+          },
+          {
+            "name": "Block 3 (alternate right/left)",
+            "type": "AB_couple",
+            "exercise_a": "twist_lposition",
+            "exercise_b": "hip_rotation_plank",
+            "sequence": [
+              {
+                "who": "A",
+                "reps": 20,
+                "rest_after": 20
+              },
+              {
+                "who": "B",
+                "reps": 20,
+                "rest_after": 20
+              },
+              {
+                "who": "A",
+                "duration": 30,
+                "rest_after": 20
+              },
+              {
+                "who": "B",
+                "duration": 30,
+                "rest_after": 20
+              },
+              {
+                "who": "A",
+                "duration": 30,
+                "rest_after": 0
+              },
+              {
+                "who": "B",
+                "duration": 30,
+                "rest_after": 0
+              }
+            ],
+            "side": "alternate",
+            "note": "A: Twist in L-position / B: Hip rotation plank"
+          }
+        ],
+        "challenge": null
+      }
+    ]
+  },
+  "week_4": {
+    "title": "Week 4",
+    "seances": [
+      {
+        "id": "w4_1",
+        "title": "Session 1 - Rectus abdominis",
+        "theme": "Rectus abdominis",
+        "focus": "Thoracic flexion and hip flexion, mainly along the body's midline.",
+        "n_blocks": 4,
+        "rest_between_blocks": 60,
+        "challenge_name": "TABATA (4 min, 20\"/10\")",
+        "blocks": [
+          {
+            "name": "Block 1",
+            "type": "chain",
+            "rounds": [
+              {
+                "exercise": "hollow_1",
+                "duration": 10
+              },
+              {
+                "exercise": "hollow_2",
+                "duration": 10,
+                "side": "right"
+              },
+              {
+                "exercise": "hollow_3",
+                "duration": 10,
+                "rest_after": 20
+              },
+              {
+                "exercise": "hollow_1",
+                "duration": 10
+              },
+              {
+                "exercise": "hollow_2",
+                "duration": 10,
+                "side": "left"
+              },
+              {
+                "exercise": "hollow_3",
+                "duration": 10
+              },
+              {
+                "exercise": "hollow_1_arm",
+                "duration": 10
+              },
+              {
+                "exercise": "hollow_2_arm",
+                "duration": 10,
+                "side": "right"
+              },
+              {
+                "exercise": "hollow_3_arm",
+                "duration": 10,
+                "rest_after": 20
+              },
+              {
+                "exercise": "hollow_1_arm",
+                "duration": 10
+              },
+              {
+                "exercise": "hollow_2_arm",
+                "duration": 10,
+                "side": "left"
+              },
+              {
+                "exercise": "hollow_3_arm",
+                "duration": 10
+              }
+            ]
+          },
+          {
+            "name": "Block 2 (start in hollow 1, 10 reps each)",
+            "type": "rep",
+            "rest_between": 15,
+            "rounds": [
+              {
+                "exercise": "deadbug",
+                "reps": 10,
+                "note": "right arm / left leg"
+              },
+              {
+                "exercise": "deadbug",
+                "reps": 10,
+                "note": "left arm / right leg"
+              },
+              {
+                "exercise": "deadbug",
+                "reps": 10,
+                "note": "alternating left/right"
+              },
+              {
+                "exercise": "all_deadbug",
+                "reps": 10,
+                "note": "without arms"
+              },
+              {
+                "exercise": "all_deadbug",
+                "reps": 10
+              }
+            ]
+          },
+          {
+            "name": "Block 3 (in hollow 1 position)",
+            "type": "on",
+            "rest_between": 20,
+            "rounds": [
+              {
+                "exercise": "deadbug",
+                "duration": 20
+              },
+              {
+                "exercise": "deadbug",
+                "duration": 20,
+                "note": "right leg / left arm"
+              },
+              {
+                "exercise": "deadbug",
+                "duration": 20,
+                "note": "left leg / right arm"
+              },
+              {
+                "exercise": "all_deadbug",
+                "duration": 20
+              }
+            ]
+          }
+        ],
+        "challenge": {
+          "name": "ALL OUT - TABATA (4 min)",
+          "type": "tabata",
+          "rounds": [
+            {
+              "exercise": "deadbug",
+              "duration": 20
+            },
+            {
+              "exercise": "hollow_1",
+              "duration": 10
+            },
+            {
+              "exercise": "deadbug",
+              "duration": 20,
+              "note": "right leg / left arm"
+            },
+            {
+              "exercise": "hollow_1",
+              "duration": 10
+            },
+            {
+              "exercise": "deadbug",
+              "duration": 20,
+              "note": "left leg / right arm"
+            },
+            {
+              "exercise": "hollow_1",
+              "duration": 10
+            },
+            {
+              "exercise": "all_deadbug",
+              "duration": 20
+            },
+            {
+              "exercise": "hollow_1",
+              "duration": 10
+            },
+            {
+              "exercise": "deadbug",
+              "duration": 20
+            },
+            {
+              "exercise": "hollow_1",
+              "duration": 10
+            },
+            {
+              "exercise": "deadbug",
+              "duration": 20,
+              "note": "right leg / left arm"
+            },
+            {
+              "exercise": "hollow_1",
+              "duration": 10
+            },
+            {
+              "exercise": "deadbug",
+              "duration": 20,
+              "note": "left leg / right arm"
+            },
+            {
+              "exercise": "hollow_1",
+              "duration": 10
+            },
+            {
+              "exercise": "all_deadbug",
+              "duration": 20
+            },
+            {
+              "exercise": "hollow_1",
+              "duration": 10
+            }
+          ],
+          "rest_between": 0,
+          "note": "Sequence repeated x2 (as marked in the book) to fill the full 4 minutes."
+        }
+      },
+      {
+        "id": "w4_2",
+        "title": "Session 2 - Core bracing",
+        "theme": "Core bracing",
+        "focus": "Often static work of the deep muscles (transverse abdominis).",
+        "n_blocks": 3,
+        "rest_between_blocks": 60,
+        "challenge_name": "HOLD",
+        "blocks": [
+          {
+            "name": "Block 1 (1' hollow evolution) x2",
+            "type": "chain",
+            "rounds": [
+              {
+                "exercise": "hollow_1",
+                "duration": 15
+              },
+              {
+                "exercise": "hollow_2",
+                "duration": 10,
+                "side": "right"
+              },
+              {
+                "exercise": "hollow_3",
+                "duration": 5
+              },
+              {
+                "exercise": "hollow_1",
+                "duration": 15
+              },
+              {
+                "exercise": "hollow_2",
+                "duration": 10,
+                "side": "left"
+              },
+              {
+                "exercise": "hollow_3",
+                "duration": 5,
+                "rest_after": 30
+              },
+              {
+                "exercise": "hollow_1",
+                "duration": 15
+              },
+              {
+                "exercise": "hollow_2",
+                "duration": 10,
+                "side": "right"
+              },
+              {
+                "exercise": "hollow_3",
+                "duration": 5
+              },
+              {
+                "exercise": "hollow_1",
+                "duration": 15
+              },
+              {
+                "exercise": "hollow_2",
+                "duration": 10,
+                "side": "left"
+              },
+              {
+                "exercise": "hollow_3",
+                "duration": 5
+              }
+            ]
+          },
+          {
+            "name": "Block 2 (1'20 arch evolution) x2",
+            "type": "chain",
+            "rounds": [
+              {
+                "exercise": "arch_no_legs",
+                "duration": 20
+              },
+              {
+                "exercise": "arch_1_leg",
+                "duration": 20,
+                "side": "right"
+              },
+              {
+                "exercise": "arch_1_leg",
+                "duration": 20,
+                "side": "left"
+              },
+              {
+                "exercise": "arch",
+                "duration": 20,
+                "rest_after": 30
+              },
+              {
+                "exercise": "arch_no_legs",
+                "duration": 20
+              },
+              {
+                "exercise": "arch_1_leg",
+                "duration": 20,
+                "side": "right"
+              },
+              {
+                "exercise": "arch_1_leg",
+                "duration": 20,
+                "side": "left"
+              },
+              {
+                "exercise": "arch",
+                "duration": 20
+              }
+            ]
+          },
+          {
+            "name": "Block 3 (1'20 plank evolution) x2",
+            "type": "chain",
+            "rounds": [
+              {
+                "exercise": "plank",
+                "duration": 20
+              },
+              {
+                "exercise": "side_plank",
+                "duration": 20,
+                "side": "right"
+              },
+              {
+                "exercise": "plank",
+                "duration": 20
+              },
+              {
+                "exercise": "side_plank",
+                "duration": 20,
+                "side": "left",
+                "rest_after": 30
+              },
+              {
+                "exercise": "plank",
+                "duration": 20
+              },
+              {
+                "exercise": "side_plank",
+                "duration": 20,
+                "side": "right"
+              },
+              {
+                "exercise": "plank",
+                "duration": 20
+              },
+              {
+                "exercise": "side_plank",
+                "duration": 20,
+                "side": "left"
+              }
+            ]
+          }
+        ],
+        "challenge": {
+          "name": "HOLD challenge",
+          "type": "hold_chain",
+          "rounds": [
+            {
+              "exercise": "hollow_2",
+              "duration": 60,
+              "side": "right"
+            },
+            {
+              "exercise": "hollow_2",
+              "duration": 45,
+              "side": "right"
+            },
+            {
+              "exercise": "hollow_2",
+              "duration": 30,
+              "side": "right"
+            },
+            {
+              "exercise": "hollow_3",
+              "duration": 15
+            },
+            {
+              "exercise": "hollow_2",
+              "duration": 60,
+              "side": "right"
+            },
+            {
+              "exercise": "hollow_2",
+              "duration": 45,
+              "side": "right"
+            },
+            {
+              "exercise": "hollow_2",
+              "duration": 30,
+              "side": "right"
+            },
+            {
+              "exercise": "hollow_3",
+              "duration": 15
+            }
+          ],
+          "rest_between": 15,
+          "note": "Descending ladder, repeated x2, then 1 min rest."
+        }
+      },
+      {
+        "id": "w4_3",
+        "title": "Session 3 - Gym",
+        "theme": "Gym",
+        "focus": "Movements transferable to gymnastics (toes to bar, L-sit, back lever...).",
+        "n_blocks": 4,
+        "rest_between_blocks": 60,
+        "challenge_name": "ALL OUT - Bring Sally Up",
+        "blocks": [
+          {
+            "name": "Block 1 (lying, legs at 90)",
+            "type": "nostop",
+            "rest_between": 10,
+            "rounds": [
+              {
+                "exercise": "reverse_crunch_bent",
+                "reps": 10
+              },
+              {
+                "exercise": "reverse_crunch_bent_to_straight",
+                "reps": 10
+              },
+              {
+                "exercise": "reverse_crunch_straight",
+                "reps": 10
+              },
+              {
+                "exercise": "reverse_crunch_bent",
+                "reps": 10
+              },
+              {
+                "exercise": "reverse_crunch_bent_to_straight",
+                "reps": 10
+              },
+              {
+                "exercise": "reverse_crunch_straight",
+                "reps": 10
+              },
+              {
+                "exercise": "reverse_crunch_bent",
+                "reps": 10
+              },
+              {
+                "exercise": "reverse_crunch_bent_to_straight",
+                "reps": 10
+              },
+              {
+                "exercise": "reverse_crunch_straight",
+                "reps": 10
+              }
+            ],
+            "note": "x3"
+          },
+          {
+            "name": "Block 2 (start in L-sit 2)",
+            "type": "chain",
+            "rounds": [
+              {
+                "exercise": "hip_raise_lsit2",
+                "reps": 10,
+                "rest_after": 10
+              },
+              {
+                "exercise": "hip_raise_lsit2",
+                "duration": 5,
+                "rest_after": 10
+              },
+              {
+                "exercise": "hip_raise_lsit2",
+                "duration": 5,
+                "rest_after": 30
+              },
+              {
+                "exercise": "hip_raise_lsit2",
+                "reps": 10,
+                "rest_after": 10
+              },
+              {
+                "exercise": "hip_raise_lsit2",
+                "duration": 5,
+                "rest_after": 10
+              },
+              {
+                "exercise": "hip_raise_lsit2",
+                "duration": 5
+              }
+            ]
+          },
+          {
+            "name": "Block 3 (start in L-sit 1)",
+            "type": "chain",
+            "rounds": [
+              {
+                "exercise": "leg_raise_lsit1",
+                "reps": 10,
+                "rest_after": 10
+              },
+              {
+                "exercise": "leg_raise_lsit1",
+                "duration": 5,
+                "rest_after": 10
+              },
+              {
+                "exercise": "leg_raise_lsit1",
+                "duration": 5,
+                "rest_after": 30
+              },
+              {
+                "exercise": "leg_raise_lsit1",
+                "reps": 10,
+                "rest_after": 10
+              },
+              {
+                "exercise": "leg_raise_lsit1",
+                "duration": 5,
+                "rest_after": 10
+              },
+              {
+                "exercise": "leg_raise_lsit1",
+                "duration": 5
+              }
+            ]
+          },
+          {
+            "name": "Block 4 (start in gym plank)",
+            "type": "rep",
+            "rest_between": 10,
+            "rounds": [
+              {
+                "exercise": "knee_tuck",
+                "reps": 10
+              },
+              {
+                "exercise": "knee_tuck",
+                "reps": 5,
+                "note": "slow"
+              },
+              {
+                "exercise": "knee_tuck",
+                "reps": 5,
+                "note": "slow"
+              }
+            ]
+          }
+        ],
+        "challenge": {
+          "name": "Bring Sally Up",
+          "type": "music_cue",
+          "note": "Track: \"Flower\" by Moby\n\n**UP** -> rest  \n**DOWN** -> Hollow 2 + arms",
+          "rounds": [
+            {
+              "exercise": "hollow_2_arm",
+              "duration": null
+            }
+          ],
+          "audio_file": "bring_sally_up",
+          "external_link": "https://open.spotify.com/search/Flower%20Moby"
+        }
+      },
+      {
+        "id": "w4_4",
+        "title": "Session 4 - Obliques",
+        "theme": "Obliques",
+        "focus": "Rotation and lateral flexion work.",
+        "n_blocks": 3,
+        "rest_between_blocks": 60,
+        "challenge_name": null,
+        "blocks": [
+          {
+            "name": "Block 1 (right side only)",
+            "type": "AB_couple",
+            "exercise_a": "bicycle_crunch_straight",
+            "exercise_b": "russian_twist",
+            "sequence": [
+              {
+                "who": "A",
+                "reps": 25,
+                "rest_after": 20
+              },
+              {
+                "who": "B",
+                "reps": 25,
+                "rest_after": 20
+              },
+              {
+                "who": "A",
+                "duration": 30,
+                "rest_after": 30
+              },
+              {
+                "who": "B",
+                "duration": 30,
+                "rest_after": 30
+              },
+              {
+                "who": "A",
+                "duration": 30,
+                "rest_after": 0
+              },
+              {
+                "who": "B",
+                "duration": 30,
+                "rest_after": 0
+              },
+              {
+                "who": "A",
+                "duration": 30,
+                "rest_after": 0
+              },
+              {
+                "who": "B",
+                "duration": 30,
+                "rest_after": 0
+              }
+            ],
+            "side": "right",
+            "note": "25 REPS A + 20\"off / 25 REPS B + 20\"off / 30\"ON A + 30\"off / 30\"ON B + 30\"off / 30\"ON A + 30\"ON B + 30\"ON A + 30\"ON B"
+          },
+          {
+            "name": "Block 2 (left side only)",
+            "type": "AB_couple",
+            "exercise_a": "bicycle_crunch_straight",
+            "exercise_b": "russian_twist",
+            "sequence": [
+              {
+                "who": "A",
+                "reps": 25,
+                "rest_after": 20
+              },
+              {
+                "who": "B",
+                "reps": 25,
+                "rest_after": 20
+              },
+              {
+                "who": "A",
+                "duration": 30,
+                "rest_after": 30
+              },
+              {
+                "who": "B",
+                "duration": 30,
+                "rest_after": 30
+              },
+              {
+                "who": "A",
+                "duration": 30,
+                "rest_after": 0
+              },
+              {
+                "who": "B",
+                "duration": 30,
+                "rest_after": 0
+              },
+              {
+                "who": "A",
+                "duration": 30,
+                "rest_after": 0
+              },
+              {
+                "who": "B",
+                "duration": 30,
+                "rest_after": 0
+              }
+            ],
+            "side": "left"
+          },
+          {
+            "name": "Block 3 (alternate right/left)",
+            "type": "AB_couple",
+            "exercise_a": "bicycle_crunch_straight",
+            "exercise_b": "russian_twist",
+            "sequence": [
+              {
+                "who": "A",
+                "reps": 25,
+                "rest_after": 20
+              },
+              {
+                "who": "B",
+                "reps": 25,
+                "rest_after": 20
+              },
+              {
+                "who": "A",
+                "duration": 30,
+                "rest_after": 30
+              },
+              {
+                "who": "B",
+                "duration": 30,
+                "rest_after": 30
+              },
+              {
+                "who": "A",
+                "duration": 30,
+                "rest_after": 0
+              },
+              {
+                "who": "B",
+                "duration": 30,
+                "rest_after": 0
+              },
+              {
+                "who": "A",
+                "duration": 30,
+                "rest_after": 0
+              },
+              {
+                "who": "B",
+                "duration": 30,
+                "rest_after": 0
+              }
+            ],
+            "side": "alternate"
+          }
+        ],
+        "challenge": null
+      }
+    ]
+  },
+  "week_5": {
+    "title": "Week 5",
+    "seances": [
+      {
+        "id": "w5_1",
+        "title": "Session 1 - Rectus abdominis",
+        "theme": "Rectus abdominis",
+        "focus": "Thoracic flexion and hip flexion, mainly along the body's midline.",
+        "n_blocks": 3,
+        "rest_between_blocks": 60,
+        "challenge_name": "TABATA (4 min, 20\"/10\")",
+        "blocks": [
+          {
+            "name": "Block 1 (chain the positions)",
+            "type": "chain",
+            "rounds": [
+              {
+                "exercise": "hollow_1",
+                "duration": 10
+              },
+              {
+                "exercise": "hollow_2",
+                "duration": 10,
+                "side": "right"
+              },
+              {
+                "exercise": "hollow_3",
+                "duration": 10
+              },
+              {
+                "exercise": "hollow_2",
+                "duration": 10,
+                "side": "left"
+              },
+              {
+                "exercise": "hollow_1",
+                "duration": 10,
+                "rest_after": 60
+              },
+              {
+                "exercise": "hollow_1_arm",
+                "duration": 10
+              },
+              {
+                "exercise": "hollow_2_arm",
+                "duration": 10,
+                "side": "right"
+              },
+              {
+                "exercise": "hollow_3_arm",
+                "duration": 10
+              },
+              {
+                "exercise": "hollow_2_arm",
+                "duration": 10,
+                "side": "left"
+              },
+              {
+                "exercise": "hollow_1_arm",
+                "duration": 10
+              }
+            ]
+          },
+          {
+            "name": "Block 2 (start in hollow 2 + arms)",
+            "type": "chain",
+            "rounds": [
+              {
+                "exercise": "crunch_hollow2_arm",
+                "reps": 10,
+                "side": "right",
+                "rest_after": 15
+              },
+              {
+                "exercise": "leg_raise_hollow2_arm",
+                "reps": 10,
+                "side": "right",
+                "rest_after": 15
+              },
+              {
+                "exercise": "tuck_up2",
+                "reps": 10,
+                "side": "right",
+                "rest_after": 15
+              },
+              {
+                "exercise": "crunch_hollow2_arm",
+                "reps": 10,
+                "side": "left",
+                "rest_after": 15
+              },
+              {
+                "exercise": "leg_raise_hollow2_arm",
+                "reps": 10,
+                "side": "left",
+                "rest_after": 15
+              },
+              {
+                "exercise": "tuck_up2",
+                "reps": 10,
+                "side": "left"
+              }
+            ]
+          },
+          {
+            "name": "Block 3 (start in hollow 3 + arms)",
+            "type": "rep",
+            "rest_between": 30,
+            "rounds": [
+              {
+                "exercise": "alt_vup_opposite",
+                "reps": 10,
+                "side": "right"
+              },
+              {
+                "exercise": "alt_vup_opposite",
+                "reps": 10,
+                "side": "left"
+              },
+              {
+                "exercise": "alt_vup",
+                "reps": 10
+              },
+              {
+                "exercise": "vup",
+                "reps": 10
+              }
+            ]
+          }
+        ],
+        "challenge": {
+          "name": "ALL OUT - TABATA (4 min)",
+          "type": "chain",
+          "rounds": [
+            {
+              "exercise": "alt_vup_opposite",
+              "duration": 20,
+              "side": "right",
+              "rest_after": 10
+            },
+            {
+              "exercise": "alt_vup_opposite",
+              "duration": 20,
+              "side": "left",
+              "rest_after": 10
+            },
+            {
+              "exercise": "alt_vup",
+              "duration": 20,
+              "rest_after": 10
+            },
+            {
+              "exercise": "vup",
+              "duration": 20,
+              "rest_after": 10
+            },
+            {
+              "exercise": "alt_vup_opposite",
+              "duration": 20,
+              "side": "right",
+              "rest_after": 10
+            },
+            {
+              "exercise": "alt_vup_opposite",
+              "duration": 20,
+              "side": "left",
+              "rest_after": 10
+            },
+            {
+              "exercise": "alt_vup",
+              "duration": 20,
+              "rest_after": 10
+            },
+            {
+              "exercise": "vup",
+              "duration": 20,
+              "rest_after": 10
+            }
+          ],
+          "rest_between": 0,
+          "note": "x2 rounds to fill the full 4 minutes."
+        }
+      },
+      {
+        "id": "w5_2",
+        "title": "Session 2 - Core bracing",
+        "theme": "Core bracing",
+        "focus": "Often static work of the deep muscles (transverse abdominis).",
+        "n_blocks": 3,
+        "rest_between_blocks": 60,
+        "challenge_name": "TABATA (4 min, 20\"/10\")",
+        "blocks": [
+          {
+            "name": "Block 1 (TABATA hollow evolution) x2",
+            "type": "chain",
+            "rounds": [
+              {
+                "exercise": "hollow_1_arm",
+                "duration": 20
+              },
+              {
+                "exercise": "hollow_1",
+                "duration": 10
+              },
+              {
+                "exercise": "hollow_2",
+                "duration": 20,
+                "side": "right"
+              },
+              {
+                "exercise": "hollow_1",
+                "duration": 10
+              },
+              {
+                "exercise": "hollow_2",
+                "duration": 20,
+                "side": "left"
+              },
+              {
+                "exercise": "hollow_1",
+                "duration": 10
+              },
+              {
+                "exercise": "hollow_3",
+                "duration": 20,
+                "rest_after": 10
+              },
+              {
+                "exercise": "hollow_1_arm",
+                "duration": 20
+              },
+              {
+                "exercise": "hollow_1",
+                "duration": 10
+              },
+              {
+                "exercise": "hollow_2",
+                "duration": 20,
+                "side": "right"
+              },
+              {
+                "exercise": "hollow_1",
+                "duration": 10
+              },
+              {
+                "exercise": "hollow_2",
+                "duration": 20,
+                "side": "left"
+              },
+              {
+                "exercise": "hollow_1",
+                "duration": 10
+              },
+              {
+                "exercise": "hollow_3",
+                "duration": 20
+              }
+            ]
+          },
+          {
+            "name": "Block 2 (TABATA arch evolution) x2",
+            "type": "chain",
+            "rounds": [
+              {
+                "exercise": "arch_1_leg",
+                "duration": 20,
+                "side": "right"
+              },
+              {
+                "exercise": "arch_no_legs",
+                "duration": 10
+              },
+              {
+                "exercise": "arch",
+                "duration": 20
+              },
+              {
+                "exercise": "arch_no_legs",
+                "duration": 10
+              },
+              {
+                "exercise": "arch_1_leg",
+                "duration": 20,
+                "side": "left"
+              },
+              {
+                "exercise": "arch_no_legs",
+                "duration": 10
+              },
+              {
+                "exercise": "arch",
+                "duration": 20,
+                "rest_after": 10
+              },
+              {
+                "exercise": "arch_1_leg",
+                "duration": 20,
+                "side": "right"
+              },
+              {
+                "exercise": "arch_no_legs",
+                "duration": 10
+              },
+              {
+                "exercise": "arch",
+                "duration": 20
+              },
+              {
+                "exercise": "arch_no_legs",
+                "duration": 10
+              },
+              {
+                "exercise": "arch_1_leg",
+                "duration": 20,
+                "side": "left"
+              },
+              {
+                "exercise": "arch_no_legs",
+                "duration": 10
+              },
+              {
+                "exercise": "arch",
+                "duration": 20
+              }
+            ]
+          },
+          {
+            "name": "Block 3 (TABATA plank evolution) x2",
+            "type": "chain",
+            "rounds": [
+              {
+                "exercise": "side_plank",
+                "duration": 20,
+                "side": "right"
+              },
+              {
+                "exercise": "plank",
+                "duration": 10
+              },
+              {
+                "exercise": "side_plank",
+                "duration": 20,
+                "side": "right"
+              },
+              {
+                "exercise": "plank",
+                "duration": 10
+              },
+              {
+                "exercise": "side_plank",
+                "duration": 20,
+                "side": "left"
+              },
+              {
+                "exercise": "plank",
+                "duration": 10
+              },
+              {
+                "exercise": "side_plank",
+                "duration": 20,
+                "side": "left",
+                "rest_after": 10
+              },
+              {
+                "exercise": "side_plank",
+                "duration": 20,
+                "side": "right"
+              },
+              {
+                "exercise": "plank",
+                "duration": 10
+              },
+              {
+                "exercise": "side_plank",
+                "duration": 20,
+                "side": "right"
+              },
+              {
+                "exercise": "plank",
+                "duration": 10
+              },
+              {
+                "exercise": "side_plank",
+                "duration": 20,
+                "side": "left"
+              },
+              {
+                "exercise": "plank",
+                "duration": 10
+              },
+              {
+                "exercise": "side_plank",
+                "duration": 20,
+                "side": "left"
+              }
+            ]
+          }
+        ],
+        "challenge": {
+          "name": "ALL OUT - TABATA (4 min)",
+          "type": "tabata",
+          "rounds": [
+            {
+              "exercise": "plank",
+              "duration": 20
+            },
+            {
+              "exercise": "gym_plank",
+              "duration": 10
+            },
+            {
+              "exercise": "plank",
+              "duration": 20
+            },
+            {
+              "exercise": "gym_plank",
+              "duration": 10
+            },
+            {
+              "exercise": "plank",
+              "duration": 20
+            },
+            {
+              "exercise": "gym_plank",
+              "duration": 10
+            },
+            {
+              "exercise": "plank",
+              "duration": 20
+            },
+            {
+              "exercise": "gym_plank",
+              "duration": 10
+            },
+            {
+              "exercise": "plank",
+              "duration": 20
+            },
+            {
+              "exercise": "gym_plank",
+              "duration": 10
+            },
+            {
+              "exercise": "plank",
+              "duration": 20
+            },
+            {
+              "exercise": "gym_plank",
+              "duration": 10
+            },
+            {
+              "exercise": "plank",
+              "duration": 20
+            },
+            {
+              "exercise": "gym_plank",
+              "duration": 10
+            },
+            {
+              "exercise": "plank",
+              "duration": 20
+            },
+            {
+              "exercise": "gym_plank",
+              "duration": 10
+            }
+          ],
+          "rest_between": 0,
+          "note": "8 rounds of this pair = 4 min total, as stated in the book."
+        }
+      },
+      {
+        "id": "w5_3",
+        "title": "Session 3 - Gym",
+        "theme": "Gym",
+        "focus": "Movements transferable to gymnastics (toes to bar, L-sit, back lever...).",
+        "n_blocks": 4,
+        "rest_between_blocks": 60,
+        "challenge_name": "ALL OUT - Bring Sally Up",
+        "blocks": [
+          {
+            "name": "Block 1 (start in L-sit 2)",
+            "type": "chain",
+            "rounds": [
+              {
+                "exercise": "hip_raise_lsit2",
+                "reps": 10,
+                "rest_after": 15
+              },
+              {
+                "exercise": "hip_raise_lsit2",
+                "duration": 5,
+                "rest_after": 15
+              },
+              {
+                "exercise": "hip_raise_lsit2",
+                "duration": 5,
+                "rest_after": 15
+              },
+              {
+                "exercise": "hip_raise_lsit2",
+                "reps": 10,
+                "rest_after": 15
+              },
+              {
+                "exercise": "hip_raise_lsit2",
+                "duration": 5,
+                "rest_after": 15
+              },
+              {
+                "exercise": "hip_raise_lsit2",
+                "duration": 5,
+                "rest_after": 15
+              },
+              {
+                "exercise": "hip_raise_lsit2",
+                "reps": 10,
+                "rest_after": 15
+              },
+              {
+                "exercise": "hip_raise_lsit2",
+                "duration": 5,
+                "rest_after": 15
+              },
+              {
+                "exercise": "hip_raise_lsit2",
+                "duration": 5
+              }
+            ]
+          },
+          {
+            "name": "Block 2 (start in L-sit 2)",
+            "type": "chain",
+            "rounds": [
+              {
+                "exercise": "leg_raise_lsit2",
+                "reps": 10,
+                "rest_after": 15
+              },
+              {
+                "exercise": "leg_raise_lsit2",
+                "duration": 5,
+                "rest_after": 15
+              },
+              {
+                "exercise": "leg_raise_lsit2",
+                "duration": 5,
+                "rest_after": 15
+              },
+              {
+                "exercise": "leg_raise_lsit2",
+                "reps": 10,
+                "rest_after": 15
+              },
+              {
+                "exercise": "leg_raise_lsit2",
+                "duration": 5,
+                "rest_after": 15
+              },
+              {
+                "exercise": "leg_raise_lsit2",
+                "duration": 5,
+                "rest_after": 15
+              },
+              {
+                "exercise": "leg_raise_lsit2",
+                "reps": 10,
+                "rest_after": 15
+              },
+              {
+                "exercise": "leg_raise_lsit2",
+                "duration": 5,
+                "rest_after": 15
+              },
+              {
+                "exercise": "leg_raise_lsit2",
+                "duration": 5
+              }
+            ]
+          },
+          {
+            "name": "Block 3 (start in gym plank)",
+            "type": "chain",
+            "rounds": [
+              {
+                "exercise": "knee_tuck",
+                "reps": 10,
+                "rest_after": 15
+              },
+              {
+                "exercise": "knee_tuck",
+                "reps": 5,
+                "note": "slow",
+                "rest_after": 15
+              },
+              {
+                "exercise": "knee_tuck",
+                "reps": 5,
+                "note": "slow",
+                "rest_after": 15
+              },
+              {
+                "exercise": "knee_tuck",
+                "reps": 10,
+                "rest_after": 15
+              },
+              {
+                "exercise": "knee_tuck",
+                "reps": 5,
+                "note": "slow",
+                "rest_after": 15
+              },
+              {
+                "exercise": "knee_tuck",
+                "reps": 5,
+                "note": "slow"
+              }
+            ],
+            "always_show_note": true,
+            "note": "The 5 slow reps: put something slippery under your feet (e.g. a t-shirt or towel) so they can slide."
+          },
+          {
+            "name": "Block 4 (start in L-sit 2)",
+            "type": "chain",
+            "rounds": [
+              {
+                "exercise": "up_to_lsit",
+                "reps": 10,
+                "rest_after": 15
+              },
+              {
+                "exercise": "up_to_lsit",
+                "duration": 5,
+                "rest_after": 15
+              },
+              {
+                "exercise": "up_to_lsit",
+                "duration": 5
+              }
+            ],
+            "always_show_note": true,
+            "note": "Lift your hips and feet off the floor at the same time. You can support yourself on your hands or your fists."
+          }
+        ],
+        "challenge": {
+          "name": "Bring Sally Up",
+          "type": "music_cue",
+          "note": "Track: \"Flower\" by Moby\n\n**UP** -> rest  \n**DOWN** -> Hollow 3",
+          "rounds": [
+            {
+              "exercise": "hollow_3",
+              "duration": null
+            }
+          ],
+          "audio_file": "bring_sally_up",
+          "external_link": "https://open.spotify.com/search/Flower%20Moby"
+        }
+      },
+      {
+        "id": "w5_4",
+        "title": "Session 4 - Obliques",
+        "theme": "Obliques",
+        "focus": "Rotation and lateral flexion work.",
+        "n_blocks": 3,
+        "rest_between_blocks": 60,
+        "challenge_name": null,
+        "blocks": [
+          {
+            "name": "Block 1 (right side only)",
+            "type": "AB_couple",
+            "exercise_a": "alt_vup_opposite",
+            "exercise_b": "hip_raise_side_plank",
+            "sequence": [
+              {
+                "who": "A",
+                "reps": 5,
+                "rest_after": 15,
+                "note": "slow"
+              },
+              {
+                "who": "B",
+                "reps": 5,
+                "rest_after": 15,
+                "note": "slow"
+              },
+              {
+                "who": "A",
+                "duration": 60,
+                "rest_after": 60
+              },
+              {
+                "who": "B",
+                "duration": 60,
+                "rest_after": 60
+              },
+              {
+                "who": "A",
+                "reps": 30,
+                "rest_after": 30
+              },
+              {
+                "who": "B",
+                "reps": 30,
+                "rest_after": 0
+              }
+            ],
+            "side": "right",
+            "note": "5 slow reps A + 15\"off / 5 slow reps B + 15\"off / 1' ON A + 1' OFF / 1' ON B + 1' OFF / 30 REPS A + 30\"off / 30 REPS B"
+          },
+          {
+            "name": "Block 2 (left side only)",
+            "type": "AB_couple",
+            "exercise_a": "alt_vup_opposite",
+            "exercise_b": "hip_raise_side_plank",
+            "sequence": [
+              {
+                "who": "A",
+                "reps": 5,
+                "rest_after": 15,
+                "note": "slow"
+              },
+              {
+                "who": "B",
+                "reps": 5,
+                "rest_after": 15,
+                "note": "slow"
+              },
+              {
+                "who": "A",
+                "duration": 60,
+                "rest_after": 60
+              },
+              {
+                "who": "B",
+                "duration": 60,
+                "rest_after": 60
+              },
+              {
+                "who": "A",
+                "reps": 30,
+                "rest_after": 30
+              },
+              {
+                "who": "B",
+                "reps": 30,
+                "rest_after": 0
+              }
+            ],
+            "side": "left"
+          },
+          {
+            "name": "Block 3 (alternate right/left)",
+            "type": "AB_couple",
+            "exercise_a": "alt_vup_opposite",
+            "exercise_b": "hip_rotation_plank",
+            "sequence": [
+              {
+                "who": "A",
+                "reps": 5,
+                "rest_after": 15,
+                "note": "slow"
+              },
+              {
+                "who": "B",
+                "reps": 5,
+                "rest_after": 15,
+                "note": "slow"
+              },
+              {
+                "who": "A",
+                "duration": 60,
+                "rest_after": 60
+              },
+              {
+                "who": "B",
+                "duration": 60,
+                "rest_after": 60
+              },
+              {
+                "who": "A",
+                "reps": 30,
+                "rest_after": 30
+              },
+              {
+                "who": "B",
+                "reps": 30,
+                "rest_after": 0
+              }
+            ],
+            "side": "alternate",
+            "note": "A: Alt. V-up (opposite hand) / B: Hip rotation plank"
+          }
+        ],
+        "challenge": null
+      }
+    ]
+  }
+}

@@ -1,0 +1,553 @@
+{
+  "exercises": {
+    "hollow_1": {
+      "name": "Hollow 1",
+      "category": "Hollow",
+      "type": "hold",
+      "description": "Legs at 90 degrees, arms forward. Back flat on the floor, shoulders off the ground.",
+      "adaptation": "Hands supporting the back of the head.",
+      "images": [
+        "hollow_1"
+      ]
+    },
+    "hollow_1_arm": {
+      "name": "Hollow 1 + arms",
+      "category": "Hollow",
+      "type": "hold",
+      "description": "Same as Hollow 1, with arms extended overhead along the ears.",
+      "adaptation": "Hollow 1",
+      "images": [
+        "hollow_1_arm"
+      ]
+    },
+    "hollow_2": {
+      "name": "Hollow 2",
+      "category": "Hollow",
+      "type": "hold",
+      "description": "One leg at 90 degrees, one leg extended straight.",
+      "adaptation": "Hollow 1",
+      "images": [
+        "hollow_2"
+      ]
+    },
+    "hollow_2_arm": {
+      "name": "Hollow 2 + arms",
+      "category": "Hollow",
+      "type": "hold",
+      "description": "Same as Hollow 2, with arms extended overhead.",
+      "adaptation": "Hollow 2",
+      "images": [
+        "hollow_2_arm"
+      ]
+    },
+    "hollow_3": {
+      "name": "Hollow 3",
+      "category": "Hollow",
+      "type": "hold",
+      "description": "Both legs extended straight.",
+      "adaptation": "Hollow 2",
+      "images": [
+        "hollow_3"
+      ]
+    },
+    "hollow_3_arm": {
+      "name": "Hollow 3 + arms",
+      "category": "Hollow",
+      "type": "hold",
+      "description": "Same as Hollow 3, with arms extended overhead.",
+      "adaptation": "Hollow 3",
+      "images": [
+        "hollow_3_arm"
+      ]
+    },
+    "arch_no_legs": {
+      "name": "Arch (no legs)",
+      "category": "Arch",
+      "type": "hold",
+      "description": "Reach tall, then lift the chest and straight arms in front. Legs stay on the floor.",
+      "adaptation": "Bend the arms.",
+      "images": [
+        "arch_nofeet"
+      ]
+    },
+    "arch_1_leg": {
+      "name": "Arch (1 leg)",
+      "category": "Arch",
+      "type": "hold",
+      "description": "Same as Arch, lifting one straight leg off the floor.",
+      "adaptation": "Arch (no legs)",
+      "images": [
+        "arch_1foot"
+      ]
+    },
+    "arch": {
+      "name": "Arch",
+      "category": "Arch",
+      "type": "hold",
+      "description": "Lift both straight legs off the floor.",
+      "adaptation": "Arch (1 leg)",
+      "images": [
+        "arch"
+      ]
+    },
+    "plank": {
+      "name": "Plank",
+      "category": "Plank",
+      "type": "hold",
+      "description": "Forearm support, shoulders stacked above elbows. Body aligned, neutral spine, glutes tight, push the floor away to engage the shoulder blades.",
+      "adaptation": "Knees on the floor, glutes contracted.",
+      "images": [
+        "plank"
+      ]
+    },
+    "gym_plank": {
+      "name": "Gym plank",
+      "category": "Plank",
+      "type": "hold",
+      "description": "Hand support, shoulders stacked above the hands.",
+      "adaptation": "Plank",
+      "images": [
+        "gym_plank"
+      ]
+    },
+    "side_plank": {
+      "name": "Side plank",
+      "category": "Plank",
+      "type": "hold",
+      "description": "Align on the horizontal and vertical planes, top arm reaching up.",
+      "adaptation": "Lower knee on the floor, leg bent.",
+      "images": [
+        "side_plank"
+      ]
+    },
+    "hip_raise_side_plank": {
+      "name": "Hip raise in side plank",
+      "category": "Plank variation",
+      "type": "rep",
+      "description": "From Side plank, lower and raise the hips with a small range of motion, staying aligned vertically.",
+      "adaptation": "On the knee.",
+      "images": [
+        "hip_raise_in_side_plank_down",
+        "hip_raise_in_side_plank_up"
+      ]
+    },
+    "hip_raise_side_plank_knee": {
+      "name": "Hip raise in side plank (on knee)",
+      "category": "Plank variation",
+      "type": "rep",
+      "description": "Same exercise with the lower knee on the floor, leg tripod position.",
+      "adaptation": null,
+      "images": [
+        "hip_raise_in_side_knee_plank_down",
+        "hip_raise_in_side_knee_plank_up"
+      ]
+    },
+    "knee_tuck": {
+      "name": "Knee tuck",
+      "category": "Plank variation",
+      "type": "rep",
+      "description": "From Gym plank, slide the feet toward the arms (ideally on a slippery floor, socks or a towel under the feet).",
+      "adaptation": "Alternate one leg after the other.",
+      "images": [
+        "knee_tuck_start",
+        "knee_tuck_end"
+      ]
+    },
+    "hip_rotation_plank": {
+      "name": "Hip rotation",
+      "category": "Plank variation",
+      "type": "rep",
+      "description": "From Plank, rock the hips from side to side toward the floor. Careful not to arch the lower back.",
+      "adaptation": null,
+      "images": [
+        "hip_rotation",
+        "hip_rotation_right"
+      ]
+    },
+    "bent_leg_raise_hollow1": {
+      "name": "Bent leg raise in hollow 1",
+      "category": "Leg raise",
+      "type": "rep",
+      "description": "Keep the head and shoulders off the floor throughout, lower the legs without arching the back, then raise them.",
+      "adaptation": "Alt. bent leg raise in hollow 1",
+      "images": [
+        "crunch_hollow_1",
+        "bent_leg_raise_hollow_1_end"
+      ]
+    },
+    "bent_leg_raise": {
+      "name": "Bent leg raise",
+      "category": "Leg raise",
+      "type": "rep",
+      "description": "Legs bent at a right angle, lower the legs without arching the back, then raise them.",
+      "adaptation": "Alternate the legs.",
+      "images": [
+        "bent_leg_raise_start",
+        "bent_leg_raise_end"
+      ]
+    },
+    "leg_raise_hollow2": {
+      "name": "Leg raise in hollow 2",
+      "category": "Leg raise",
+      "type": "rep",
+      "description": "Head and shoulders off the floor, one leg static at a right angle, the other leg straight and mobile: raise it while keeping the lower back on the floor.",
+      "adaptation": "Alt. bent leg raise in hollow 1",
+      "images": [
+        "leg_raise_hollow_2_start",
+        "leg_raise_hollow_2_end"
+      ]
+    },
+    "leg_raise_hollow2_arm": {
+      "name": "Leg raise in hollow 2 + arms",
+      "category": "Leg raise",
+      "type": "rep",
+      "description": "Same as Leg raise in hollow 2, adding straight arms overhead throughout (without resting the shoulders on the floor).",
+      "adaptation": "Leg raise in hollow 2",
+      "images": [
+        "leg_raise_hollow_2_arm",
+        "leg_raise_hollow_2_end_arm"
+      ]
+    },
+    "alt_bent_leg_raise": {
+      "name": "Alt. bent leg raise",
+      "category": "Alt. leg raise",
+      "type": "rep",
+      "description": "Legs bent at a right angle, lower one leg until the toes touch the floor, raise it, then switch legs.",
+      "adaptation": null,
+      "images": [
+        "bent_leg_raise_start",
+        "alt_bent_leg_raise"
+      ]
+    },
+    "alt_leg_raise_lposition": {
+      "name": "Alt. leg raise in L-position",
+      "category": "Alt. leg raise",
+      "type": "rep",
+      "description": "Legs straight up vertically, lower one leg as low as possible without arching the back, raise it, then switch.",
+      "adaptation": "Bent legs = Alt. bent leg raise",
+      "images": [
+        "L_position",
+        "alt_leg_raise_L_position"
+      ]
+    },
+    "alt_bent_leg_raise_hollow1": {
+      "name": "Alt. bent leg raise in hollow 1",
+      "category": "Alt. leg raise",
+      "type": "rep",
+      "description": "Same movement as Alt. bent leg raise, with shoulders off the floor throughout.",
+      "adaptation": "Alt. bent leg raise",
+      "images": [
+        "crunch_hollow_1",
+        "alt_bent_leg_raise_hollow_1"
+      ]
+    },
+    "alt_leg_raise_lsit1": {
+      "name": "Alt. leg raise in L-sit 1",
+      "category": "Alt. leg raise in L-sit",
+      "type": "rep",
+      "description": "Hands on the floor behind the hips, back straight, lift one straight leg off the floor. Avoid leaning too far back.",
+      "adaptation": null,
+      "images": [
+        "L_sit_1",
+        "alt_leg_raise_L_sit_1"
+      ]
+    },
+    "alt_leg_raise_lsit2": {
+      "name": "Alt. leg raise in L-sit 2",
+      "category": "Alt. leg raise in L-sit",
+      "type": "rep",
+      "description": "Hands on the floor between the knees and hips, back straight, lift one straight leg by pushing into the floor.",
+      "adaptation": "Alt. leg raise in L-sit 1",
+      "images": [
+        "L_sit_2",
+        "alt_leg_raise_L_sit_2"
+      ]
+    },
+    "leg_raise_lsit1": {
+      "name": "Leg raise in L-sit 1",
+      "category": "Leg raise in L-sit",
+      "type": "rep",
+      "description": "Hands on the floor behind the hips, back straight, lift both straight legs off the floor.",
+      "adaptation": "Alt. leg raise in L-sit 1",
+      "images": [
+        "L_sit_1",
+        "leg_raise_L_sit_1"
+      ]
+    },
+    "leg_raise_lsit2": {
+      "name": "Leg raise in L-sit 2",
+      "category": "Leg raise in L-sit",
+      "type": "rep",
+      "description": "Hands on the floor between the knees and hips, back straight, lift both straight legs by pushing into the floor.",
+      "adaptation": "Leg raise in L-sit 1",
+      "images": [
+        "L_sit_2",
+        "leg_raise_L_sit_2"
+      ]
+    },
+    "hip_raise_lsit2": {
+      "name": "Hip raise in L-sit 2",
+      "category": "L-sit",
+      "type": "rep",
+      "description": "Hands on the floor between the knees and hips, push into the hands to lift the hips off the floor (feet stay down).",
+      "adaptation": "Hands elevated.",
+      "images": [
+        "L_sit_2",
+        "hip_raise_L_sit_2"
+      ]
+    },
+    "up_to_lsit": {
+      "name": "Up to L-sit",
+      "category": "L-sit",
+      "type": "rep",
+      "description": "Hands on the floor between the knees and hips, push into the hands and lift the whole body off the floor (feet and hips). Can be done on fists.",
+      "adaptation": "Hip raise in L-sit 2",
+      "images": [
+        "L_sit_2",
+        "up_to_L_sit"
+      ]
+    },
+    "crunch": {
+      "name": "Crunch",
+      "category": "Crunch",
+      "type": "rep",
+      "description": "Legs bent, feet on the floor, hands behind the neck, lift the shoulders. Drive the movement with the chest, not the hands.",
+      "adaptation": null,
+      "images": [
+        "crunch_start",
+        "crunch"
+      ]
+    },
+    "crunch_hollow1": {
+      "name": "Crunch in hollow 1",
+      "category": "Crunch",
+      "type": "rep",
+      "description": "Same movement with legs bent at a right angle. Hands can support the head.",
+      "adaptation": "Crunch",
+      "images": [
+        "bent_leg_raise_start",
+        "crunch_hollow_1"
+      ]
+    },
+    "crunch_lposition": {
+      "name": "Crunch in L-position",
+      "category": "Crunch",
+      "type": "rep",
+      "description": "Same movement with legs straight, vertical.",
+      "adaptation": "Crunch in hollow 1",
+      "images": [
+        "crunch_L_position_start",
+        "crunch_L_position_end"
+      ]
+    },
+    "crunch_hollow2": {
+      "name": "Crunch in hollow 2",
+      "category": "Crunch",
+      "type": "rep",
+      "description": "From Hollow 2, lower the shoulders until they touch the floor, then lift them, keeping the lower back pressed down. Hands can support the neck.",
+      "adaptation": "Crunch in hollow 1",
+      "images": [
+        "crunch_in_hollow_2_start",
+        "crunch_hollow_2_end"
+      ]
+    },
+    "crunch_hollow2_arm": {
+      "name": "Crunch in hollow 2 + arms",
+      "category": "Crunch",
+      "type": "rep",
+      "description": "From Hollow 2 with arms extended overhead, lower the shoulders to the floor then lift them, lower back pressed down.",
+      "adaptation": "Crunch in hollow 2",
+      "images": [
+        "crunch_hollow_2_arm_start",
+        "crunch_hollow_2_arm_end"
+      ]
+    },
+    "reverse_crunch_bent": {
+      "name": "Reverse crunch (bent legs)",
+      "category": "Reverse crunch",
+      "type": "rep",
+      "description": "Legs bent at a right angle, lift the hips off the floor. You may help by pushing on your arms.",
+      "adaptation": null,
+      "images": [
+        "bent_reverse_crunch_start",
+        "bent_reverse_crunch"
+      ]
+    },
+    "reverse_crunch_bent_to_straight": {
+      "name": "Reverse crunch (straight legs at the end)",
+      "category": "Reverse crunch",
+      "type": "rep",
+      "description": "Legs bent at a right angle, lift the hips and straighten the legs upward. Push on your arms if needed.",
+      "adaptation": "Bent legs.",
+      "images": [
+        "bent_reverse_crunch_start",
+        "reverse_crunch"
+      ]
+    },
+    "reverse_crunch_straight": {
+      "name": "Reverse crunch (straight legs)",
+      "category": "Reverse crunch",
+      "type": "rep",
+      "description": "Legs straight and vertical, lift the hips while keeping the legs up. Push on your arms if needed.",
+      "adaptation": "Bent legs at the end.",
+      "images": [
+        "L_position",
+        "reverse_crunch"
+      ]
+    },
+    "heel_touch": {
+      "name": "Heel touch",
+      "category": "Lateral/Bicycle crunch",
+      "type": "rep",
+      "description": "Arms along the body, feet on the floor. Lift the shoulders and reach to touch the same-side heel with your hand, then switch sides without resting the shoulders on the floor.",
+      "adaptation": null,
+      "images": [
+        "heel_touch_left",
+        "heel_touch_right"
+      ]
+    },
+    "bicycle_crunch_bent": {
+      "name": "Bicycle crunch (2 bent legs)",
+      "category": "Lateral/Bicycle crunch",
+      "type": "rep",
+      "description": "Feet off the floor, hands behind the head with elbows out. Bring the elbow to the opposite knee while lowering the other leg until the toes touch the floor. Both legs stay bent at a right angle.",
+      "adaptation": null,
+      "images": [
+        "bent_bicycle_crunch_left",
+        "bent_bicycle_crunch_right"
+      ]
+    },
+    "bicycle_crunch": {
+      "name": "Bicycle crunch",
+      "category": "Bicycle crunch",
+      "type": "rep",
+      "description": "Hands behind the head with elbows out, bring the elbow to the opposite knee. Keep the other leg straight, then switch sides.",
+      "adaptation": "2 bent legs.",
+      "images": [
+        "bicycle_crunch_left",
+        "bicycle_crunch_right"
+      ]
+    },
+    "bicycle_crunch_straight": {
+      "name": "Bicycle crunch (straight legs)",
+      "category": "Bicycle crunch",
+      "type": "rep",
+      "description": "Same as bicycle crunch, keeping both legs straight throughout, then switch sides.",
+      "adaptation": "Bicycle crunch.",
+      "images": [
+        "straight_bicycle_crunch_left",
+        "straight_bicycle_crunch_right"
+      ]
+    },
+    "russian_twist": {
+      "name": "Russian twist",
+      "category": "Twist",
+      "type": "rep",
+      "description": "Seated, legs bent and lifted off the floor, rotate the torso to touch the floor with the hands on each side.",
+      "adaptation": "Feet on the floor.",
+      "images": [
+        "russian_twist_left",
+        "russian_twist_right"
+      ]
+    },
+    "twist_lposition": {
+      "name": "Twist in L-position",
+      "category": "Twist",
+      "type": "rep",
+      "description": "Lying down, legs straight and vertical, reach with one hand to the outside of the opposite foot. Keep the shoulder off the floor; the other hand can support the head.",
+      "adaptation": null,
+      "images": [
+        "twist_L_position_left",
+        "twist_L_position_right"
+      ]
+    },
+    "all_deadbug": {
+      "name": "All deadbug",
+      "category": "Deadbug",
+      "type": "rep",
+      "description": "Start with legs bent and arms forward, extend the arms backward and the legs as low as possible without arching the back.",
+      "adaptation": "Deadbug",
+      "images": [
+        "crunch_hollow_1",
+        "all_deadbug"
+      ]
+    },
+    "deadbug": {
+      "name": "Deadbug",
+      "category": "Deadbug",
+      "type": "rep",
+      "description": "Start with legs bent and arms forward, extend the opposite arm and leg without arching the back, then switch sides.",
+      "adaptation": "Without moving the arms.",
+      "images": [
+        "crunch_hollow_1",
+        "deadbug"
+      ]
+    },
+    "tuck_up1_hollow2": {
+      "name": "Tuck up 1 in hollow 2",
+      "category": "Tuck up",
+      "type": "rep",
+      "description": "Start with one leg bent, one straight, shoulders off the floor. Lift the shoulders and the straight leg together, keeping the lower back on the floor.",
+      "adaptation": "Tuck up 1",
+      "images": [
+        "crunch_hollow_2_arm_start",
+        "tuck_up_1_hollow_2"
+      ]
+    },
+    "tuck_up1": {
+      "name": "Tuck up 1",
+      "category": "Tuck up",
+      "type": "rep",
+      "description": "Start lying down, legs bent, hands behind the head. Lift the shoulders and bent legs together.",
+      "adaptation": "Crunch",
+      "images": [
+        "crunch_start",
+        "tuck_up_1"
+      ]
+    },
+    "tuck_up2": {
+      "name": "Tuck up 2",
+      "category": "Tuck up",
+      "type": "rep",
+      "description": "Start with one leg bent, one straight, shoulders off the floor with arms behind. Reach for your foot, bringing the leg to vertical, lower back staying on the floor.",
+      "adaptation": "Tuck up 1 in hollow 2",
+      "images": [
+        "crunch_hollow_2_arm_end",
+        "tuck_up_2"
+      ]
+    },
+    "alt_vup": {
+      "name": "Alt. V-up",
+      "category": "V-up",
+      "type": "rep",
+      "description": "Start in hollow 3 (+arms), lower back pressed on the floor. Reach for your foot, bringing the leg to vertical, lifting the whole back off the floor.",
+      "adaptation": "Tuck up 2",
+      "images": [
+        "all_deadbug",
+        "alt_V_up"
+      ]
+    },
+    "alt_vup_opposite": {
+      "name": "Alt. V-up",
+      "category": "V-up",
+      "type": "rep",
+      "description": "Reach with your hand to the opposite foot, bringing the leg to vertical, lifting the whole back off the floor.",
+      "adaptation": "Bicycle crunch (straight legs)",
+      "images": [
+        "alt_V_up_left",
+        "alt_V_up_right"
+      ]
+    },
+    "vup": {
+      "name": "V-up",
+      "category": "V-up",
+      "type": "rep",
+      "description": "Start in hollow 3 (+arms), lower back pressed on the floor. Reach for both feet, lifting the whole back off the floor.",
+      "adaptation": "Alt. V-up",
+      "images": [
+        "all_deadbug",
+        "V_up"
+      ]
+    }
+  }
+}
