@@ -10,20 +10,19 @@ top_banner("Library", "Every exercise, with instructions and adaptations")
 
 st.markdown(
     "<div class='syx-plan-note'>"
-    "When an exercise is held in a static position, your goal is to hold it for "
-    "the entire interval. Always prioritize doing the required exercise -- if you "
-    "can't complete the full interval without stopping, you can split it into 2. "
-    "If you need to split it into more than 2, it's better to switch to the "
-    "optimized adaptation instead."
+    "For exercises held in a static position, aim to hold it for the full "
+    "interval. Always try the exercise as prescribed first -- if you can't hold "
+    "it the whole time without stopping, break it into 2 sets. If you need more "
+    "than 2 breaks, it's a sign to switch to the easier adaptation instead."
     "</div>",
     unsafe_allow_html=True,
 )
 st.markdown(
     "<div class='syx-plan-note'>"
-    "Always prioritize quality over quantity. If an exercise is too difficult, "
-    "choose its adaptation instead. Leave your ego aside -- some exercises are "
-    "designed for an advanced level, take the time to progress at your own pace "
-    "for more safety."
+    "Quality always beats quantity. If an exercise feels too hard, switch to its "
+    "adaptation rather than pushing through bad form. Leave your ego at the "
+    "door -- some exercises are built for an advanced level, so take the time to "
+    "progress at your own pace and stay safe."
     "</div>",
     unsafe_allow_html=True,
 )

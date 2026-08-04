@@ -9,6 +9,12 @@ inject_global_css()
 
 top_banner("100% ABS", "20 sessions x 20 min · Sport Your Mind")
 
+active_profile = st.session_state.get("_syx_profile")
+if active_profile:
+    st.caption(f"Signed in as {active_profile}")
+else:
+    st.caption("No profile yet -- set one up on the Profile page to track your progress.")
+
 assets_home = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "assets", "home.jpg")
 if os.path.exists(assets_home):
     st.image(assets_home, use_container_width=True)
@@ -36,4 +42,5 @@ c3.metric("Per session", "~20 min")
 
 st.divider()
 st.page_link("pages/workout.py", label="Start a session")
+st.page_link("pages/profile.py", label="My profile & progress")
 st.page_link("pages/library.py", label="Exercise library")

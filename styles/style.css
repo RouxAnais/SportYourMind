@@ -90,7 +90,7 @@ div[data-testid="stVerticalBlockBorderWrapper"] {
 
 /* Exercise card text */
 .syx-ex-name { font-weight: 700; font-size: 1.02rem; color: var(--syx-white); text-transform: uppercase; letter-spacing: 0.3px; }
-.syx-ex-name-sm { font-weight: 600; font-size: 0.98rem; color: var(--syx-white); }
+.syx-ex-name-sm { font-weight: 800; font-size: 1.6rem; color: var(--syx-white); text-transform: uppercase; letter-spacing: 0.3px; text-align: center; margin-top: 8px; }
 .syx-ex-cat { color: var(--syx-accent-2); font-size: 0.75rem; text-transform: uppercase; margin-bottom: 6px; letter-spacing: 0.8px; }
 .syx-ex-desc { color: var(--syx-grey); font-size: 0.87rem; margin-top: 4px; line-height: 1.4; }
 .syx-ex-adapt { color: var(--syx-accent); font-size: 0.8rem; margin-top: 8px; opacity: 0.9; }
@@ -240,10 +240,28 @@ div[role="radiogroup"] label {
     .syx-banner { padding: 16px 18px; }
     .syx-banner-title { font-size: 1.35rem; }
     .stButton > button { width: 100%; padding: 0.8em 1em; font-size: 0.95rem; }
-    div[data-testid="column"] { min-width: 100% !important; }
+    [data-testid="stMetricValue"] { font-size: 1.5rem !important; }
+    [data-testid="stMetricLabel"] { font-size: 0.72rem !important; }
+    .syx-ex-name-sm { font-size: 1.25rem; }
 }
 
 /* Larger tap targets everywhere for touch screens */
 .stButton > button, div[role="radiogroup"] label {
     min-height: 44px;
+}
+
+/* Sidebar navigation links (Home / Session / Library / About) -- bigger and
+   easier to tap on mobile */
+section[data-testid="stSidebar"] [data-testid="stSidebarNav"] a,
+section[data-testid="stSidebar"] nav a,
+section[data-testid="stSidebar"] li a {
+    font-size: 1.15rem !important;
+    font-weight: 600 !important;
+    padding: 16px 18px !important;
+    min-height: 52px !important;
+    border-radius: 10px !important;
+}
+section[data-testid="stSidebar"] [data-testid="stSidebarNav"] li,
+section[data-testid="stSidebar"] nav li {
+    margin-bottom: 6px !important;
 }

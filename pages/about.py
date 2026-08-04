@@ -9,8 +9,8 @@ top_banner("About", "Sport Your Mind")
 st.markdown(
     """
     **Anais Roux** -- Personal trainer, former CrossFit(R) athlete, former
-    military, graduate of the Lyon Faculty of Sport (2017), CrossFit(R)
-    Level 2, Pilates and Yoga instructor.
+    military, graduate of the Lyon Faculty of Sport (2017) and CrossFit(R)
+    Level 1.
 
     Founder of **Sport Your Mind**, specialized in bodyweight training.
 

@@ -3,6 +3,7 @@ import streamlit as st
 
 from utils.helpers import build_seance_timeline, format_time, describe_step_short
 from utils.load_data import get_audio_path, get_exercise
+from utils import gsheets
 from components.exercise_card import exercise_thumb
 from components.timer import countdown_display, run_autorefresh
 
@@ -46,7 +47,7 @@ def _jump_to(seance_id: str, target_idx: int):
     st.session_state[_state_key(seance_id, "finished")] = False
 
 
-def render_workout_player(seance: dict):
+def render_workout_player(seance: dict, week_id: str = None, week_title: str = None):
     seance_id = seance["id"]
     _init_state(seance)
 
@@ -57,7 +58,7 @@ def render_workout_player(seance: dict):
 
     block_points = [(i, step["label"]) for i, step in enumerate(timeline) if step["kind"] == "block_title"]
     if block_points:
-        with st.expander("Jump to a block"):
+        with st.expander("Block"):
             cols = st.columns(len(block_points))
             for col, (target_idx, label) in zip(cols, block_points):
                 short_label = "Challenge" if label.startswith("CHALLENGE") else label.split(" (")[0]
@@ -70,8 +71,18 @@ def render_workout_player(seance: dict):
 
     if idx >= len(timeline):
         st.success("Session complete! Great work.")
+
+        logged_key = _state_key(seance_id, "logged")
+        profile = st.session_state.get("_syx_profile")
+        if profile and not st.session_state.get(logged_key):
+            gsheets.log_completion(profile, week_id, week_title, seance_id, seance.get("title", ""))
+            st.session_state[logged_key] = True
+        elif not profile:
+            st.caption("Set up a profile (see the Profile page) to save this to your progress history.")
+
         if st.button("Restart session", key=f"restart_{seance_id}"):
             _restart(seance_id)
+            st.session_state[logged_key] = False
             st.rerun()
         return
 
