@@ -90,12 +90,18 @@ def log_completion(profile: str, week_id: str, week_title: str, seance_id: str, 
         }])
         df = pd.concat([df, new_row], ignore_index=True) if not df.empty else new_row
         conn.update(worksheet=HISTORY_SHEET, data=df)
+        load_history.clear()  # bust the cache so the just-completed block shows up right away
         return True
     except Exception:
         return False
 
 
+@st.cache_data(ttl=20)
 def load_history(profile: str) -> pd.DataFrame:
+    """Cached for 20s -- this is read on every block/session/week label render,
+    including while a timer is ticking (reruns every second), so an uncached
+    live Google Sheets call on every tick was causing the countdown to stall.
+    Busted immediately after a new completion is logged (see log_completion)."""
     df = _safe_read(HISTORY_SHEET)
     if "profile" not in df.columns:
         return pd.DataFrame()
