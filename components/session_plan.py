@@ -1,6 +1,21 @@
 import streamlit as st
 from utils.load_data import get_exercise
-from utils.helpers import build_readable_plan
+from utils.helpers import build_readable_plan, build_block_rows
+
+
+def _render_rows(rows: list[dict]):
+    rows_html = []
+    for row in rows:
+        if row["type"] == "rest":
+            rows_html.append(f"<div class='syx-plan-rest-row'>{row['label']}</div>")
+        else:
+            rows_html.append(
+                f"<div class='syx-plan-row'>"
+                f"<span class='syx-plan-row-exercise'>{row['exercise']}</span>"
+                f"<span class='syx-plan-row-meta'>{row['meta']}</span>"
+                f"</div>"
+            )
+    st.markdown("".join(rows_html), unsafe_allow_html=True)
 
 
 def render_session_plan(seance: dict):
@@ -15,21 +30,19 @@ def render_session_plan(seance: dict):
         if (entry.get("is_challenge") or entry.get("always_show_note")) and entry.get("note"):
             st.markdown(f"<div class='syx-plan-note'>{entry['note']}</div>", unsafe_allow_html=True)
 
-        rows_html = []
-        for row in entry["rows"]:
-            if row["type"] == "rest":
-                rows_html.append(f"<div class='syx-plan-rest-row'>{row['label']}</div>")
-            else:
-                rows_html.append(
-                    f"<div class='syx-plan-row'>"
-                    f"<span class='syx-plan-row-exercise'>{row['exercise']}</span>"
-                    f"<span class='syx-plan-row-meta'>{row['meta']}</span>"
-                    f"</div>"
-                )
-        st.markdown("".join(rows_html), unsafe_allow_html=True)
+        _render_rows(entry["rows"])
 
         if entry.get("rest_after_block"):
             st.markdown(
                 f"<div class='syx-plan-block-rest'>-- {entry['rest_after_block']} rest before next block --</div>",
                 unsafe_allow_html=True,
             )
+
+
+def render_block_detail(block: dict):
+    """Full detail of a SINGLE block: every exercise name, time/reps, and rest --
+    used on the block-detail screen before starting it."""
+    if block.get("note"):
+        st.markdown(f"<div class='syx-plan-note'>{block['note']}</div>", unsafe_allow_html=True)
+    rows = build_block_rows(block, get_exercise)
+    _render_rows(rows)

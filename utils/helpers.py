@@ -59,6 +59,12 @@ def _plan_rows_from_steps(steps, get_exercise_fn) -> list[dict]:
     return rows
 
 
+def build_block_rows(block: dict, get_exercise_fn) -> list[dict]:
+    """Public wrapper: readable rows (exercise + time/reps, or rest lines) for a
+    single block, used by the block-detail screen."""
+    return _plan_rows_from_steps(build_block_timeline(block), get_exercise_fn)
+
+
 def build_readable_plan(seance: dict, get_exercise_fn) -> list[dict]:
     """Build a static, at-a-glance plan of the whole session: one entry per block
     (+ one for the challenge), each with a title, an optional note, and readable rows
