@@ -28,7 +28,7 @@ def countdown_display(remaining: float, total: float, phase: str, big_label: str
     )
 
 
-def run_autorefresh(interval_ms: int = 250, key: str = "syx_tick"):
+def run_autorefresh(interval_ms: int = 1000, key: str = "syx_tick"):
     if HAS_AUTOREFRESH:
         st_autorefresh(interval=interval_ms, key=key)
     else:

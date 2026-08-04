@@ -1,11 +1,12 @@
 import time
 import streamlit as st
 
-from utils.helpers import build_seance_timeline, format_time, describe_step_short
+from utils.helpers import build_seance_timeline, format_time, describe_step_short, remaining_in_block
 from utils.load_data import get_audio_path, get_exercise
 from utils import gsheets
 from components.exercise_card import exercise_thumb
 from components.timer import countdown_display, run_autorefresh
+from components.beep import play_start_beep, play_rest_beep
 
 
 def _state_key(seance_id: str, suffix: str) -> str:
@@ -22,6 +23,7 @@ def _init_state(seance: dict):
         st.session_state[_state_key(seance_id, "paused")] = False
         st.session_state[_state_key(seance_id, "pause_elapsed")] = 0.0
         st.session_state[_state_key(seance_id, "finished")] = False
+        st.session_state[_state_key(seance_id, "beeped_idx")] = -1
 
 
 def _advance(seance_id: str):
@@ -54,18 +56,25 @@ def render_workout_player(seance: dict, week_id: str = None, week_title: str = N
     timeline = st.session_state[_state_key(seance_id, "timeline")]
     idx = st.session_state[_state_key(seance_id, "idx")]
 
-    st.markdown(f"### {seance['title']}")
-
     block_points = [(i, step["label"]) for i, step in enumerate(timeline) if step["kind"] == "block_title"]
-    if block_points:
-        with st.expander("Block"):
-            cols = st.columns(len(block_points))
-            for col, (target_idx, label) in zip(cols, block_points):
-                short_label = "Challenge" if label.startswith("CHALLENGE") else label.split(" (")[0]
-                with col:
-                    if st.button(short_label, key=f"jump_{seance_id}_{target_idx}", use_container_width=True):
-                        _jump_to(seance_id, target_idx)
-                        st.rerun()
+    block_short_labels = [
+        "Challenge" if label.startswith("CHALLENGE") else label.split(" (")[0]
+        for _, label in block_points
+    ]
+
+    col_title, col_block = st.columns([3, 2])
+    with col_title:
+        st.markdown(f"### {seance['title']}")
+    with col_block:
+        if block_points:
+            picked = st.selectbox(
+                "Block", block_short_labels, key=f"block_select_{seance_id}",
+                label_visibility="collapsed",
+            )
+            if st.button("Go to block", key=f"block_go_{seance_id}", use_container_width=True):
+                target_idx = block_points[block_short_labels.index(picked)][0]
+                _jump_to(seance_id, target_idx)
+                st.rerun()
 
     st.progress(min(idx / max(len(timeline), 1), 1.0))
 
@@ -88,6 +97,15 @@ def render_workout_player(seance: dict, week_id: str = None, week_title: str = N
 
     step = timeline[idx]
     kind = step["kind"]
+
+    # Play a beep the first time we render this step (not on every autorefresh tick)
+    beeped_key = _state_key(seance_id, "beeped_idx")
+    if st.session_state[beeped_key] != idx:
+        if kind == "work":
+            play_start_beep()
+        elif kind == "rest":
+            play_rest_beep()
+        st.session_state[beeped_key] = idx
 
     next_step = timeline[idx + 1] if idx + 1 < len(timeline) else None
     if next_step:
@@ -145,7 +163,12 @@ def render_workout_player(seance: dict, week_id: str = None, week_title: str = N
         if step.get("exercise"):
             exercise_thumb(step["exercise"], step.get("side"))
         st.markdown(
-            f"<div class='syx-timer-label'>{step['reps']} REPS</div>",
+            f"""
+            <div class="syx-timer-wrap">
+                <div class="syx-timer-label">REPS</div>
+                <div class="syx-timer-number">{step['reps']}</div>
+            </div>
+            """,
             unsafe_allow_html=True,
         )
         if step.get("note"):
@@ -153,6 +176,7 @@ def render_workout_player(seance: dict, week_id: str = None, week_title: str = N
         if st.button("Done, next step", key=f"done_{seance_id}_{idx}", use_container_width=True):
             _advance(seance_id)
             st.rerun()
+        st.caption(f"{remaining_in_block(timeline, idx)} exercise(s) left in this block")
 
     elif kind in ("work", "rest"):
         phase = "rest" if kind == "rest" else step.get("label", "on").lower()
@@ -179,7 +203,7 @@ def render_workout_player(seance: dict, week_id: str = None, week_title: str = N
         big_label = step.get("label", "")
         countdown_display(remaining, total, phase, big_label)
 
-        c1, c2, c3 = st.columns(3)
+        c1, c2 = st.columns(2)
         with c1:
             if st.session_state[pause_key]:
                 if st.button("Resume", key=f"resume_{seance_id}_{idx}", use_container_width=True):
@@ -195,12 +219,12 @@ def render_workout_player(seance: dict, week_id: str = None, week_title: str = N
             if st.button("Skip", key=f"skip_{seance_id}_{idx}", use_container_width=True):
                 _advance(seance_id)
                 st.rerun()
-        with c3:
-            st.caption(f"Step {idx+1} / {len(timeline)}")
+
+        st.caption(f"{remaining_in_block(timeline, idx)} exercise(s) left in this block")
 
         if remaining <= 0 and not st.session_state[pause_key]:
             _advance(seance_id)
             st.rerun()
 
         if not st.session_state[pause_key]:
-            run_autorefresh(250, key=f"tick_{seance_id}_{idx}")
+            run_autorefresh(1000, key=f"tick_{seance_id}_{idx}")

@@ -86,6 +86,20 @@ def build_readable_plan(seance: dict, get_exercise_fn) -> list[dict]:
     return plan
 
 
+def remaining_in_block(timeline: list, idx: int) -> int:
+    """Count how many exercise steps (work/reps/manual) remain in the current
+    block, starting at idx and stopping at the next block_title. Used instead
+    of an absolute step count, which includes rests and isn't meaningful."""
+    count = 0
+    for i in range(idx, len(timeline)):
+        step = timeline[i]
+        if step["kind"] == "block_title" and i != idx:
+            break
+        if step["kind"] in ("work", "reps", "manual"):
+            count += 1
+    return count
+
+
 def format_time(seconds: int) -> str:
     seconds = max(0, int(seconds))
     m, s = divmod(seconds, 60)
