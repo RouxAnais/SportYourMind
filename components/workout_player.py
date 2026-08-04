@@ -9,6 +9,96 @@ from components.timer import countdown_display, run_autorefresh
 from components.beep import play_start_beep, play_rest_beep
 
 
+def _inject_fullscreen_css():
+    """Edge-to-edge training screen: fixed header (block name + progress strip)
+    and fixed footer (Pause/Resume + Skip, full width, split in two) -- only
+    while actually training, not on the rest of the app."""
+    st.markdown(
+        """
+        <style>
+        .block-container {
+            padding-top: 90px !important;
+            padding-bottom: 90px !important;
+            padding-left: 1rem !important;
+            padding-right: 1rem !important;
+            max-width: 100% !important;
+        }
+        [data-testid="stMainBlockContainer"] {
+            padding-top: 90px !important;
+        }
+
+        /* Fixed header -- block name */
+        .syx-player-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 64px;
+            background: var(--syx-black-soft);
+            border-bottom: 1px solid var(--syx-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 1rem;
+            color: var(--syx-white);
+            z-index: 1000;
+            text-align: center;
+            padding: 0 1rem;
+        }
+        .syx-player-loader {
+            position: fixed;
+            top: 64px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--syx-border);
+            z-index: 1000;
+        }
+        .syx-player-loader-fill {
+            height: 100%;
+            background: var(--syx-accent);
+            transition: width 0.3s ease;
+        }
+
+        /* Fixed footer -- Pause/Resume + Skip, full width, split in two */
+        [data-testid="stHorizontalBlock"] {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 64px;
+            margin: 0 !important;
+            background: var(--syx-black-soft);
+            border-top: 1px solid var(--syx-border);
+            z-index: 1000;
+        }
+        [data-testid="stHorizontalBlock"] [data-testid="column"] {
+            height: 100%;
+            display: flex;
+            align-items: stretch;
+        }
+        [data-testid="stHorizontalBlock"] [data-testid="column"]:last-child {
+            border-left: 1px solid var(--syx-border);
+        }
+        [data-testid="stHorizontalBlock"] .stButton {
+            width: 100%;
+            height: 100%;
+        }
+        [data-testid="stHorizontalBlock"] .stButton > button {
+            width: 100%;
+            height: 100%;
+            border-radius: 0 !important;
+            border: none !important;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
 def _k(player_key: str, suffix: str) -> str:
     return f"syx_play_{player_key}_{suffix}"
 
@@ -227,9 +317,16 @@ def render_block_player(block: dict, block_label: str, player_key: str,
                          block_ref=None):
     """Play just ONE block (or the challenge). No inter-block rest is inserted --
     moving to another block is a manual, user-driven action (Back to blocks)."""
+    _inject_fullscreen_css()
     timeline = build_block_timeline(block)
-    st.markdown(f"### {block_label}")
-    st.progress(min(st.session_state.get(_k(player_key, "idx"), 0) / max(len(timeline), 1), 1.0))
+    idx_now = st.session_state.get(_k(player_key, "idx"), 0)
+    pct = min(idx_now / max(len(timeline), 1), 1.0)
+    st.markdown(f"<div class='syx-player-header'>{block_label}</div>", unsafe_allow_html=True)
+    st.markdown(
+        f"<div class='syx-player-loader'><div class='syx-player-loader-fill' "
+        f"style='width:{pct * 100:.1f}%;'></div></div>",
+        unsafe_allow_html=True,
+    )
 
     def on_finished(pkey):
         st.success("Nice work -- you've completed this part of the session!")
