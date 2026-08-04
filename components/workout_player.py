@@ -223,7 +223,8 @@ def render_workout_player(seance: dict, week_id: str = None, week_title: str = N
 # ============================================================
 def render_block_player(block: dict, block_label: str, player_key: str,
                          week_id: str = None, week_title: str = None,
-                         seance_id: str = None, seance_title: str = None):
+                         seance_id: str = None, seance_title: str = None,
+                         block_ref=None):
     """Play just ONE block (or the challenge). No inter-block rest is inserted --
     moving to another block is a manual, user-driven action (Back to blocks)."""
     timeline = build_block_timeline(block)
@@ -235,8 +236,8 @@ def render_block_player(block: dict, block_label: str, player_key: str,
         profile = st.session_state.get("_syx_profile")
         logged_key = _k(pkey, "logged")
         if profile and not st.session_state.get(logged_key):
-            title = f"{seance_title} -- {block_label}" if seance_title else block_label
-            gsheets.log_completion(profile, week_id, week_title, seance_id or "", title)
+            gsheets.log_completion(profile, week_id, week_title, seance_id or "", seance_title or "",
+                                    block_ref=block_ref)
             st.session_state[logged_key] = True
         elif not profile:
             st.caption("Set up a profile (see the Profile page) to save this to your progress history.")

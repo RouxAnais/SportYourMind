@@ -12,7 +12,7 @@ phones. This is a one-time setup (about 10 minutes).
    - In row 1, add two headers: `name` | `created_at`
 3. Add a second tab (the `+` button next to the tab name) named exactly:
    `history`
-   - In row 1, add these headers: `profile` | `week_id` | `week_title` | `seance_id` | `seance_title` | `completed_at`
+   - In row 1, add these headers: `profile` | `week_id` | `week_title` | `seance_id` | `seance_title` | `block_ref` | `completed_at`
 4. Copy the Sheet's URL from your browser's address bar (you'll need it in
    step 3 below).
 
@@ -72,3 +72,11 @@ Once this is set up, the **Profile** page in the app lets anyone create a
 name and see their completed-session history and a weekly progress chart.
 No password -- it's just a name, so keep the app link private if that
 matters to you.
+
+## Already set up? One small update needed
+
+If you configured this before the block-by-block progress tracking was
+added, open your Google Sheet's `history` tab and add a new column header
+in cell **G1**: `block_ref` (after `seance_title`, before `completed_at` if
+you want to keep the order tidy -- the exact position doesn't matter, only
+the header name does). That's it, no other change needed.

@@ -72,7 +72,8 @@ def create_profile(name: str) -> bool:
         return False
 
 
-def log_completion(profile: str, week_id: str, week_title: str, seance_id: str, seance_title: str) -> bool:
+def log_completion(profile: str, week_id: str, week_title: str, seance_id: str, seance_title: str,
+                    block_ref: str = "") -> bool:
     conn = _get_conn()
     if conn is None:
         return False
@@ -84,6 +85,7 @@ def log_completion(profile: str, week_id: str, week_title: str, seance_id: str, 
             "week_title": week_title or "",
             "seance_id": seance_id or "",
             "seance_title": seance_title or "",
+            "block_ref": str(block_ref) if block_ref != "" else "",
             "completed_at": datetime.datetime.now().isoformat(),
         }])
         df = pd.concat([df, new_row], ignore_index=True) if not df.empty else new_row

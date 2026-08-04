@@ -6,6 +6,7 @@
     --syx-card: #1A1C15;
     --syx-border: #2B2E24;
     --syx-accent: #5B4FE8;
+    --syx-done: #3FAE73;
     --syx-accent-dim: #443CB0;
     --syx-accent-2: #9AD4F0;
     --syx-white: #F3F2EC;
@@ -52,6 +53,21 @@ p, span, label, .stMarkdown { color: var(--syx-white); }
     background: var(--syx-accent-dim);
     color: var(--syx-white);
     transform: translateY(-1px);
+}
+
+/* "Done" state -- st.button(..., type="primary") is used for completed
+   blocks/sessions/weeks, rendered in green instead of the default accent so
+   progress is visible at a glance. */
+.stButton > button[kind="primary"],
+[data-testid="stBaseButton-primary"] {
+    background: var(--syx-done) !important;
+    color: var(--syx-black) !important;
+}
+.stButton > button[kind="primary"]:hover,
+[data-testid="stBaseButton-primary"]:hover {
+    background: var(--syx-done) !important;
+    opacity: 0.85;
+    color: var(--syx-black) !important;
 }
 
 /* Secondary / outline feel for less prominent actions handled via container borders */

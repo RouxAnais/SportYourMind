@@ -4,16 +4,18 @@ from components.navbar import inject_global_css, top_banner
 from components.workout_player import render_block_player
 from components.session_plan import render_block_detail
 from utils.load_data import load_workouts
+from utils import progress
 
 st.set_page_config(page_title="100% Abs -- Session", layout="centered")
 inject_global_css()
 
 workouts = load_workouts()
+profile = st.session_state.get("_syx_profile")
 
 FLOW_KEY = "_syx_flow"
-WEEK_KEY = "_syx_week_id"
-SEANCE_KEY = "_syx_seance_id"
 BLOCK_KEY = "_syx_block_ref"
+SIDEBAR_WEEK_KEY = "_syx_sidebar_week"
+SIDEBAR_SEANCE_KEY = "_syx_sidebar_seance"
 
 
 def _go(stage, **kwargs):
@@ -23,12 +25,6 @@ def _go(stage, **kwargs):
     st.rerun()
 
 
-def _get_seance(week, seance_id):
-    if not week:
-        return None
-    return next((s for s in week.get("seances", []) if s["id"] == seance_id), None)
-
-
 def _get_block(seance, block_ref):
     if block_ref == "__challenge__":
         return seance.get("challenge"), f"Challenge -- {seance.get('challenge', {}).get('name', '')}"
@@ -36,68 +32,81 @@ def _get_block(seance, block_ref):
     return block, block.get("name", f"Block {block_ref + 1}")
 
 
-flow = st.session_state.get(FLOW_KEY, "week")
+# ============================================================
+# SIDEBAR -- week & session filters (always visible)
+# ============================================================
+with st.sidebar:
+    st.markdown("#### Filters")
+
+    week_ids = list(workouts.keys())
+
+    def _week_label(wid):
+        w = workouts[wid]
+        mark = "\u2713 " if progress.is_week_done(profile, w) else ""
+        return f"{mark}{w['title']}"
+
+    week_choice = st.selectbox("Week", week_ids, format_func=_week_label, key="sidebar_week_select")
+    week = workouts[week_choice]
+    seances = week.get("seances", [])
+
+    if seances:
+        def _seance_label(sid):
+            s = next(x for x in seances if x["id"] == sid)
+            mark = "\u2713 " if progress.is_session_done(profile, s) else ""
+            return f"{mark}{s['title']}"
+
+        seance_choice = st.selectbox(
+            "Session", [s["id"] for s in seances], format_func=_seance_label, key="sidebar_seance_select"
+        )
+    else:
+        seance_choice = None
+        st.caption(week.get("note", "This week has not been added to the app yet."))
+
+# Reset to the block picker whenever the sidebar selection changes
+if (st.session_state.get(SIDEBAR_WEEK_KEY) != week_choice
+        or st.session_state.get(SIDEBAR_SEANCE_KEY) != seance_choice):
+    st.session_state[SIDEBAR_WEEK_KEY] = week_choice
+    st.session_state[SIDEBAR_SEANCE_KEY] = seance_choice
+    st.session_state[FLOW_KEY] = "block"
+
+if seance_choice is None:
+    st.stop()
+
+seance = next(s for s in seances if s["id"] == seance_choice)
+flow = st.session_state.get(FLOW_KEY, "block")
 
 # ============================================================
-# STAGE 1: pick a week
+# STAGE: pick a block within the chosen session
 # ============================================================
-if flow == "week":
-    top_banner("Session", "Pick your week")
-    for wid, week in workouts.items():
-        n = len(week.get("seances", []))
-        label = week["title"] if n else f"{week['title']} (coming soon)"
-        if st.button(label, key=f"week_{wid}", use_container_width=True, disabled=(n == 0)):
-            _go("session", **{WEEK_KEY: wid})
-
-# ============================================================
-# STAGE 2: pick a session (1-4) within the chosen week
-# ============================================================
-elif flow == "session":
-    week_id = st.session_state.get(WEEK_KEY)
-    week = workouts.get(week_id)
-    if week is None:
-        _go("week")
-
-    if st.button("< Back to weeks"):
-        _go("week")
-
-    top_banner(week["title"], "Pick today's session")
-    for s in week.get("seances", []):
-        if st.button(s["title"], key=f"seance_{s['id']}", use_container_width=True):
-            _go("block", **{SEANCE_KEY: s["id"]})
-
-# ============================================================
-# STAGE 3: pick a block within the chosen session
-# ============================================================
-elif flow == "block":
-    week = workouts.get(st.session_state.get(WEEK_KEY))
-    seance = _get_seance(week, st.session_state.get(SEANCE_KEY))
-    if seance is None:
-        _go("week")
-
-    if st.button("< Back to sessions"):
-        _go("session")
-
-    top_banner(seance["title"], "Pick a block")
+if flow == "block":
+    top_banner(seance["title"], week["title"])
 
     for i, block in enumerate(seance.get("blocks", [])):
-        if st.button(block.get("name", f"Block {i + 1}"), key=f"pick_block_{i}", use_container_width=True):
+        label = block.get("name", f"Block {i + 1}")
+        done = progress.is_block_done(profile, seance["id"], i)
+        if st.button(label, key=f"pick_block_{i}", use_container_width=True,
+                     type="primary" if done else "secondary"):
             _go("detail", **{BLOCK_KEY: i})
 
     challenge = seance.get("challenge")
     if challenge:
-        if st.button(f"Challenge -- {challenge.get('name', '')}", key="pick_block_challenge", use_container_width=True):
+        done = progress.is_block_done(profile, seance["id"], "__challenge__")
+        if st.button(f"Challenge -- {challenge.get('name', '')}", key="pick_block_challenge",
+                     use_container_width=True, type="primary" if done else "secondary"):
             _go("detail", **{BLOCK_KEY: "__challenge__"})
 
+    if profile:
+        st.caption("Completed blocks are shown in green.")
+    else:
+        st.caption("Set up a profile (see the Profile page) to track which blocks you've done.")
+
 # ============================================================
-# STAGE 4: block detail (full plan for just this block) + Start
+# STAGE: block detail (full plan for just this block) + Start
 # ============================================================
 elif flow == "detail":
-    week = workouts.get(st.session_state.get(WEEK_KEY))
-    seance = _get_seance(week, st.session_state.get(SEANCE_KEY))
     block_ref = st.session_state.get(BLOCK_KEY)
-    if seance is None or block_ref is None:
-        _go("week")
+    if block_ref is None:
+        _go("block")
     block, block_label = _get_block(seance, block_ref)
 
     if st.button("< Back to blocks"):
@@ -113,14 +122,12 @@ elif flow == "detail":
     render_block_detail(block)
 
 # ============================================================
-# STAGE 5: player -- plays just this one block
+# STAGE: player -- plays just this one block
 # ============================================================
 elif flow == "player":
-    week = workouts.get(st.session_state.get(WEEK_KEY))
-    seance = _get_seance(week, st.session_state.get(SEANCE_KEY))
     block_ref = st.session_state.get(BLOCK_KEY)
-    if seance is None or block_ref is None:
-        _go("week")
+    if block_ref is None:
+        _go("block")
     block, block_label = _get_block(seance, block_ref)
 
     if st.button("< Back to block"):
@@ -129,6 +136,7 @@ elif flow == "player":
     player_key = f"{seance['id']}_{block_ref}"
     render_block_player(
         block, block_label, player_key,
-        week_id=st.session_state.get(WEEK_KEY), week_title=week.get("title"),
+        week_id=week_choice, week_title=week.get("title"),
         seance_id=seance["id"], seance_title=seance.get("title"),
+        block_ref=block_ref,
     )

@@ -13,6 +13,7 @@ COLORS = {
     "accent_2": "#9AD4F0",     # pale sky blue (book subtitle color)
     "white": "#F2F1EE",
     "grey": "#96979E",
+    "done": "#3FAE73",          # success green -- reserved for completion indicators only
 }
 
 # Phase colors used by the workout timer.
