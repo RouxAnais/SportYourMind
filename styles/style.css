@@ -57,14 +57,24 @@ p, span, label, .stMarkdown { color: var(--syx-white); }
 
 /* "Done" state -- st.button(..., type="primary") is used for completed
    blocks/sessions/weeks, rendered in green instead of the default accent so
-   progress is visible at a glance. */
+   progress is visible at a glance. Several selector variants are included
+   since the exact DOM/attribute Streamlit uses for button "kind" has changed
+   across versions. */
 .stButton > button[kind="primary"],
-[data-testid="stBaseButton-primary"] {
+button[kind="primary"],
+[data-testid="stBaseButton-primary"],
+[data-testid="stBaseButton-primary"] button,
+button[data-testid="stBaseButton-primary"],
+[data-testid="baseButton-primary"],
+[data-testid="baseButton-primary"] button {
     background: var(--syx-done) !important;
     color: var(--syx-black) !important;
+    border-color: var(--syx-done) !important;
 }
 .stButton > button[kind="primary"]:hover,
-[data-testid="stBaseButton-primary"]:hover {
+button[kind="primary"]:hover,
+[data-testid="stBaseButton-primary"]:hover,
+[data-testid="baseButton-primary"]:hover {
     background: var(--syx-done) !important;
     opacity: 0.85;
     color: var(--syx-black) !important;

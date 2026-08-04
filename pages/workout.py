@@ -84,6 +84,8 @@ if flow == "block":
     for i, block in enumerate(seance.get("blocks", [])):
         label = block.get("name", f"Block {i + 1}")
         done = progress.is_block_done(profile, seance["id"], i)
+        if done:
+            label = f"\u2713 {label} -- done"
         if st.button(label, key=f"pick_block_{i}", use_container_width=True,
                      type="primary" if done else "secondary"):
             _go("detail", **{BLOCK_KEY: i})
@@ -91,7 +93,10 @@ if flow == "block":
     challenge = seance.get("challenge")
     if challenge:
         done = progress.is_block_done(profile, seance["id"], "__challenge__")
-        if st.button(f"Challenge -- {challenge.get('name', '')}", key="pick_block_challenge",
+        challenge_label = f"Challenge -- {challenge.get('name', '')}"
+        if done:
+            challenge_label = f"\u2713 {challenge_label} -- done"
+        if st.button(challenge_label, key="pick_block_challenge",
                      use_container_width=True, type="primary" if done else "secondary"):
             _go("detail", **{BLOCK_KEY: "__challenge__"})
 
