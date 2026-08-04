@@ -130,6 +130,21 @@ div[data-testid="stVerticalBlockBorderWrapper"] {
     font-size: 0.78rem;
 }
 
+/* Two-image gallery -- always side by side, even on narrow phone screens */
+.syx-img-row {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    align-items: flex-start;
+}
+.syx-img-row img {
+    border-radius: 8px;
+    max-width: 100%;
+    height: auto;
+    flex: 1 1 0;
+    min-width: 0;
+}
+
 /* Block titles inside the player -- flat accent, no gradient text */
 .syx-block-title {
     font-size: 1.15rem;

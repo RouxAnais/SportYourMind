@@ -21,17 +21,30 @@ def _inject_fullscreen_css():
             padding-top: 1rem !important;
             padding-bottom: 1rem !important;
         }
-        /* Cap the exercise photo height so it doesn't push everything else
-           off-screen -- this is the single biggest space hog otherwise. */
+        /* Cap exercise photo height so it doesn't push everything else
+           off-screen -- covers both the single-image (st.image) and the
+           two-image side-by-side (raw HTML) cases. */
         [data-testid="stImage"] img {
-            max-height: 26vh !important;
+            max-height: 22vh !important;
             width: auto !important;
             display: block;
             margin: 0 auto;
         }
+        .syx-img-row img {
+            max-height: 22vh !important;
+            width: auto !important;
+        }
         /* Tighter vertical rhythm between elements */
         .element-container {
             margin-bottom: 0.3rem !important;
+        }
+        /* Return / Stop -- smaller and less prominent than Pause/Next.
+           :last-of-type targets the LAST button row on the screen, which is
+           always Return/Stop (Pause/Next, when present, comes right before). */
+        [data-testid="stHorizontalBlock"]:last-of-type .stButton > button {
+            font-size: 0.78rem !important;
+            padding: 0.4em 0.6em !important;
+            opacity: 0.85;
         }
         </style>
         """,
@@ -62,6 +75,14 @@ def _advance(player_key: str):
     st.session_state[_k(player_key, "paused")] = False
 
 
+def _go_back(player_key: str):
+    idx_key = _k(player_key, "idx")
+    st.session_state[idx_key] = max(0, st.session_state[idx_key] - 1)
+    st.session_state[_k(player_key, "phase_start")] = None
+    st.session_state[_k(player_key, "pause_elapsed")] = 0.0
+    st.session_state[_k(player_key, "paused")] = False
+
+
 def _restart(player_key: str):
     st.session_state[_k(player_key, "idx")] = 0
     st.session_state[_k(player_key, "phase_start")] = None
@@ -77,9 +98,28 @@ def _jump_to(player_key: str, target_idx: int):
     st.session_state[_k(player_key, "paused")] = False
 
 
+def _render_nav_controls(player_key: str, idx: int):
+    """Next (big) to move forward, Return (small) to go back one step, Stop
+    (small) to exit back to the block picker. Used for screens with no
+    active countdown (no Pause needed)."""
+    if st.button("Next", key=f"next_{player_key}_{idx}", use_container_width=True):
+        _advance(player_key)
+        st.rerun()
+
+    c1, c2 = st.columns(2)
+    with c1:
+        if st.button("Return", key=f"return_{player_key}_{idx}", use_container_width=True):
+            _go_back(player_key)
+            st.rerun()
+    with c2:
+        if st.button("Stop", key=f"stop_{player_key}_{idx}", use_container_width=True):
+            st.session_state["_syx_flow"] = "block"
+            st.rerun()
+
+
 def _play_timeline(player_key: str, timeline: list, on_finished):
     """Core playback engine: steps through `timeline`, one exercise/rest at a
-    time, with pause/skip/beeps/next-up preview. `on_finished` is called (and
+    time, with beeps and a next-up preview. `on_finished` is called (and
     should render its own completion UI) once the timeline is exhausted."""
     _init_state(player_key, timeline)
     idx = st.session_state[_k(player_key, "idx")]
@@ -121,15 +161,11 @@ def _play_timeline(player_key: str, timeline: list, on_finished):
         if step.get("external_link"):
             st.link_button("Open the track", step["external_link"])
 
-        if st.button("Continue", key=f"cont_{player_key}_{idx}", use_container_width=True):
-            _advance(player_key)
-            st.rerun()
+        _render_nav_controls(player_key, idx)
 
     elif kind == "note":
         st.info(step["label"])
-        if st.button("Got it, continue", key=f"cont_{player_key}_{idx}", use_container_width=True):
-            _advance(player_key)
-            st.rerun()
+        _render_nav_controls(player_key, idx)
 
     elif kind == "manual":
         if step.get("exercise"):
@@ -148,9 +184,7 @@ def _play_timeline(player_key: str, timeline: list, on_finished):
         if step.get("external_link"):
             st.link_button("Open the track", step["external_link"])
 
-        if st.button("Next step", key=f"cont_{player_key}_{idx}", use_container_width=True):
-            _advance(player_key)
-            st.rerun()
+        _render_nav_controls(player_key, idx)
 
     elif kind == "reps":
         if step.get("exercise"):
@@ -166,10 +200,8 @@ def _play_timeline(player_key: str, timeline: list, on_finished):
         )
         if step.get("note"):
             st.caption(step["note"])
-        if st.button("Done, next step", key=f"done_{player_key}_{idx}", use_container_width=True):
-            _advance(player_key)
-            st.rerun()
         st.caption(f"{remaining_in_block(timeline, idx)} exercise(s) left")
+        _render_nav_controls(player_key, idx)
 
     elif kind in ("work", "rest"):
         phase = "rest" if kind == "rest" else step.get("label", "on").lower()
@@ -196,8 +228,11 @@ def _play_timeline(player_key: str, timeline: list, on_finished):
         big_label = step.get("label", "")
         countdown_display(remaining, total, phase, big_label)
 
-        c1, c2 = st.columns(2)
-        with c1:
+        st.caption(f"{remaining_in_block(timeline, idx)} exercise(s) left")
+
+        # Pause/Resume + Next -- active countdown controls
+        cpause, cnext = st.columns(2)
+        with cpause:
             if st.session_state[pause_key]:
                 if st.button("Resume", key=f"resume_{player_key}_{idx}", use_container_width=True):
                     st.session_state[start_key] = time.time()
@@ -208,12 +243,21 @@ def _play_timeline(player_key: str, timeline: list, on_finished):
                     st.session_state[elapsed_key] = elapsed
                     st.session_state[pause_key] = True
                     st.rerun()
-        with c2:
-            if st.button("Skip", key=f"skip_{player_key}_{idx}", use_container_width=True):
+        with cnext:
+            if st.button("Next", key=f"next_{player_key}_{idx}", use_container_width=True):
                 _advance(player_key)
                 st.rerun()
 
-        st.caption(f"{remaining_in_block(timeline, idx)} exercise(s) left")
+        # Return / Stop -- smaller, secondary navigation
+        c1, c2 = st.columns(2)
+        with c1:
+            if st.button("Return", key=f"return_{player_key}_{idx}", use_container_width=True):
+                _go_back(player_key)
+                st.rerun()
+        with c2:
+            if st.button("Stop", key=f"stop_{player_key}_{idx}", use_container_width=True):
+                st.session_state["_syx_flow"] = "block"
+                st.rerun()
 
         if remaining <= 0 and not st.session_state[pause_key]:
             _advance(player_key)
@@ -256,7 +300,7 @@ def render_block_player(block: dict, block_label: str, player_key: str,
                          seance_id: str = None, seance_title: str = None,
                          block_ref=None):
     """Play just ONE block (or the challenge). No inter-block rest is inserted --
-    moving to another block is a manual, user-driven action (Back to blocks)."""
+    moving to another block is a manual, user-driven action (the Stop button)."""
     _inject_fullscreen_css()
     timeline = build_block_timeline(block)
     st.markdown(f"### {block_label}")
@@ -272,8 +316,14 @@ def render_block_player(block: dict, block_label: str, player_key: str,
             st.session_state[logged_key] = True
         elif not profile:
             st.caption("Set up a profile (see the Profile page) to save this to your progress history.")
-        if st.button("Restart this block", key=f"restart_{pkey}"):
-            _restart(pkey)
-            st.rerun()
+        c1, c2 = st.columns(2)
+        with c1:
+            if st.button("Restart this block", key=f"restart_{pkey}", use_container_width=True):
+                _restart(pkey)
+                st.rerun()
+        with c2:
+            if st.button("Back to blocks", key=f"done_back_{pkey}", use_container_width=True):
+                st.session_state["_syx_flow"] = "block"
+                st.rerun()
 
     _play_timeline(player_key, timeline, on_finished)

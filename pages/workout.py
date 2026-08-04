@@ -32,47 +32,51 @@ def _get_block(seance, block_ref):
     return block, block.get("name", f"Block {block_ref + 1}")
 
 
+# Default selection: first week that has sessions, its first session
+week_ids = list(workouts.keys())
+_default_week = next((w for w in week_ids if workouts[w].get("seances")), week_ids[0])
+if SIDEBAR_WEEK_KEY not in st.session_state:
+    st.session_state[SIDEBAR_WEEK_KEY] = _default_week
+if SIDEBAR_SEANCE_KEY not in st.session_state:
+    _default_seances = workouts[st.session_state[SIDEBAR_WEEK_KEY]].get("seances", [])
+    st.session_state[SIDEBAR_SEANCE_KEY] = _default_seances[0]["id"] if _default_seances else None
+
 # ============================================================
-# SIDEBAR -- week & session filters (always visible)
+# SIDEBAR -- program tree: weeks expand to show their sessions
 # ============================================================
 with st.sidebar:
-    st.markdown("#### Filters")
+    st.markdown("#### Program")
 
-    week_ids = list(workouts.keys())
+    for wid, w in workouts.items():
+        w_seances = w.get("seances", [])
+        if not w_seances:
+            st.caption(f"{w['title']} (coming soon)")
+            continue
 
-    def _week_label(wid):
-        w = workouts[wid]
-        mark = "\u2713 " if progress.is_week_done(profile, w) else ""
-        return f"{mark}{w['title']}"
+        week_done = progress.is_week_done(profile, w)
+        mark = "\u2713 " if week_done else ""
+        week_label = f"{mark}{w['title']}"
 
-    week_choice = st.selectbox("Week", week_ids, format_func=_week_label, key="sidebar_week_select")
-    week = workouts[week_choice]
-    seances = week.get("seances", [])
+        with st.expander(week_label, expanded=(wid == st.session_state[SIDEBAR_WEEK_KEY])):
+            for s in w_seances:
+                done = progress.is_session_done(profile, s)
+                s_mark = "\u2713 " if done else ""
+                label = f"{s_mark}{s['title']}"
+                if st.button(label, key=f"nav_{s['id']}", use_container_width=True,
+                             type="primary" if done else "secondary"):
+                    st.session_state[SIDEBAR_WEEK_KEY] = wid
+                    st.session_state[SIDEBAR_SEANCE_KEY] = s["id"]
+                    st.session_state[FLOW_KEY] = "block"
+                    st.rerun()
 
-    if seances:
-        def _seance_label(sid):
-            s = next(x for x in seances if x["id"] == sid)
-            mark = "\u2713 " if progress.is_session_done(profile, s) else ""
-            return f"{mark}{s['title']}"
-
-        seance_choice = st.selectbox(
-            "Session", [s["id"] for s in seances], format_func=_seance_label, key="sidebar_seance_select"
-        )
-    else:
-        seance_choice = None
-        st.caption(week.get("note", "This week has not been added to the app yet."))
-
-# Reset to the block picker whenever the sidebar selection changes
-if (st.session_state.get(SIDEBAR_WEEK_KEY) != week_choice
-        or st.session_state.get(SIDEBAR_SEANCE_KEY) != seance_choice):
-    st.session_state[SIDEBAR_WEEK_KEY] = week_choice
-    st.session_state[SIDEBAR_SEANCE_KEY] = seance_choice
-    st.session_state[FLOW_KEY] = "block"
+week_choice = st.session_state[SIDEBAR_WEEK_KEY]
+week = workouts[week_choice]
+seance_choice = st.session_state[SIDEBAR_SEANCE_KEY]
 
 if seance_choice is None:
     st.stop()
 
-seance = next(s for s in seances if s["id"] == seance_choice)
+seance = next(s for s in week["seances"] if s["id"] == seance_choice)
 flow = st.session_state.get(FLOW_KEY, "block")
 
 # ============================================================
@@ -134,9 +138,6 @@ elif flow == "player":
     if block_ref is None:
         _go("block")
     block, block_label = _get_block(seance, block_ref)
-
-    if st.button("< Back to block"):
-        _go("detail")
 
     player_key = f"{seance['id']}_{block_ref}"
     render_block_player(

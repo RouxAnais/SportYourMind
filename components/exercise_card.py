@@ -1,9 +1,21 @@
+import base64
 import streamlit as st
 from utils.load_data import get_exercise, get_exercise_image_paths
 
 
+def _image_to_data_uri(path: str) -> str:
+    ext = path.rsplit(".", 1)[-1].lower()
+    mime = "image/png" if ext == "png" else "image/jpeg"
+    with open(path, "rb") as f:
+        b64 = base64.b64encode(f.read()).decode("utf-8")
+    return f"data:{mime};base64,{b64}"
+
+
 def _image_gallery(image_paths, key_prefix=""):
-    """Show 1 or 2 images side by side (both are needed to understand the movement)."""
+    """Show 1 or 2 images side by side (both are needed to understand the
+    movement). Uses raw HTML/flexbox for 2 images so they stay side by side
+    even on narrow phone screens, instead of Streamlit's columns which stack
+    automatically on mobile."""
     if not image_paths:
         st.markdown(
             "<div class='syx-img-placeholder'>photo coming soon</div>",
@@ -13,10 +25,10 @@ def _image_gallery(image_paths, key_prefix=""):
     if len(image_paths) == 1:
         st.image(image_paths[0], use_container_width=True)
     else:
-        cols = st.columns(len(image_paths))
-        for c, p in zip(cols, image_paths):
-            with c:
-                st.image(p, use_container_width=True)
+        imgs_html = "".join(
+            f"<img src='{_image_to_data_uri(p)}' />" for p in image_paths
+        )
+        st.markdown(f"<div class='syx-img-row'>{imgs_html}</div>", unsafe_allow_html=True)
 
 
 def exercise_card(exercise_id: str, show_adaptation: bool = True, compact: bool = False):
