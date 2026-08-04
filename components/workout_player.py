@@ -38,12 +38,32 @@ def _inject_fullscreen_css():
         .element-container {
             margin-bottom: 0.3rem !important;
         }
+        /* Force button rows to stay side by side, even on narrow phones --
+           Streamlit stacks columns vertically on narrow viewports by
+           default, which is what was happening here. */
+        [data-testid="stHorizontalBlock"] {
+            flex-direction: row !important;
+            flex-wrap: nowrap !important;
+            gap: 0.5rem !important;
+        }
+        [data-testid="stHorizontalBlock"] > [data-testid="column"] {
+            width: 100% !important;
+            flex: 1 1 0 !important;
+            min-width: 0 !important;
+        }
+        [data-testid="stHorizontalBlock"] .stButton > button {
+            font-size: 0.82rem !important;
+            padding: 0.55em 0.3em !important;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
         /* Return / Stop -- smaller and less prominent than Pause/Next.
            :last-of-type targets the LAST button row on the screen, which is
            always Return/Stop (Pause/Next, when present, comes right before). */
         [data-testid="stHorizontalBlock"]:last-of-type .stButton > button {
-            font-size: 0.78rem !important;
-            padding: 0.4em 0.6em !important;
+            font-size: 0.72rem !important;
+            padding: 0.4em 0.3em !important;
             opacity: 0.85;
         }
         </style>
@@ -216,8 +236,6 @@ def _play_timeline(player_key: str, timeline: list, on_finished):
 
         if step.get("exercise"):
             exercise_thumb(step["exercise"], step.get("side"))
-        elif kind == "rest":
-            st.markdown("<div class='syx-rest-icon'>Rest</div>", unsafe_allow_html=True)
 
         if st.session_state[pause_key]:
             elapsed = st.session_state[elapsed_key]
