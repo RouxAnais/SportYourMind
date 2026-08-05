@@ -8,7 +8,10 @@ inject_global_css()
 
 assets_home = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "assets", "home.jpg")
 if os.path.exists(assets_home):
-    st.image(assets_home, use_container_width=True)
+    try:
+        st.image(assets_home, use_column_width=True)
+    except Exception as e:
+        st.caption(f"(cover image could not be displayed: {e})")
 
 active_profile = st.session_state.get("_syx_profile")
 if active_profile:

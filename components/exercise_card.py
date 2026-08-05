@@ -25,7 +25,7 @@ def _image_gallery(image_paths, key_prefix="", centered=False):
         )
         return
     if len(image_paths) == 1 and not centered:
-        st.image(image_paths[0], use_container_width=True)
+        st.image(image_paths[0], use_column_width=True)
         return
     imgs_html = "".join(f"<img src='{_image_to_data_uri(p)}' />" for p in image_paths)
     st.markdown(f"<div class='syx-img-row'>{imgs_html}</div>", unsafe_allow_html=True)
