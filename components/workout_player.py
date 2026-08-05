@@ -29,8 +29,10 @@ def _inject_fullscreen_css():
         .element-container {
             margin-bottom: 0.3rem !important;
         }
-        /* Small icon-style buttons */
-        [data-testid="stHorizontalBlock"] .stButton > button {
+        /* Small icon-style buttons -- data-testid confirmed via browser
+           inspector (stBaseButton-secondary / -primary) */
+        [data-testid="stHorizontalBlock"] .stButton > button,
+        [data-testid^="stBaseButton"] {
             font-size: 1.1rem !important;
             padding: 0.3em 0.6em !important;
             line-height: 1.2;
@@ -116,11 +118,11 @@ def _render_nav_controls(player_key: str, idx: int):
     with st.container(key=f"syx_icons_{player_key}_{idx}"):
         c1, c2 = st.columns(2)
         with c1:
-            if st.button("\u21A9\ufe0f", key=f"return_{player_key}_{idx}", help="Previous exercise"):
+            if st.button("\u21A9\ufe0f", key=f"return_{player_key}_{idx}"):
                 _go_back(player_key)
                 st.rerun()
         with c2:
-            if st.button("\u23F9\ufe0f", key=f"stop_{player_key}_{idx}", help="Stop and go back to blocks"):
+            if st.button("\u23F9\ufe0f", key=f"stop_{player_key}_{idx}"):
                 st.session_state["_syx_flow"] = "block"
                 st.rerun()
 
@@ -247,21 +249,21 @@ def _play_timeline(player_key: str, timeline: list, on_finished):
             c1, c2, c3 = st.columns(3)
             with c1:
                 if st.session_state[pause_key]:
-                    if st.button("\u25B6\ufe0f", key=f"resume_{player_key}_{idx}", help="Resume"):
+                    if st.button("\u25B6\ufe0f", key=f"resume_{player_key}_{idx}"):
                         st.session_state[start_key] = time.time()
                         st.session_state[pause_key] = False
                         st.rerun()
                 else:
-                    if st.button("\u23F8\ufe0f", key=f"pause_{player_key}_{idx}", help="Pause"):
+                    if st.button("\u23F8\ufe0f", key=f"pause_{player_key}_{idx}"):
                         st.session_state[elapsed_key] = elapsed
                         st.session_state[pause_key] = True
                         st.rerun()
             with c2:
-                if st.button("\u21A9\ufe0f", key=f"return_{player_key}_{idx}", help="Previous exercise"):
+                if st.button("\u21A9\ufe0f", key=f"return_{player_key}_{idx}"):
                     _go_back(player_key)
                     st.rerun()
             with c3:
-                if st.button("\u23F9\ufe0f", key=f"stop_{player_key}_{idx}", help="Stop and go back to blocks"):
+                if st.button("\u23F9\ufe0f", key=f"stop_{player_key}_{idx}"):
                     st.session_state["_syx_flow"] = "block"
                     st.rerun()
 
