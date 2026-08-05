@@ -25,51 +25,33 @@ def _inject_fullscreen_css():
             max-height: 22vh !important;
             width: auto !important;
         }
-        /* Tighter vertical rhythm between elements */
         .element-container {
             margin-bottom: 0.3rem !important;
         }
-        /* Icon controls (Pause/Return/Stop) -- plain HTML links in a flex
-           row, NOT Streamlit buttons/columns. Streamlit auto-stacks columns
-           vertically on narrow phones regardless of configuration, so this
-           uses the same reliable raw-HTML technique as the exercise photos. */
-        .syx-icon-row {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            margin: 8px 0;
+        /* Icon row -- real st.button()s, NOT inside st.columns (Streamlit
+           auto-stacks columns vertically on narrow phones no matter what).
+           Instead they live in a keyed container (confirmed via browser
+           inspection to get a "st-key-<key>" class) whose direct .stButton
+           children we force inline-block, so they sit side by side and can
+           be centered with plain text-align. */
+        [class*="st-key-iconrow_"] {
+            text-align: center !important;
         }
-        .syx-icon-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 42px;
-            height: 42px;
-            border-radius: 10px;
-            background: var(--syx-black-soft);
-            border: 1px solid var(--syx-border);
-            color: var(--syx-white) !important;
-            font-size: 1.15rem;
-            text-decoration: none !important;
+        [class*="st-key-iconrow_"] .stButton {
+            display: inline-block !important;
+            width: auto !important;
+            margin: 0 4px !important;
         }
-        .syx-icon-btn:hover {
-            background: var(--syx-accent-dim);
+        [class*="st-key-iconrow_"] .stButton > button {
+            font-size: 1.1rem !important;
+            padding: 0.3em 0.65em !important;
+            min-width: 0 !important;
+            line-height: 1.2;
         }
         </style>
         """,
         unsafe_allow_html=True,
     )
-
-
-def _render_icon_row(actions):
-    """actions: list of (query_value, icon_char) tuples. Renders a small,
-    tightly-packed, centered row of icon links (not Streamlit buttons)."""
-    links = "".join(
-        f"<a href='?nav={val}' class='syx-icon-btn' target='_self'>{icon}</a>"
-        for val, icon in actions
-    )
-    st.markdown(f"<div class='syx-icon-row'>{links}</div>", unsafe_allow_html=True)
 
 
 def _k(player_key: str, suffix: str) -> str:
@@ -118,43 +100,21 @@ def _jump_to(player_key: str, target_idx: int):
     st.session_state[_k(player_key, "paused")] = False
 
 
-def _toggle_pause(player_key: str):
-    pause_key = _k(player_key, "paused")
-    start_key = _k(player_key, "phase_start")
-    elapsed_key = _k(player_key, "pause_elapsed")
-    if st.session_state.get(pause_key):
-        st.session_state[start_key] = time.time()
-        st.session_state[pause_key] = False
-    else:
-        if st.session_state.get(start_key):
-            elapsed_so_far = (time.time() - st.session_state[start_key]) + st.session_state.get(elapsed_key, 0.0)
-            st.session_state[elapsed_key] = elapsed_so_far
-        st.session_state[pause_key] = True
-
-
-def _handle_nav_action(player_key: str):
-    """Handle a click from the HTML icon row (Return/Stop/Pause), read from
-    the URL query params since these are plain links, not Streamlit buttons."""
-    action = st.query_params.get("nav")
-    if not action:
-        return
-    st.query_params.clear()
-    if action == "return":
-        _go_back(player_key)
-    elif action == "stop":
-        st.session_state["_syx_flow"] = "block"
-    elif action == "pause":
-        _toggle_pause(player_key)
-    st.rerun()
-
-
 def _render_nav_controls(player_key: str, idx: int):
-    """Next (big, always the same) to move forward. Return/Stop as a small
-    icon row below."""
+    """Next (big, always the same) to move forward. Return/Stop as a small,
+    centered icon row below (real st.button()s, grouped via a keyed
+    container -- see _inject_fullscreen_css)."""
     if st.button("Next", key=f"next_{player_key}_{idx}", use_container_width=True):
         _advance(player_key)
         st.rerun()
-    _render_icon_row([("return", "\u21A9\ufe0f"), ("stop", "\u23F9\ufe0f")])
+
+    with st.container(key=f"iconrow_{player_key}_{idx}"):
+        if st.button("\u21A9\ufe0f", key=f"return_{player_key}_{idx}"):
+            _go_back(player_key)
+            st.rerun()
+        if st.button("\u23F9\ufe0f", key=f"stop_{player_key}_{idx}"):
+            st.session_state["_syx_flow"] = "block"
+            st.rerun()
 
 
 def _play_timeline(player_key: str, timeline: list, on_finished):
@@ -162,7 +122,6 @@ def _play_timeline(player_key: str, timeline: list, on_finished):
     time, with beeps and a next-up preview. `on_finished` is called (and
     should render its own completion UI) once the timeline is exhausted."""
     _init_state(player_key, timeline)
-    _handle_nav_action(player_key)
     idx = st.session_state[_k(player_key, "idx")]
 
     if idx >= len(timeline):
@@ -172,7 +131,6 @@ def _play_timeline(player_key: str, timeline: list, on_finished):
     step = timeline[idx]
     kind = step["kind"]
 
-    # Play a beep the first time we render this step (not on every autorefresh tick)
     beeped_key = _k(player_key, "beeped_idx")
     if st.session_state[beeped_key] != idx:
         if kind == "work":
@@ -274,8 +232,24 @@ def _play_timeline(player_key: str, timeline: list, on_finished):
             _advance(player_key)
             st.rerun()
 
-        pause_icon = "\u25B6\ufe0f" if st.session_state[pause_key] else "\u23F8\ufe0f"
-        _render_icon_row([("pause", pause_icon), ("return", "\u21A9\ufe0f"), ("stop", "\u23F9\ufe0f")])
+        # Pause / Return / Stop -- small icons, grouped in a keyed container
+        with st.container(key=f"iconrow_{player_key}_{idx}"):
+            if st.session_state[pause_key]:
+                if st.button("\u25B6\ufe0f", key=f"resume_{player_key}_{idx}"):
+                    st.session_state[start_key] = time.time()
+                    st.session_state[pause_key] = False
+                    st.rerun()
+            else:
+                if st.button("\u23F8\ufe0f", key=f"pause_{player_key}_{idx}"):
+                    st.session_state[elapsed_key] = elapsed
+                    st.session_state[pause_key] = True
+                    st.rerun()
+            if st.button("\u21A9\ufe0f", key=f"return_{player_key}_{idx}"):
+                _go_back(player_key)
+                st.rerun()
+            if st.button("\u23F9\ufe0f", key=f"stop_{player_key}_{idx}"):
+                st.session_state["_syx_flow"] = "block"
+                st.rerun()
 
         if remaining <= 0 and not st.session_state[pause_key]:
             _advance(player_key)
