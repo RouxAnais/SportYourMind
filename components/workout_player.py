@@ -29,11 +29,28 @@ def _inject_fullscreen_css():
         .element-container {
             margin-bottom: 0.3rem !important;
         }
-        /* Small icon-style buttons (used inside narrow spacer-column rows) */
+        /* Small icon-style buttons */
         [data-testid="stHorizontalBlock"] .stButton > button {
             font-size: 1.1rem !important;
             padding: 0.3em 0.6em !important;
             line-height: 1.2;
+        }
+        /* Icon row -- force side by side + centered, using a dedicated
+           container (targeted via its key) instead of raw columns, since
+           Streamlit auto-stacks columns vertically on narrow phones
+           regardless of column ratios. */
+        [class*="st-key-syx_icons"] {
+            text-align: center !important;
+        }
+        [class*="st-key-syx_icons"] [data-testid="stHorizontalBlock"] {
+            display: inline-flex !important;
+            width: auto !important;
+            flex-wrap: nowrap !important;
+            gap: 0.2rem !important;
+        }
+        [class*="st-key-syx_icons"] [data-testid="column"] {
+            width: auto !important;
+            flex: 0 0 auto !important;
         }
         </style>
         """,
@@ -96,15 +113,16 @@ def _render_nav_controls(player_key: str, idx: int):
         _advance(player_key)
         st.rerun()
 
-    _, c1, c2, _ = st.columns([3, 1, 1, 3])
-    with c1:
-        if st.button("\u21A9\ufe0f", key=f"return_{player_key}_{idx}", help="Previous exercise"):
-            _go_back(player_key)
-            st.rerun()
-    with c2:
-        if st.button("\u23F9\ufe0f", key=f"stop_{player_key}_{idx}", help="Stop and go back to blocks"):
-            st.session_state["_syx_flow"] = "block"
-            st.rerun()
+    with st.container(key=f"syx_icons_{player_key}_{idx}"):
+        c1, c2 = st.columns(2)
+        with c1:
+            if st.button("\u21A9\ufe0f", key=f"return_{player_key}_{idx}", help="Previous exercise"):
+                _go_back(player_key)
+                st.rerun()
+        with c2:
+            if st.button("\u23F9\ufe0f", key=f"stop_{player_key}_{idx}", help="Stop and go back to blocks"):
+                st.session_state["_syx_flow"] = "block"
+                st.rerun()
 
 
 def _play_timeline(player_key: str, timeline: list, on_finished):
@@ -224,27 +242,28 @@ def _play_timeline(player_key: str, timeline: list, on_finished):
             st.rerun()
 
         # Pause / Return / Stop -- small icons, tightly clustered and centered
-        # via narrow spacer columns either side (layout-guaranteed centering).
-        _, c1, c2, c3, _ = st.columns([2, 1, 1, 1, 2])
-        with c1:
-            if st.session_state[pause_key]:
-                if st.button("\u25B6\ufe0f", key=f"resume_{player_key}_{idx}", help="Resume"):
-                    st.session_state[start_key] = time.time()
-                    st.session_state[pause_key] = False
+        # via a dedicated named container (see the CSS at the top of this file).
+        with st.container(key=f"syx_icons_{player_key}_{idx}"):
+            c1, c2, c3 = st.columns(3)
+            with c1:
+                if st.session_state[pause_key]:
+                    if st.button("\u25B6\ufe0f", key=f"resume_{player_key}_{idx}", help="Resume"):
+                        st.session_state[start_key] = time.time()
+                        st.session_state[pause_key] = False
+                        st.rerun()
+                else:
+                    if st.button("\u23F8\ufe0f", key=f"pause_{player_key}_{idx}", help="Pause"):
+                        st.session_state[elapsed_key] = elapsed
+                        st.session_state[pause_key] = True
+                        st.rerun()
+            with c2:
+                if st.button("\u21A9\ufe0f", key=f"return_{player_key}_{idx}", help="Previous exercise"):
+                    _go_back(player_key)
                     st.rerun()
-            else:
-                if st.button("\u23F8\ufe0f", key=f"pause_{player_key}_{idx}", help="Pause"):
-                    st.session_state[elapsed_key] = elapsed
-                    st.session_state[pause_key] = True
+            with c3:
+                if st.button("\u23F9\ufe0f", key=f"stop_{player_key}_{idx}", help="Stop and go back to blocks"):
+                    st.session_state["_syx_flow"] = "block"
                     st.rerun()
-        with c2:
-            if st.button("\u21A9\ufe0f", key=f"return_{player_key}_{idx}", help="Previous exercise"):
-                _go_back(player_key)
-                st.rerun()
-        with c3:
-            if st.button("\u23F9\ufe0f", key=f"stop_{player_key}_{idx}", help="Stop and go back to blocks"):
-                st.session_state["_syx_flow"] = "block"
-                st.rerun()
 
         if remaining <= 0 and not st.session_state[pause_key]:
             _advance(player_key)
