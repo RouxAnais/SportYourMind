@@ -23,7 +23,12 @@ def _inject_fullscreen_css():
         }
         /* Cap exercise photo height so it doesn't push everything else
            off-screen -- covers both the single-image (st.image) and the
-           two-image side-by-side (raw HTML) cases. */
+           two-image side-by-side (raw HTML) cases. Also center a single
+           image (Streamlit's image wrapper doesn't center it by default). */
+        [data-testid="stImage"] {
+            display: flex !important;
+            justify-content: center !important;
+        }
         [data-testid="stImage"] img {
             max-height: 22vh !important;
             width: auto !important;
@@ -38,21 +43,25 @@ def _inject_fullscreen_css():
         .element-container {
             margin-bottom: 0.3rem !important;
         }
-        /* Force button rows to stay on one line, even on narrow phones --
-           Streamlit stacks columns vertically on narrow viewports by
-           default, which is what was happening here. */
+        /* Icon buttons (Pause/Return/Stop) -- tightly clustered and centered
+           under Next, on both desktop and mobile. */
         [data-testid="stHorizontalBlock"] {
+            display: flex !important;
             flex-direction: row !important;
             flex-wrap: nowrap !important;
             justify-content: center !important;
-            gap: 0.6rem !important;
+            align-items: center !important;
+            gap: 0.15rem !important;
+            width: auto !important;
+            margin: 0 auto !important;
         }
         [data-testid="stHorizontalBlock"] > [data-testid="column"] {
             width: auto !important;
             flex: 0 0 auto !important;
             min-width: 0 !important;
+            display: flex !important;
+            justify-content: center !important;
         }
-        /* Pause / Return / Stop -- small icon-only buttons, no label text */
         [data-testid="stHorizontalBlock"] .stButton > button {
             font-size: 1.15rem !important;
             padding: 0.3em 0.65em !important;
