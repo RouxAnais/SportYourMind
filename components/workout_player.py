@@ -38,33 +38,26 @@ def _inject_fullscreen_css():
         .element-container {
             margin-bottom: 0.3rem !important;
         }
-        /* Force button rows to stay side by side, even on narrow phones --
+        /* Force button rows to stay on one line, even on narrow phones --
            Streamlit stacks columns vertically on narrow viewports by
            default, which is what was happening here. */
         [data-testid="stHorizontalBlock"] {
             flex-direction: row !important;
             flex-wrap: nowrap !important;
-            gap: 0.5rem !important;
+            justify-content: center !important;
+            gap: 0.6rem !important;
         }
         [data-testid="stHorizontalBlock"] > [data-testid="column"] {
-            width: 100% !important;
-            flex: 1 1 0 !important;
+            width: auto !important;
+            flex: 0 0 auto !important;
             min-width: 0 !important;
         }
+        /* Pause / Return / Stop -- small icon-only buttons, no label text */
         [data-testid="stHorizontalBlock"] .stButton > button {
-            font-size: 0.82rem !important;
-            padding: 0.55em 0.3em !important;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        /* Return / Stop -- smaller and less prominent than Pause/Next.
-           :last-of-type targets the LAST button row on the screen, which is
-           always Return/Stop (Pause/Next, when present, comes right before). */
-        [data-testid="stHorizontalBlock"]:last-of-type .stButton > button {
-            font-size: 0.72rem !important;
-            padding: 0.4em 0.3em !important;
-            opacity: 0.85;
+            font-size: 1.15rem !important;
+            padding: 0.3em 0.65em !important;
+            min-width: 0 !important;
+            line-height: 1.2;
         }
         </style>
         """,
@@ -119,20 +112,19 @@ def _jump_to(player_key: str, target_idx: int):
 
 
 def _render_nav_controls(player_key: str, idx: int):
-    """Next (big) to move forward, Return (small) to go back one step, Stop
-    (small) to exit back to the block picker. Used for screens with no
-    active countdown (no Pause needed)."""
+    """Next (big, always the same) to move forward. Return/Stop as small
+    icon-only buttons below -- used for screens with no active countdown."""
     if st.button("Next", key=f"next_{player_key}_{idx}", use_container_width=True):
         _advance(player_key)
         st.rerun()
 
     c1, c2 = st.columns(2)
     with c1:
-        if st.button("Return", key=f"return_{player_key}_{idx}", use_container_width=True):
+        if st.button("\u21A9\ufe0f", key=f"return_{player_key}_{idx}", help="Previous exercise"):
             _go_back(player_key)
             st.rerun()
     with c2:
-        if st.button("Stop", key=f"stop_{player_key}_{idx}", use_container_width=True):
+        if st.button("\u23F9\ufe0f", key=f"stop_{player_key}_{idx}", help="Stop and go back to blocks"):
             st.session_state["_syx_flow"] = "block"
             st.rerun()
 
@@ -248,32 +240,30 @@ def _play_timeline(player_key: str, timeline: list, on_finished):
 
         st.caption(f"{remaining_in_block(timeline, idx)} exercise(s) left")
 
-        # Pause/Resume + Next -- active countdown controls
-        cpause, cnext = st.columns(2)
-        with cpause:
+        # Next -- always the same, full width, same position as every other screen
+        if st.button("Next", key=f"next_{player_key}_{idx}", use_container_width=True):
+            _advance(player_key)
+            st.rerun()
+
+        # Pause / Return / Stop -- small icon-only buttons
+        c1, c2, c3 = st.columns(3)
+        with c1:
             if st.session_state[pause_key]:
-                if st.button("Resume", key=f"resume_{player_key}_{idx}", use_container_width=True):
+                if st.button("\u25B6\ufe0f", key=f"resume_{player_key}_{idx}", help="Resume"):
                     st.session_state[start_key] = time.time()
                     st.session_state[pause_key] = False
                     st.rerun()
             else:
-                if st.button("Pause", key=f"pause_{player_key}_{idx}", use_container_width=True):
+                if st.button("\u23F8\ufe0f", key=f"pause_{player_key}_{idx}", help="Pause"):
                     st.session_state[elapsed_key] = elapsed
                     st.session_state[pause_key] = True
                     st.rerun()
-        with cnext:
-            if st.button("Next", key=f"next_{player_key}_{idx}", use_container_width=True):
-                _advance(player_key)
-                st.rerun()
-
-        # Return / Stop -- smaller, secondary navigation
-        c1, c2 = st.columns(2)
-        with c1:
-            if st.button("Return", key=f"return_{player_key}_{idx}", use_container_width=True):
+        with c2:
+            if st.button("\u21A9\ufe0f", key=f"return_{player_key}_{idx}", help="Previous exercise"):
                 _go_back(player_key)
                 st.rerun()
-        with c2:
-            if st.button("Stop", key=f"stop_{player_key}_{idx}", use_container_width=True):
+        with c3:
+            if st.button("\u23F9\ufe0f", key=f"stop_{player_key}_{idx}", help="Stop and go back to blocks"):
                 st.session_state["_syx_flow"] = "block"
                 st.rerun()
 
