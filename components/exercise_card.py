@@ -11,24 +11,24 @@ def _image_to_data_uri(path: str) -> str:
     return f"data:{mime};base64,{b64}"
 
 
-def _image_gallery(image_paths, key_prefix=""):
-    """Show 1 or 2 images side by side (both are needed to understand the
-    movement). Uses raw HTML/flexbox for 2 images so they stay side by side
-    even on narrow phone screens, instead of Streamlit's columns which stack
-    automatically on mobile."""
+def _image_gallery(image_paths, key_prefix="", centered=False):
+    """Show 1 or 2 images. With centered=True (player screen), both cases use
+    raw HTML/flexbox so they are reliably centered and stay side by side even
+    on narrow phones -- Streamlit's own image widget/columns don't center or
+    stay side-by-side reliably on mobile. With centered=False (library page,
+    default), a single image keeps using st.image at full container width,
+    unchanged."""
     if not image_paths:
         st.markdown(
             "<div class='syx-img-placeholder'>photo coming soon</div>",
             unsafe_allow_html=True,
         )
         return
-    if len(image_paths) == 1:
+    if len(image_paths) == 1 and not centered:
         st.image(image_paths[0], use_container_width=True)
-    else:
-        imgs_html = "".join(
-            f"<img src='{_image_to_data_uri(p)}' />" for p in image_paths
-        )
-        st.markdown(f"<div class='syx-img-row'>{imgs_html}</div>", unsafe_allow_html=True)
+        return
+    imgs_html = "".join(f"<img src='{_image_to_data_uri(p)}' />" for p in image_paths)
+    st.markdown(f"<div class='syx-img-row'>{imgs_html}</div>", unsafe_allow_html=True)
 
 
 def exercise_card(exercise_id: str, show_adaptation: bool = True, compact: bool = False):
@@ -52,13 +52,13 @@ def exercise_card(exercise_id: str, show_adaptation: bool = True, compact: bool 
 
 
 def exercise_thumb(exercise_id: str, side: str | None = None):
-    """Inline preview used inside the workout player. Shows both images when the
-    exercise has 2 (needed to understand the movement), stacked above the name."""
+    """Inline preview used inside the workout player. Always centered, shows
+    both images when the exercise has 2 (needed to understand the movement)."""
     ex = get_exercise(exercise_id)
     image_paths = get_exercise_image_paths(exercise_id)
     side_label = {"right": " (right)", "left": " (left)", "alternate": " (alternating)"}.get(side, "")
 
-    _image_gallery(image_paths)
+    _image_gallery(image_paths, centered=True)
     st.markdown(f"<div class='syx-ex-name-sm'>{ex['name']}{side_label}</div>", unsafe_allow_html=True)
     if ex.get("adaptation"):
         st.caption(f"Too hard? -> {ex['adaptation']}")

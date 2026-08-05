@@ -21,20 +21,6 @@ def _inject_fullscreen_css():
             padding-top: 1rem !important;
             padding-bottom: 1rem !important;
         }
-        /* Cap exercise photo height so it doesn't push everything else
-           off-screen -- covers both the single-image (st.image) and the
-           two-image side-by-side (raw HTML) cases. Also center a single
-           image (Streamlit's image wrapper doesn't center it by default). */
-        [data-testid="stImage"] {
-            display: flex !important;
-            justify-content: center !important;
-        }
-        [data-testid="stImage"] img {
-            max-height: 22vh !important;
-            width: auto !important;
-            display: block;
-            margin: 0 auto;
-        }
         .syx-img-row img {
             max-height: 22vh !important;
             width: auto !important;
@@ -43,29 +29,10 @@ def _inject_fullscreen_css():
         .element-container {
             margin-bottom: 0.3rem !important;
         }
-        /* Icon buttons (Pause/Return/Stop) -- tightly clustered and centered
-           under Next, on both desktop and mobile. */
-        [data-testid="stHorizontalBlock"] {
-            display: flex !important;
-            flex-direction: row !important;
-            flex-wrap: nowrap !important;
-            justify-content: center !important;
-            align-items: center !important;
-            gap: 0.15rem !important;
-            width: auto !important;
-            margin: 0 auto !important;
-        }
-        [data-testid="stHorizontalBlock"] > [data-testid="column"] {
-            width: auto !important;
-            flex: 0 0 auto !important;
-            min-width: 0 !important;
-            display: flex !important;
-            justify-content: center !important;
-        }
+        /* Small icon-style buttons (used inside narrow spacer-column rows) */
         [data-testid="stHorizontalBlock"] .stButton > button {
-            font-size: 1.15rem !important;
-            padding: 0.3em 0.65em !important;
-            min-width: 0 !important;
+            font-size: 1.1rem !important;
+            padding: 0.3em 0.6em !important;
             line-height: 1.2;
         }
         </style>
@@ -122,12 +89,14 @@ def _jump_to(player_key: str, target_idx: int):
 
 def _render_nav_controls(player_key: str, idx: int):
     """Next (big, always the same) to move forward. Return/Stop as small
-    icon-only buttons below -- used for screens with no active countdown."""
+    icon-only buttons below, kept tightly clustered and centered using narrow
+    spacer columns either side (a layout-based guarantee, not dependent on
+    CSS matching Streamlit's internal DOM)."""
     if st.button("Next", key=f"next_{player_key}_{idx}", use_container_width=True):
         _advance(player_key)
         st.rerun()
 
-    c1, c2 = st.columns(2)
+    _, c1, c2, _ = st.columns([3, 1, 1, 3])
     with c1:
         if st.button("\u21A9\ufe0f", key=f"return_{player_key}_{idx}", help="Previous exercise"):
             _go_back(player_key)
@@ -254,8 +223,9 @@ def _play_timeline(player_key: str, timeline: list, on_finished):
             _advance(player_key)
             st.rerun()
 
-        # Pause / Return / Stop -- small icon-only buttons
-        c1, c2, c3 = st.columns(3)
+        # Pause / Return / Stop -- small icons, tightly clustered and centered
+        # via narrow spacer columns either side (layout-guaranteed centering).
+        _, c1, c2, c3, _ = st.columns([2, 1, 1, 1, 2])
         with c1:
             if st.session_state[pause_key]:
                 if st.button("\u25B6\ufe0f", key=f"resume_{player_key}_{idx}", help="Resume"):
@@ -335,11 +305,11 @@ def render_block_player(block: dict, block_label: str, player_key: str,
             st.caption("Set up a profile (see the Profile page) to save this to your progress history.")
         c1, c2 = st.columns(2)
         with c1:
-            if st.button("Restart this block", key=f"restart_{pkey}", use_container_width=True):
+            if st.button("Restart", key=f"restart_{pkey}", use_container_width=True):
                 _restart(pkey)
                 st.rerun()
         with c2:
-            if st.button("Back to blocks", key=f"done_back_{pkey}", use_container_width=True):
+            if st.button("Back", key=f"done_back_{pkey}", use_container_width=True):
                 st.session_state["_syx_flow"] = "block"
                 st.rerun()
 
