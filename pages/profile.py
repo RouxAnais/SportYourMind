@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import altair as alt
 
 from components.navbar import inject_global_css, top_banner
 from utils import gsheets
@@ -73,9 +74,23 @@ else:
         c2.metric("Weeks started", weeks_touched)
 
         if "week_title" in history.columns:
-            st.markdown("##### Sessions per week")
-            counts = history["week_title"].value_counts().sort_index()
-            st.bar_chart(counts)
+            st.markdown("##### Exercises per week")
+            week_order = ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5"]
+            counts_map = history["week_title"].value_counts().to_dict()
+            chart_df = pd.DataFrame({
+                "week": week_order,
+                "count": [counts_map.get(w, 0) for w in week_order],
+            })
+            chart = alt.Chart(chart_df).mark_bar().encode(
+                x=alt.X("week:N", sort=week_order, title=None),
+                y=alt.Y("count:Q", title="Exercises completed"),
+                color=alt.condition(
+                    alt.datum.count > 0,
+                    alt.value("#6C5CE7"),
+                    alt.value("#808080"),
+                ),
+            ).properties(height=260)
+            st.altair_chart(chart, use_container_width=True)
 
         st.markdown("##### Recent sessions")
         recent = history.sort_values("completed_at", ascending=False).head(10)
