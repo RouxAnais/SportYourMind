@@ -29,28 +29,6 @@ def _inject_fullscreen_css():
         .element-container {
             margin-bottom: 0.3rem !important;
         }
-        /* Icon row -- real st.button()s, NOT inside st.columns (Streamlit
-           auto-stacks columns vertically on narrow phones no matter what).
-           Instead they live in a keyed container (confirmed via browser
-           inspection to get a "st-key-<key>" class) whose direct .stButton
-           children we force inline-block, so they sit side by side and can
-           be centered with plain text-align. */
-        [class*="st-key-iconrow_"] {
-            text-align: center !important;
-        }
-        [class*="st-key-iconrow_"] .stElementContainer {
-            display: inline-block !important;
-            width: auto !important;
-            margin: 0 4px !important;
-        }
-        [class*="st-key-iconrow_"] .stButton > button {
-            font-size: 1.1rem !important;
-            padding: 0.3em 0.65em !important;
-            min-width: 0 !important;
-            width: auto !important;
-            flex: 0 0 auto !important;
-            line-height: 1.2;
-        }
         </style>
         """,
         unsafe_allow_html=True,
@@ -121,13 +99,18 @@ def _render_nav_controls(player_key: str, idx: int):
         _advance(player_key)
         st.rerun()
 
-    with st.container(key=f"iconrow_{player_key}_{idx}"):
-        if st.button("\u21A9", key=f"return_{player_key}_{idx}"):
+    control_key = f"ctrl_{player_key}_{idx}"
+    choice = st.segmented_control(
+        "controls", options=["\u21A9 Return", "\u25A0 Stop"],
+        key=control_key, label_visibility="collapsed",
+    )
+    if choice is not None:
+        st.session_state[control_key] = None
+        if choice.startswith("\u21A9"):
             _go_back(player_key)
-            st.rerun()
-        if st.button("\u25A0", key=f"stop_{player_key}_{idx}"):
+        else:
             st.session_state["_syx_flow"] = "block"
-            st.rerun()
+        st.rerun()
 
 
 def _play_timeline(player_key: str, timeline: list, on_finished):
@@ -250,24 +233,29 @@ def _play_timeline(player_key: str, timeline: list, on_finished):
             _advance(player_key)
             st.rerun()
 
-        # Pause / Return / Stop -- small icons, grouped in a keyed container
-        with st.container(key=f"iconrow_{player_key}_{idx}"):
-            if st.session_state[pause_key]:
-                if st.button("\u25B6", key=f"resume_{player_key}_{idx}"):
+        # Pause / Return / Stop -- one native segmented control, always on a
+        # single line (not built from separate buttons/columns, which
+        # Streamlit stacks vertically on narrow phones no matter what).
+        pause_label = "\u25B6 Resume" if st.session_state[pause_key] else "\u23F8 Pause"
+        control_key = f"ctrl_{player_key}_{idx}"
+        choice = st.segmented_control(
+            "controls", options=[pause_label, "\u21A9 Return", "\u25A0 Stop"],
+            key=control_key, label_visibility="collapsed",
+        )
+        if choice is not None:
+            st.session_state[control_key] = None
+            if choice == pause_label:
+                if st.session_state[pause_key]:
                     st.session_state[start_key] = time.time()
                     st.session_state[pause_key] = False
-                    st.rerun()
-            else:
-                if st.button("\u23F8", key=f"pause_{player_key}_{idx}"):
+                else:
                     st.session_state[elapsed_key] = elapsed
                     st.session_state[pause_key] = True
-                    st.rerun()
-            if st.button("\u21A9", key=f"return_{player_key}_{idx}"):
+            elif choice.startswith("\u21A9"):
                 _go_back(player_key)
-                st.rerun()
-            if st.button("\u25A0", key=f"stop_{player_key}_{idx}"):
+            else:
                 st.session_state["_syx_flow"] = "block"
-                st.rerun()
+            st.rerun()
 
         if remaining <= 0 and not st.session_state[pause_key]:
             _advance(player_key)
