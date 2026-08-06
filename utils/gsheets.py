@@ -47,6 +47,7 @@ def _safe_read(worksheet: str) -> pd.DataFrame:
         return pd.DataFrame()
 
 
+@st.cache_data(ttl=30)
 def load_profiles() -> list[str]:
     df = _safe_read(PROFILES_SHEET)
     if "name" not in df.columns:
@@ -68,6 +69,7 @@ def create_profile(name: str) -> bool:
         new_row = pd.DataFrame([{"name": name, "created_at": datetime.datetime.now().isoformat()}])
         df = pd.concat([df, new_row], ignore_index=True) if not df.empty else new_row
         conn.update(worksheet=PROFILES_SHEET, data=df)
+        load_profiles.clear()
         return True
     except Exception as e:
         st.session_state["_syx_gsheets_last_error"] = f"create_profile: {type(e).__name__}: {e}"
