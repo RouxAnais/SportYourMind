@@ -6,7 +6,7 @@ from utils.load_data import get_audio_path, get_exercise
 from utils import gsheets
 from components.exercise_card import exercise_thumb
 from components.timer import countdown_display, run_autorefresh
-from components.beep import play_start_beep, play_rest_beep
+from components.beep import play_start_beep, play_rest_beep, play_end_beep
 
 
 def _inject_fullscreen_css():
@@ -254,6 +254,7 @@ def _play_timeline(player_key: str, timeline: list, on_finished):
                 st.rerun()
 
         if remaining <= 0 and not st.session_state[pause_key]:
+            play_end_beep()
             _advance(player_key)
             st.rerun()
 
