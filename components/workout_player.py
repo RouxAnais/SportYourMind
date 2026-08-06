@@ -37,7 +37,7 @@ def _inject_fullscreen_css():
         [class*="st-key-iconrow_"] {
             text-align: center !important;
         }
-        [class*="st-key-iconrow_"] .stButton {
+        [class*="st-key-iconrow_"] .stElementContainer {
             display: inline-block !important;
             width: auto !important;
             margin: 0 4px !important;
@@ -46,6 +46,8 @@ def _inject_fullscreen_css():
             font-size: 1.1rem !important;
             padding: 0.3em 0.65em !important;
             min-width: 0 !important;
+            width: auto !important;
+            flex: 0 0 auto !important;
             line-height: 1.2;
         }
         </style>

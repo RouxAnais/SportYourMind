@@ -9,7 +9,7 @@ inject_global_css()
 assets_home = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "assets", "home.jpg")
 if os.path.exists(assets_home):
     try:
-        st.image(assets_home, use_column_width=True)
+        st.image(assets_home, width="stretch")
     except Exception as e:
         st.caption(f"(cover image could not be displayed: {e})")
 
