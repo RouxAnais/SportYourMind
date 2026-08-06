@@ -43,7 +43,7 @@ def play_rest_beep():
     components.html(_beep_html([(0, 880, 0.16), (0.22, 880, 0.16)]), height=0)
 
 
-def play_end_beep():
-    """Two-note descending tone -- signals a countdown reaching zero, clearly
-    distinct from the start/rest beeps (lower pitch, descending, longer)."""
-    components.html(_beep_html([(0, 660, 0.14), (0.13, 392, 0.28)]), height=0)
+def play_tick_beep():
+    """Short single tick -- played once per second on the last 3 seconds of
+    a countdown (3, 2, 1), distinct in pitch from the start/rest beeps."""
+    components.html(_beep_html([(0, 600, 0.1)]), height=0)
