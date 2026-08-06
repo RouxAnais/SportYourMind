@@ -1,6 +1,5 @@
 [theme.dark]
 primaryColor = "royalblue"
-secondaryBackgroundColor = "darkgray"
 codeTextColor = "lightblue"
 codeBackgroundColor = "royalblue"
 borderColor = "royalblue"
