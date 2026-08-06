@@ -8,6 +8,7 @@ show a setup notice) if the connection isn't configured yet.
 from __future__ import annotations
 
 import datetime
+import re
 import pandas as pd
 import streamlit as st
 
@@ -47,33 +48,69 @@ def _safe_read(worksheet: str) -> pd.DataFrame:
         return pd.DataFrame()
 
 
+def _make_profile_id(first_name: str, last_name: str, birthdate_str: str) -> str:
+    """A stable identifier combining first name, last name, and birthdate --
+    this is what disambiguates two people who share the same name."""
+    raw = f"{first_name.strip().lower()}_{last_name.strip().lower()}_{birthdate_str}"
+    raw = raw.replace(" ", "-")
+    return re.sub(r"[^a-z0-9_\-]", "", raw)
+
+
 @st.cache_data(ttl=30)
-def load_profiles() -> list[str]:
+def load_profiles() -> list[dict]:
+    """Each entry: {"id", "first_name", "last_name", "birthdate", "display"}."""
     df = _safe_read(PROFILES_SHEET)
-    if "name" not in df.columns:
+    if "id" not in df.columns:
         return []
-    return sorted(df["name"].astype(str).unique().tolist())
+    profiles = []
+    for _, row in df.iterrows():
+        first = str(row.get("first_name", "")).strip()
+        last = str(row.get("last_name", "")).strip()
+        birthdate = str(row.get("birthdate", "")).strip()
+        pid = str(row.get("id", "")).strip()
+        if not pid:
+            continue
+        profiles.append({
+            "id": pid,
+            "first_name": first,
+            "last_name": last,
+            "birthdate": birthdate,
+            "display": f"{first} {last}".strip(),
+        })
+    profiles.sort(key=lambda p: p["display"].lower())
+    return profiles
 
 
-def create_profile(name: str) -> bool:
+def create_profile(first_name: str, last_name: str, birthdate) -> tuple[bool, str]:
+    """Creates (or reuses, if it already exists) a profile identified by
+    first name + last name + birthdate. Returns (success, profile_id)."""
     conn = _get_conn()
     if conn is None:
-        return False
-    name = name.strip()
-    if not name:
-        return False
+        return False, ""
+    first_name = first_name.strip()
+    last_name = last_name.strip()
+    if not first_name or not last_name or not birthdate:
+        return False, ""
+    birthdate_str = birthdate.isoformat() if hasattr(birthdate, "isoformat") else str(birthdate)
+    profile_id = _make_profile_id(first_name, last_name, birthdate_str)
     try:
         df = _safe_read(PROFILES_SHEET)
-        if "name" in df.columns and name in df["name"].astype(str).values:
-            return True  # already exists, nothing to do
-        new_row = pd.DataFrame([{"name": name, "created_at": datetime.datetime.now().isoformat()}])
+        if "id" in df.columns and profile_id in df["id"].astype(str).values:
+            return True, profile_id  # already exists, nothing to do
+        new_row = pd.DataFrame([{
+            "id": profile_id,
+            "first_name": first_name,
+            "last_name": last_name,
+            "birthdate": birthdate_str,
+            "created_at": datetime.datetime.now().isoformat(),
+        }])
         df = pd.concat([df, new_row], ignore_index=True) if not df.empty else new_row
         conn.update(worksheet=PROFILES_SHEET, data=df)
         load_profiles.clear()
-        return True
+        return True, profile_id
     except Exception as e:
         st.session_state["_syx_gsheets_last_error"] = f"create_profile: {type(e).__name__}: {e}"
-        return False
+        return False, ""
 
 
 def log_completion(profile: str, week_id: str, week_title: str, seance_id: str, seance_title: str,

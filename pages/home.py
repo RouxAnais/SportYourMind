@@ -15,16 +15,12 @@ if os.path.exists(assets_home):
 
 active_profile = st.session_state.get("_syx_profile")
 if active_profile:
-    st.caption(f"Signed in as {active_profile}")
+    display_name = st.session_state.get("_syx_profile_name", active_profile)
+    st.caption(f"Signed in as {display_name}")
 else:
-    st.caption("No profile yet -- set one up on the Profile page to track your progress.")
-
-st.markdown(
-    """
-    > Quality always beats quantity. If an exercise feels too hard, use the
-    > adaptation shown for it.
-    """
-)
+    st.caption("No profile yet -- set one up to track your progress.")
+    if st.button("Start", use_container_width=True, type="primary"):
+        st.switch_page("pages/profile.py")
 
 st.divider()
 st.page_link("pages/workout.py", label="Start a session")

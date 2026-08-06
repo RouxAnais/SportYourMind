@@ -1,3 +1,4 @@
+import datetime
 import streamlit as st
 import pandas as pd
 import altair as alt
@@ -9,7 +10,8 @@ st.set_page_config(page_title="100% Abs -- Profile", layout="centered")
 inject_global_css()
 top_banner("Profile", "Track your progress over time")
 
-PROFILE_KEY = "_syx_profile"
+PROFILE_KEY = "_syx_profile"          # stores the internal profile id
+PROFILE_NAME_KEY = "_syx_profile_name"  # stores "First Last" for display
 
 if not gsheets.is_configured():
     st.warning(
@@ -32,31 +34,47 @@ if not active_profile:
 
     if profiles:
         st.markdown("#### Who's training today?")
-        choice = st.selectbox("Select your profile", profiles)
+        labels = [f"{p['display']} ({p['birthdate']})" for p in profiles]
+        choice_label = st.selectbox("Select your profile", labels)
+        chosen = profiles[labels.index(choice_label)]
         if st.button("Continue", use_container_width=True):
-            st.session_state[PROFILE_KEY] = choice
+            st.session_state[PROFILE_KEY] = chosen["id"]
+            st.session_state[PROFILE_NAME_KEY] = chosen["display"]
             st.rerun()
         st.divider()
 
     st.markdown("#### New here?")
-    new_name = st.text_input("Create a profile with your name")
+    st.caption("First name, last name, and date of birth are used together "
+               "so two people with the same name don't share one profile.")
+    first_name = st.text_input("First name")
+    last_name = st.text_input("Last name")
+    birthdate = st.date_input(
+        "Date of birth",
+        value=None,
+        min_value=datetime.date(1920, 1, 1),
+        max_value=datetime.date.today(),
+    )
     if st.button("Create profile", use_container_width=True):
-        if new_name.strip():
-            if gsheets.create_profile(new_name.strip()):
-                st.session_state[PROFILE_KEY] = new_name.strip()
+        if first_name.strip() and last_name.strip() and birthdate:
+            ok, profile_id = gsheets.create_profile(first_name, last_name, birthdate)
+            if ok:
+                st.session_state[PROFILE_KEY] = profile_id
+                st.session_state[PROFILE_NAME_KEY] = f"{first_name.strip()} {last_name.strip()}"
                 st.rerun()
             else:
                 st.error("Couldn't save the profile -- please try again.")
         else:
-            st.error("Enter a name first.")
+            st.error("Enter your first name, last name, and date of birth.")
 
 # ============================================================
 # Active profile -- progress dashboard
 # ============================================================
 else:
-    st.markdown(f"#### Hi {active_profile}!")
+    display_name = st.session_state.get(PROFILE_NAME_KEY, active_profile)
+    st.markdown(f"#### Hi {display_name}!")
     if st.button("Switch profile", key="switch_profile"):
         st.session_state[PROFILE_KEY] = None
+        st.session_state[PROFILE_NAME_KEY] = None
         st.rerun()
 
     st.divider()

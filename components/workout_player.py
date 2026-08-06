@@ -99,13 +99,16 @@ def _render_nav_controls(player_key: str, idx: int):
         _advance(player_key)
         st.rerun()
 
-    control_key = f"ctrl_{player_key}_{idx}"
+    nonce_key = _k(player_key, "ctrl_nonce")
+    if nonce_key not in st.session_state:
+        st.session_state[nonce_key] = 0
+    control_key = f"ctrl_{player_key}_{idx}_{st.session_state[nonce_key]}"
     choice = st.segmented_control(
         "controls", options=["\u21A9 Return", "\u25A0 Stop"],
         key=control_key, label_visibility="collapsed",
     )
     if choice is not None:
-        st.session_state[control_key] = None
+        st.session_state[nonce_key] += 1
         if choice.startswith("\u21A9"):
             _go_back(player_key)
         else:
@@ -237,13 +240,16 @@ def _play_timeline(player_key: str, timeline: list, on_finished):
         # single line (not built from separate buttons/columns, which
         # Streamlit stacks vertically on narrow phones no matter what).
         pause_label = "\u25B6 Resume" if st.session_state[pause_key] else "\u23F8 Pause"
-        control_key = f"ctrl_{player_key}_{idx}"
+        nonce_key = _k(player_key, "ctrl_nonce")
+        if nonce_key not in st.session_state:
+            st.session_state[nonce_key] = 0
+        control_key = f"ctrl_{player_key}_{idx}_{st.session_state[nonce_key]}"
         choice = st.segmented_control(
             "controls", options=[pause_label, "\u21A9 Return", "\u25A0 Stop"],
             key=control_key, label_visibility="collapsed",
         )
         if choice is not None:
-            st.session_state[control_key] = None
+            st.session_state[nonce_key] += 1
             if choice == pause_label:
                 if st.session_state[pause_key]:
                     st.session_state[start_key] = time.time()
