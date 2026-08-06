@@ -34,18 +34,27 @@ if not active_profile:
 
     if profiles:
         st.markdown("#### Who's training today?")
-        labels = [f"{p['display']} ({p['birthdate']})" for p in profiles]
+        labels = [p["display"] for p in profiles]
         choice_label = st.selectbox("Select your profile", labels)
         chosen = profiles[labels.index(choice_label)]
+        entered_dob = st.text_input(
+            "Confirm your date of birth (DDMMYY, e.g. 120590)",
+            max_chars=6, key="login_dob",
+        )
         if st.button("Continue", use_container_width=True):
-            st.session_state[PROFILE_KEY] = chosen["id"]
-            st.session_state[PROFILE_NAME_KEY] = chosen["display"]
-            st.rerun()
+            if gsheets.verify_birthdate(chosen["id"], entered_dob):
+                st.session_state[PROFILE_KEY] = chosen["id"]
+                st.session_state[PROFILE_NAME_KEY] = chosen["display"]
+                st.rerun()
+            else:
+                st.error("That doesn't match -- please try again.")
         st.divider()
 
     st.markdown("#### New here?")
     st.caption("First name, last name, and date of birth are used together "
-               "so two people with the same name don't share one profile.")
+               "so two people with the same name don't share one profile. "
+               "Your date of birth isn't shown publicly -- it's used to "
+               "confirm it's you when you come back.")
     first_name = st.text_input("First name")
     last_name = st.text_input("Last name")
     birthdate = st.date_input(
@@ -72,7 +81,7 @@ if not active_profile:
 else:
     display_name = st.session_state.get(PROFILE_NAME_KEY, active_profile)
     st.markdown(f"#### Hi {display_name}!")
-    if st.button("Switch profile", key="switch_profile"):
+    if st.button("Log out", key="switch_profile"):
         st.session_state[PROFILE_KEY] = None
         st.session_state[PROFILE_NAME_KEY] = None
         st.rerun()

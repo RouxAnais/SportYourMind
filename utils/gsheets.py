@@ -113,6 +113,25 @@ def create_profile(first_name: str, last_name: str, birthdate) -> tuple[bool, st
         return False, ""
 
 
+def verify_birthdate(profile_id: str, ddmmyy: str) -> bool:
+    """Checks an entered date of birth (DDMMYY, e.g. '120590') against the
+    profile's stored birthdate -- this is what unlocks switching into an
+    existing profile, instead of a separate PIN. The birthdate is never
+    shown in the profile picker, so this only works if you actually know it."""
+    df = _safe_read(PROFILES_SHEET)
+    if "id" not in df.columns or "birthdate" not in df.columns:
+        return False
+    row = df[df["id"].astype(str) == str(profile_id)]
+    if row.empty:
+        return False
+    stored = str(row.iloc[0].get("birthdate", "")).strip()
+    try:
+        stored_ddmmyy = datetime.date.fromisoformat(stored).strftime("%d%m%y")
+    except ValueError:
+        return False
+    return stored_ddmmyy == str(ddmmyy).strip()
+
+
 def log_completion(profile: str, week_id: str, week_title: str, seance_id: str, seance_title: str,
                     block_ref: str = "") -> bool:
     conn = _get_conn()
