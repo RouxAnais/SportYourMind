@@ -109,10 +109,10 @@ def _render_nav_controls(player_key: str, idx: int):
         st.rerun()
 
     with st.container(key=f"iconrow_{player_key}_{idx}"):
-        if st.button("\u21A9\ufe0f", key=f"return_{player_key}_{idx}"):
+        if st.button("\u21A9", key=f"return_{player_key}_{idx}"):
             _go_back(player_key)
             st.rerun()
-        if st.button("\u23F9\ufe0f", key=f"stop_{player_key}_{idx}"):
+        if st.button("\u25A0", key=f"stop_{player_key}_{idx}"):
             st.session_state["_syx_flow"] = "block"
             st.rerun()
 
@@ -235,19 +235,19 @@ def _play_timeline(player_key: str, timeline: list, on_finished):
         # Pause / Return / Stop -- small icons, grouped in a keyed container
         with st.container(key=f"iconrow_{player_key}_{idx}"):
             if st.session_state[pause_key]:
-                if st.button("\u25B6\ufe0f", key=f"resume_{player_key}_{idx}"):
+                if st.button("\u25B6", key=f"resume_{player_key}_{idx}"):
                     st.session_state[start_key] = time.time()
                     st.session_state[pause_key] = False
                     st.rerun()
             else:
-                if st.button("\u23F8\ufe0f", key=f"pause_{player_key}_{idx}"):
+                if st.button("\u23F8", key=f"pause_{player_key}_{idx}"):
                     st.session_state[elapsed_key] = elapsed
                     st.session_state[pause_key] = True
                     st.rerun()
-            if st.button("\u21A9\ufe0f", key=f"return_{player_key}_{idx}"):
+            if st.button("\u21A9", key=f"return_{player_key}_{idx}"):
                 _go_back(player_key)
                 st.rerun()
-            if st.button("\u23F9\ufe0f", key=f"stop_{player_key}_{idx}"):
+            if st.button("\u25A0", key=f"stop_{player_key}_{idx}"):
                 st.session_state["_syx_flow"] = "block"
                 st.rerun()
 
