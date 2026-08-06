@@ -1,5 +1,5 @@
 [theme.dark]
-primaryColor = "royalblue"
+primaryColor = "indigo"
 codeTextColor = "lightblue"
-codeBackgroundColor = "royalblue"
-borderColor = "royalblue"
+codeBackgroundColor = "indigo"
+borderColor = "indigo"

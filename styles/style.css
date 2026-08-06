@@ -4,7 +4,7 @@
    signal rather than branding. ===== */
 
 :root {
-    --syx-done: #3FAE73;
+    --syx-done: #6C5CE7;
 }
 
 html, body, [class*="css"] {
@@ -42,7 +42,7 @@ button[data-testid="stBaseButton-primary"],
 [data-testid="baseButton-primary"],
 [data-testid="baseButton-primary"] button {
     background: var(--syx-done) !important;
-    color: #0B0C0A !important;
+    color: #FFFFFF !important;
     border-color: var(--syx-done) !important;
 }
 .stButton > button[kind="primary"]:hover,
@@ -51,7 +51,7 @@ button[kind="primary"]:hover,
 [data-testid="baseButton-primary"]:hover {
     background: var(--syx-done) !important;
     opacity: 0.85;
-    color: #0B0C0A !important;
+    color: #FFFFFF !important;
 }
 
 div[data-testid="stVerticalBlockBorderWrapper"] {
