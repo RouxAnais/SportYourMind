@@ -34,12 +34,12 @@ def _beep_html(notes: list[tuple[float, float, float]]) -> str:
 
 
 def play_doorbell_beep():
-    """Two-note chime (high then low), like a doorbell -- played once, 2
-    seconds into a countdown."""
-    components.html(_beep_html([(0, 784, 0.22), (0.24, 659, 0.30)]), height=0)
+    """Three-note chime (high, low, high), like a doorbell -- played once,
+    1 second into a countdown."""
+    components.html(_beep_html([(0, 784, 0.18), (0.20, 659, 0.18), (0.40, 784, 0.22)]), height=0)
 
 
 def play_countdown_beep():
-    """One long beep -- played once per second on each of the last 3
-    seconds of a countdown."""
-    components.html(_beep_html([(0, 523, 0.6)]), height=0)
+    """One long, lower beep -- played once, on the second-to-last second of
+    a countdown."""
+    components.html(_beep_html([(0, 392, 1.0)]), height=0)

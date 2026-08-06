@@ -233,13 +233,13 @@ def _play_timeline(player_key: str, timeline: list, on_finished):
         countdown_display(remaining, total, phase, big_label)
 
         if not st.session_state[pause_key]:
-            # Doorbell chime -- once, 2 seconds into the countdown
-            if elapsed >= 2 and not st.session_state[doorbell_key]:
+            # Doorbell chime -- once, 1 second into the countdown
+            if elapsed >= 1 and not st.session_state[doorbell_key]:
                 play_doorbell_beep()
                 st.session_state[doorbell_key] = True
-            # Countdown beep -- one long beep on each of the last 3 seconds
+            # Countdown beep -- once, on the second-to-last second
             tick = math.ceil(remaining)
-            if 1 <= tick <= 3 and tick != st.session_state[tick_key]:
+            if tick == 2 and tick != st.session_state[tick_key]:
                 play_countdown_beep()
                 st.session_state[tick_key] = tick
 
