@@ -7,7 +7,7 @@ from utils.load_data import get_audio_path, get_exercise
 from utils import gsheets
 from components.exercise_card import exercise_thumb
 from components.timer import countdown_display, run_autorefresh
-from components.beep import play_start_beep, play_rest_beep, play_tick_beep
+from components.beep import play_doorbell_beep, play_countdown_beep
 
 
 def _inject_fullscreen_css():
@@ -71,6 +71,7 @@ def _init_state(player_key: str, timeline: list):
         st.session_state[_k(player_key, "pause_elapsed")] = 0.0
         st.session_state[_k(player_key, "beeped_idx")] = -1
         st.session_state[_k(player_key, "last_tick")] = None
+        st.session_state[_k(player_key, "doorbell_played")] = False
         st.session_state[_k(player_key, "logged")] = False
 
 
@@ -78,6 +79,7 @@ def _advance(player_key: str):
     st.session_state[_k(player_key, "idx")] += 1
     st.session_state[_k(player_key, "phase_start")] = None
     st.session_state[_k(player_key, "last_tick")] = None
+    st.session_state[_k(player_key, "doorbell_played")] = False
     st.session_state[_k(player_key, "pause_elapsed")] = 0.0
     st.session_state[_k(player_key, "paused")] = False
 
@@ -87,6 +89,7 @@ def _go_back(player_key: str):
     st.session_state[idx_key] = max(0, st.session_state[idx_key] - 1)
     st.session_state[_k(player_key, "phase_start")] = None
     st.session_state[_k(player_key, "last_tick")] = None
+    st.session_state[_k(player_key, "doorbell_played")] = False
     st.session_state[_k(player_key, "pause_elapsed")] = 0.0
     st.session_state[_k(player_key, "paused")] = False
 
@@ -95,6 +98,7 @@ def _restart(player_key: str):
     st.session_state[_k(player_key, "idx")] = 0
     st.session_state[_k(player_key, "phase_start")] = None
     st.session_state[_k(player_key, "last_tick")] = None
+    st.session_state[_k(player_key, "doorbell_played")] = False
     st.session_state[_k(player_key, "pause_elapsed")] = 0.0
     st.session_state[_k(player_key, "paused")] = False
     st.session_state[_k(player_key, "logged")] = False
@@ -104,6 +108,7 @@ def _jump_to(player_key: str, target_idx: int):
     st.session_state[_k(player_key, "idx")] = target_idx
     st.session_state[_k(player_key, "phase_start")] = None
     st.session_state[_k(player_key, "last_tick")] = None
+    st.session_state[_k(player_key, "doorbell_played")] = False
     st.session_state[_k(player_key, "pause_elapsed")] = 0.0
     st.session_state[_k(player_key, "paused")] = False
 
@@ -138,14 +143,6 @@ def _play_timeline(player_key: str, timeline: list, on_finished):
 
     step = timeline[idx]
     kind = step["kind"]
-
-    beeped_key = _k(player_key, "beeped_idx")
-    if st.session_state[beeped_key] != idx:
-        if kind == "work":
-            play_start_beep()
-        elif kind == "rest":
-            play_rest_beep()
-        st.session_state[beeped_key] = idx
 
     next_step = timeline[idx + 1] if idx + 1 < len(timeline) else None
     if next_step:
@@ -218,6 +215,7 @@ def _play_timeline(player_key: str, timeline: list, on_finished):
         pause_key = _k(player_key, "paused")
         elapsed_key = _k(player_key, "pause_elapsed")
         tick_key = _k(player_key, "last_tick")
+        doorbell_key = _k(player_key, "doorbell_played")
 
         if st.session_state[start_key] is None:
             st.session_state[start_key] = time.time()
@@ -234,11 +232,15 @@ def _play_timeline(player_key: str, timeline: list, on_finished):
         big_label = step.get("label", "")
         countdown_display(remaining, total, phase, big_label)
 
-        # Countdown tick -- one short beep on each of the last 3 seconds
         if not st.session_state[pause_key]:
+            # Doorbell chime -- once, 2 seconds into the countdown
+            if elapsed >= 2 and not st.session_state[doorbell_key]:
+                play_doorbell_beep()
+                st.session_state[doorbell_key] = True
+            # Countdown beep -- one long beep on each of the last 3 seconds
             tick = math.ceil(remaining)
             if 1 <= tick <= 3 and tick != st.session_state[tick_key]:
-                play_tick_beep()
+                play_countdown_beep()
                 st.session_state[tick_key] = tick
 
         st.caption(f"{remaining_in_block(timeline, idx)} exercise(s) left")

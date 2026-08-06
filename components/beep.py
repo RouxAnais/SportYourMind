@@ -3,7 +3,7 @@ import streamlit.components.v1 as components
 
 def _beep_html(notes: list[tuple[float, float, float]]) -> str:
     """notes: list of (delay_from_start, frequency, duration) tuples, each
-    played as a short sine tone. Delays are in seconds."""
+    played as a short sine tone. Delays and durations are in seconds."""
     notes_js = ",".join(f"[{delay},{freq},{dur}]" for delay, freq, dur in notes)
     return f"""
     <script>
@@ -19,7 +19,7 @@ def _beep_html(notes: list[tuple[float, float, float]]) -> str:
                     osc.type = "sine";
                     osc.frequency.value = freq;
                     gain.gain.setValueAtTime(0.001, ctx.currentTime);
-                    gain.gain.exponentialRampToValueAtTime(0.25, ctx.currentTime + 0.01);
+                    gain.gain.exponentialRampToValueAtTime(0.28, ctx.currentTime + 0.01);
                     gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + dur);
                     osc.connect(gain);
                     gain.connect(ctx.destination);
@@ -33,17 +33,13 @@ def _beep_html(notes: list[tuple[float, float, float]]) -> str:
     """
 
 
-def play_start_beep():
-    """Single beep -- signals the start of a work/exercise phase."""
-    components.html(_beep_html([(0, 880, 0.16)]), height=0)
+def play_doorbell_beep():
+    """Two-note chime (high then low), like a doorbell -- played once, 2
+    seconds into a countdown."""
+    components.html(_beep_html([(0, 784, 0.22), (0.24, 659, 0.30)]), height=0)
 
 
-def play_rest_beep():
-    """Double beep -- signals the start of a rest/recovery phase."""
-    components.html(_beep_html([(0, 880, 0.16), (0.22, 880, 0.16)]), height=0)
-
-
-def play_tick_beep():
-    """Short single tick -- played once per second on the last 3 seconds of
-    a countdown (3, 2, 1), distinct in pitch from the start/rest beeps."""
-    components.html(_beep_html([(0, 600, 0.1)]), height=0)
+def play_countdown_beep():
+    """One long beep -- played once per second on each of the last 3
+    seconds of a countdown."""
+    components.html(_beep_html([(0, 523, 0.6)]), height=0)
