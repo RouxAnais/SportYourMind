@@ -32,8 +32,8 @@ h1 { text-transform: uppercase; font-weight: 800; }
 }
 
 /* "Done" state -- st.button(..., type="primary") is used for completed
-   blocks/sessions/weeks, rendered in green so progress is visible at a
-   glance regardless of light/dark theme. */
+   blocks/sessions/weeks, rendered in indigo/violet so progress is visible
+   at a glance regardless of light/dark theme. */
 .stButton > button[kind="primary"],
 button[kind="primary"],
 [data-testid="stBaseButton-primary"],
@@ -249,6 +249,24 @@ div[role="radiogroup"] label {
 /* Larger tap targets everywhere for touch screens */
 .stButton > button, div[role="radiogroup"] label {
     min-height: 44px;
+}
+
+/* st.success() boxes -- Streamlit renders these with a fixed native green
+   that isn't controlled by config.toml theming. Override to indigo/violet
+   to match the "done" accent used throughout the app. */
+[data-testid="stAlertContainer"],
+[data-testid="stAlert"],
+.stSuccess,
+[data-testid="stNotificationContentSuccess"] {
+    background-color: rgba(108, 92, 231, 0.15) !important;
+    color: #6C5CE7 !important;
+}
+[data-testid="stAlertContainer"] *,
+[data-testid="stAlert"] *,
+.stSuccess *,
+[data-testid="stNotificationContentSuccess"] * {
+    color: #6C5CE7 !important;
+    fill: #6C5CE7 !important;
 }
 
 /* Sidebar navigation links -- bigger and easier to tap on mobile */

@@ -105,7 +105,7 @@ if flow == "block":
             _go("detail", **{BLOCK_KEY: "__challenge__"})
 
     if profile:
-        st.caption("Completed blocks are shown in green.")
+        st.caption("Completed blocks are shown in blue.")
     else:
         st.caption("Set up a profile (see the Profile page) to track which blocks you've done.")
 
