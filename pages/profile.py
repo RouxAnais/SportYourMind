@@ -17,6 +17,10 @@ if not gsheets.is_configured():
     )
     st.stop()
 
+_last_err = st.session_state.get("_syx_gsheets_last_error")
+if _last_err:
+    st.warning(f"(Debug -- temporary) Last Google Sheets error: {_last_err}")
+
 active_profile = st.session_state.get(PROFILE_KEY)
 
 # ============================================================

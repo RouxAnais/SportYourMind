@@ -42,7 +42,8 @@ def _safe_read(worksheet: str) -> pd.DataFrame:
     try:
         df = conn.read(worksheet=worksheet, ttl=0)
         return df.dropna(how="all")
-    except Exception:
+    except Exception as e:
+        st.session_state["_syx_gsheets_last_error"] = f"read({worksheet}): {type(e).__name__}: {e}"
         return pd.DataFrame()
 
 
@@ -68,7 +69,8 @@ def create_profile(name: str) -> bool:
         df = pd.concat([df, new_row], ignore_index=True) if not df.empty else new_row
         conn.update(worksheet=PROFILES_SHEET, data=df)
         return True
-    except Exception:
+    except Exception as e:
+        st.session_state["_syx_gsheets_last_error"] = f"create_profile: {type(e).__name__}: {e}"
         return False
 
 
