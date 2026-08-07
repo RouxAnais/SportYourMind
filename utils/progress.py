@@ -52,3 +52,34 @@ def is_week_done(profile: str, week: dict) -> bool:
     if not seances:
         return False
     return all(is_session_done(profile, s) for s in seances)
+
+
+def get_next_session(profile: str, workouts: dict) -> dict | None:
+    """The first session that isn't fully done yet, walking weeks/sessions in
+    order. Returns None if the whole program is complete."""
+    if not profile:
+        return None
+    for week_id, week in workouts.items():
+        for seance in week.get("seances", []):
+            if not is_session_done(profile, seance):
+                return {
+                    "week_id": week_id,
+                    "week_title": week.get("title", ""),
+                    "seance_id": seance["id"],
+                    "seance_title": seance.get("title", ""),
+                }
+    return None
+
+
+def get_overall_progress(profile: str, workouts: dict) -> tuple[int, int]:
+    """(completed_sessions, total_sessions) across the whole program."""
+    total = 0
+    done = 0
+    if not profile:
+        return 0, sum(len(w.get("seances", [])) for w in workouts.values())
+    for week in workouts.values():
+        for seance in week.get("seances", []):
+            total += 1
+            if is_session_done(profile, seance):
+                done += 1
+    return done, total

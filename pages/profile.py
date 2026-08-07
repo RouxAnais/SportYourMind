@@ -4,7 +4,8 @@ import pandas as pd
 import altair as alt
 
 from components.navbar import inject_global_css, top_banner
-from utils import gsheets
+from utils import gsheets, progress
+from utils.load_data import load_workouts
 
 st.set_page_config(page_title="100% Abs -- Profile", layout="centered")
 inject_global_css()
@@ -85,6 +86,27 @@ else:
         st.session_state[PROFILE_KEY] = None
         st.session_state[PROFILE_NAME_KEY] = None
         st.rerun()
+
+    st.caption("This program runs over 5 weeks, with 4 sessions per week -- "
+               "20 sessions in total.")
+
+    workouts = load_workouts()
+    done_count, total_count = progress.get_overall_progress(active_profile, workouts)
+    st.progress(0 if total_count == 0 else done_count / total_count,
+                text=f"{done_count} / {total_count} sessions completed")
+
+    next_session = progress.get_next_session(active_profile, workouts)
+    if next_session is None:
+        st.success("You've completed the whole program! Feel free to start again any time.")
+    else:
+        label = "Start" if done_count == 0 else "Continue"
+        st.markdown(f"**Next up:** {next_session['week_title']} -- {next_session['seance_title']}")
+        if st.button(f"{label} {next_session['week_title']} \u00b7 {next_session['seance_title']}",
+                     use_container_width=True, type="primary"):
+            st.session_state["_syx_sidebar_week"] = next_session["week_id"]
+            st.session_state["_syx_sidebar_seance"] = next_session["seance_id"]
+            st.session_state["_syx_flow"] = "block"
+            st.switch_page("pages/workout.py")
 
     st.divider()
 
